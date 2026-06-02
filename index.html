@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مركز حياة اليت لطب الأسنان | We Design Your Smile</title>
+<meta name="description" content="مركز حياة اليت لطب الأسنان — زراعة الأسنان، هوليوود سمايل، التركيبات، التقويم، والعلاج العام بأحدث التقنيات. نصمّم ابتسامتك بعناية.">
+<style>
+  :root{
+    --navy:#14506e; --teal:#1f7aa8; --red:#e0352b; --gold:#c9a227;
+    --bg:#f7fbfd; --ink:#1f2a30; --muted:#5b6b75; --white:#fff;
+    --radius:16px; --shadow:0 10px 30px rgba(20,80,110,.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI','Tahoma',sans-serif;color:var(--ink);background:var(--bg);line-height:1.8}
+  a{text-decoration:none;color:inherit}
+  img{max-width:100%;display:block}
+  .container{max-width:1180px;margin:0 auto;padding:0 22px}
+  .btn{display:inline-block;background:var(--red);color:#fff;padding:13px 28px;border-radius:40px;font-weight:700;transition:.2s;border:none;cursor:pointer;font-size:15px}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(224,53,43,.35)}
+  .btn.outline{background:transparent;color:var(--navy);border:2px solid var(--navy)}
+  .btn.outline:hover{background:var(--navy);color:#fff}
+  .sec{padding:80px 0}
+  .sec h2{font-size:32px;color:var(--navy);text-align:center;margin-bottom:8px}
+  .sec .lead{text-align:center;color:var(--muted);max-width:640px;margin:0 auto 46px;font-size:17px}
+  .tag{display:inline-block;color:var(--teal);font-weight:700;letter-spacing:1px;font-size:14px;margin-bottom:6px}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);box-shadow:0 2px 14px rgba(0,0,0,.06)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 22px;max-width:1180px;margin:0 auto}
+  .nav .logo{display:flex;align-items:center;gap:10px}
+  .nav .logo img{height:56px}
+  .nav .logo b{color:var(--navy);font-size:18px}
+  .menu{display:flex;gap:26px;align-items:center}
+  .menu a{font-weight:600;color:var(--navy);font-size:15px}
+  .menu a:hover{color:var(--red)}
+  .nav .cta{display:flex;gap:10px;align-items:center}
+  .burger{display:none;font-size:26px;background:none;border:none;color:var(--navy);cursor:pointer}
+
+  /* Hero */
+  .hero{background:linear-gradient(135deg,#0e3a52 0%,#1f7aa8 100%);color:#fff;position:relative;overflow:hidden}
+  .hero .container{display:flex;align-items:center;gap:40px;padding-top:70px;padding-bottom:80px;flex-wrap:wrap}
+  .hero-txt{flex:1 1 420px}
+  .hero-txt h1{font-size:46px;line-height:1.3;margin-bottom:16px}
+  .hero-txt h1 span{color:#ffd966}
+  .hero-txt p{font-size:19px;opacity:.95;margin-bottom:26px;max-width:520px}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-actions .btn.ghost{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.5)}
+  .hero-card{flex:1 1 340px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:24px;padding:30px;backdrop-filter:blur(4px)}
+  .hero-card img{height:120px;margin:0 auto 14px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.3))}
+  .hero-card .quote{text-align:center;font-size:20px;font-weight:700}
+  .hero-stats{display:flex;justify-content:space-around;margin-top:22px;text-align:center}
+  .hero-stats b{display:block;font-size:26px;color:#ffd966}
+  .hero-stats span{font-size:13px;opacity:.9}
+
+  /* Difference cards */
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:30px;text-align:center;transition:.2s}
+  .card:hover{transform:translateY(-6px)}
+  .card .ico{width:64px;height:64px;border-radius:50%;background:#e7f1f7;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px}
+  .card h3{color:var(--navy);font-size:19px;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:15px}
+
+  /* Services */
+  .services{background:var(--navy);color:#fff}
+  .services h2{color:#fff}
+  .services .lead{color:#cfe3ee}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .svc{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:26px;transition:.2s}
+  .svc:hover{background:rgba(255,255,255,.14)}
+  .svc .ico{font-size:32px;margin-bottom:10px}
+  .svc h3{font-size:19px;margin-bottom:8px;color:#ffd966}
+  .svc p{color:#d6e6ef;font-size:14.5px}
+
+  /* Gallery */
+  .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .gal-grid img{border-radius:14px;box-shadow:var(--shadow);transition:.25s;cursor:pointer}
+  .gal-grid img:hover{transform:scale(1.03)}
+
+  /* Why band */
+  .why{background:linear-gradient(135deg,#1f7aa8,#14506e);color:#fff}
+  .why .grid3 .card{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2)}
+  .why .grid3 .card h3{color:#ffd966}
+  .why .grid3 .card p{color:#e3eef4}
+  .why .ico{background:rgba(255,255,255,.15)}
+
+  /* Testimonials */
+  .tst-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .tst{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:26px}
+  .tst .stars{color:var(--gold);font-size:18px;margin-bottom:10px}
+  .tst p{color:#46555e;font-size:15px;margin-bottom:14px;font-style:italic}
+  .tst b{color:var(--navy)}
+
+  /* Contact */
+  .contact{background:#eef6fa}
+  .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+  .contact-info p{margin-bottom:14px;color:var(--ink);font-size:16px}
+  .contact-info .row{display:flex;gap:12px;align-items:center}
+  .contact-info .row .i{width:42px;height:42px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+  form{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
+  form label{font-weight:600;font-size:14px;color:var(--navy);display:block;margin:10px 0 5px}
+  form input,form textarea{width:100%;padding:12px;border:1px solid #d4e2ea;border-radius:10px;font-family:inherit;font-size:15px}
+  form .btn{width:100%;margin-top:18px}
+  .map{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin-top:30px;height:300px;border:0}
+
+  /* Footer */
+  footer{background:#0e3a52;color:#cfe3ee;padding:46px 0 24px}
+  .foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+  .foot .logo img{height:80px;margin-bottom:10px}
+  .foot h4{color:#fff;margin-bottom:12px}
+  .foot a{display:block;color:#cfe3ee;margin-bottom:7px;font-size:14.5px}
+  .foot a:hover{color:#ffd966}
+  .social{display:flex;gap:12px;margin-top:8px}
+  .social a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:18px}
+  .social a:hover{background:var(--red)}
+  .copy{text-align:center;border-top:1px solid rgba(255,255,255,.15);margin-top:30px;padding-top:18px;font-size:13px;opacity:.8}
+
+  /* Floating WhatsApp */
+  .wa{position:fixed;bottom:22px;left:22px;z-index:60;background:#25d366;color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 8px 22px rgba(37,211,102,.5)}
+  .wa:hover{transform:scale(1.08)}
+
+  @media(max-width:880px){
+    .menu{display:none;position:absolute;top:78px;right:0;left:0;background:#fff;flex-direction:column;padding:18px;box-shadow:0 10px 20px rgba(0,0,0,.1)}
+    .menu.open{display:flex}
+    .burger{display:block}
+    .grid3,.svc-grid,.tst-grid,.gal-grid,.contact-wrap{grid-template-columns:1fr}
+    .gal-grid{grid-template-columns:1fr 1fr}
+    .hero-txt h1{font-size:34px}
+    .nav .cta .btn{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="nav">
+    <a class="logo" href="#home"><img src="assets/logo.png" alt="حياة اليت"><b>حياة اليت</b></a>
+    <nav class="menu" id="menu">
+      <a href="#home">الرئيسية</a>
+      <a href="#about">من نحن</a>
+      <a href="#services">خدماتنا</a>
+      <a href="#gallery">معرض الابتسامات</a>
+      <a href="#why">لماذا نحن</a>
+      <a href="#contact">تواصل واحجز</a>
+    </nav>
+    <div class="cta">
+      <a href="#contact" class="btn">احجز موعدك</a>
+    </div>
+    <button class="burger" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-txt">
+      <span class="tag" style="color:#ffd966">We Design Your Smile</span>
+      <h1>ابتسامتك تستحق <span>عناية النخبة</span></h1>
+      <p>في مركز حياة اليت نصمّم لك ابتسامة طبيعية وواثقة بأحدث تقنيات زراعة الأسنان والهوليوود سمايل والتقويم — على يد نخبة من الأطباء.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn">احجز استشارتك الآن</a>
+        <a href="#services" class="btn ghost">تعرّف على خدماتنا</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <img src="assets/logo_white.png" alt="logo">
+      <div class="quote">نصمّم ابتسامتك بعناية</div>
+      <div class="hero-stats">
+        <div><b>+10</b><span>سنوات خبرة</span></div>
+        <div><b>+5000</b><span>ابتسامة</span></div>
+        <div><b>نخبة</b><span>من الأطباء</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / DIFFERENCE -->
+<section class="sec" id="about">
+  <div class="container">
+    <div style="text-align:center"><span class="tag">الفرق مع حياة اليت</span></div>
+    <h2>تجربة مصمّمة من أجلك</h2>
+    <p class="lead">نهتم ببناء علاقة ثقة معك بقدر اهتمامنا بصحة وجمال أسنانك — رعاية تشعرك بالراحة من أول زيارة.</p>
+    <div class="grid3">
+      <div class="card"><div class="ico">🦷</div><h3>تقنيات حديثة</h3><p>أحدث الأجهزة والتصميم الرقمي للابتسامة لنتائج دقيقة وطبيعية.</p></div>
+      <div class="card"><div class="ico">🤍</div><h3>رعاية تشبه العائلة</h3><p>فريق يهتم بك كإنسان أولًا، ويستمع لمخاوفك ويطمئنك في كل خطوة.</p></div>
+      <div class="card"><div class="ico">✨</div><h3>نتائج تدوم</h3><p>خامات عالمية ومعايير تعقيم صارمة لابتسامة صحية تدوم سنوات.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec services" id="services">
+  <div class="container">
+    <div style="text-align:center"><span class="tag" style="color:#ffd966">خدماتنا</span></div>
+    <h2>حلول متكاملة لابتسامتك</h2>
+    <p class="lead">كل ما تحتاجه أسنانك تحت سقف واحد، بأيدٍ متخصّصة.</p>
+    <div class="svc-grid">
+      <div class="svc"><div class="ico">🦷</div><h3>زراعة الأسنان</h3><p>تعويض الأسنان المفقودة بجذور ثابتة تمضغ بها كأسنانك الطبيعية.</p></div>
+      <div class="svc"><div class="ico">😁</div><h3>هوليوود سمايل</h3><p>تصميم ابتسامة متناسقة وطبيعية على مقاس وجهك بأحدث الفينير.</p></div>
+      <div class="svc"><div class="ico">👑</div><h3>التركيبات والتيجان</h3><p>تركيبات زيركون عالية الجودة تجمع بين القوة والمظهر الطبيعي.</p></div>
+      <div class="svc"><div class="ico">📐</div><h3>تقويم الأسنان</h3><p>تقويم معدني وشفاف لابتسامة منتظمة وإطباق صحيح.</p></div>
+      <div class="svc"><div class="ico">🪥</div><h3>العلاج العام والتجميلي</h3><p>حشو، علاج عصب، تنظيف، وتبييض احترافي للأسنان.</p></div>
+      <div class="svc"><div class="ico">🧒</div><h3>طب أسنان الأطفال</h3><p>رعاية لطيفة وآمنة تبني علاقة إيجابية لطفلك مع طبيب الأسنان.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="sec" id="gallery">
+  <div class="container">
+    <div style="text-align:center"><span class="tag">معرض الابتسامات</span></div>
+    <h2>نتائج حقيقية لمرضانا</h2>
+    <p class="lead">نماذج من حالات قبل وبعد — كل ابتسامة قصة ثقة استعادها صاحبها.</p>
+    <div class="gal-grid">
+      <img src="assets/case1.jpg" alt="حالة قبل وبعد 1">
+      <img src="assets/case2.jpg" alt="حالة قبل وبعد 2">
+      <img src="assets/case3.jpg" alt="حالة قبل وبعد 3">
+      <img src="assets/case4.jpg" alt="حالة قبل وبعد 4">
+    </div>
+    <p style="text-align:center;color:var(--muted);margin-top:18px;font-size:14px">النتائج تختلف من حالة لأخرى حسب التشخيص.</p>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="sec why" id="why">
+  <div class="container">
+    <div style="text-align:center"><span class="tag" style="color:#ffd966">لماذا حياة اليت</span></div>
+    <h2 style="color:#fff">أسباب تجعلنا اختيارك الأول</h2>
+    <p class="lead" style="color:#d6e6ef">نلتزم بأعلى معايير الجودة والراحة في كل تفصيلة.</p>
+    <div class="grid3">
+      <div class="card"><div class="ico">👨‍⚕️</div><h3>نخبة من الأطباء</h3><p>فريق متخصّص في الزراعة والتجميل والتقويم.</p></div>
+      <div class="card"><div class="ico">🧼</div><h3>تعقيم آمن</h3><p>بروتوكولات تعقيم صارمة لسلامتك التامة.</p></div>
+      <div class="card"><div class="ico">💳</div><h3>أسعار وخطط مرنة</h3><p>خطط دفع تناسبك مع شفافية كاملة في الأسعار.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec" id="reviews">
+  <div class="container">
+    <div style="text-align:center"><span class="tag">آراء عملائنا</span></div>
+    <h2>ثقة تتحدّث عنّا</h2>
+    <p class="lead">رضا مرضانا هو أكبر إنجازاتنا.</p>
+    <div class="tst-grid">
+      <div class="tst"><div class="stars">★★★★★</div><p>"أفضل تجربة علاج أسنان مريت بيها. الدكتور محترف والنتيجة فاقت توقعاتي."</p><b>— مريم ت.</b></div>
+      <div class="tst"><div class="stars">★★★★★</div><p>"عملت هوليوود سمايل وطلعت طبيعية جدًا. شكرًا لكل الفريق على الاهتمام."</p><b>— أحمد ع.</b></div>
+      <div class="tst"><div class="stars">★★★★★</div><p>"مكان نظيف ومنظّم والتعامل راقي. رجّعولي ثقتي في ابتسامتي."</p><b>— دعاء س.</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec contact" id="contact">
+  <div class="container">
+    <div style="text-align:center"><span class="tag">تواصل واحجز</span></div>
+    <h2>نتطلّع للقائك!</h2>
+    <p class="lead">احجز استشارتك الآن، وسنتواصل معك لتأكيد الموعد في أقرب وقت.</p>
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <div class="row" style="margin-bottom:16px"><div class="i">📞</div><p style="margin:0"><b>الهاتف</b><br><a href="tel:0228440012">0228440012</a> / <a href="tel:0228440013">0228440013</a></p></div>
+        <div class="row" style="margin-bottom:16px"><div class="i">💬</div><p style="margin:0"><b>واتساب</b><br><a href="https://wa.me/201003033566">01003033566</a></p></div>
+        <div class="row" style="margin-bottom:16px"><div class="i">📍</div><p style="margin:0"><b>العنوان</b><br>قطعة 9078، شارع 9 أعلى الشبراوي، المقطم، القاهرة</p></div>
+        <div class="row"><div class="i">🕐</div><p style="margin:0"><b>مواعيد العمل</b><br>السبت – الخميس: 11 ص – 10 م</p></div>
+        <a href="https://wa.me/201003033566" class="btn" style="margin-top:22px">احجز عبر واتساب</a>
+        <iframe class="map" src="https://www.google.com/maps?q=قطعة+9078+شارع+9+المقطم+القاهرة&output=embed" loading="lazy"></iframe>
+      </div>
+      <form onsubmit="sendWA(event)">
+        <label>الاسم</label>
+        <input id="f_name" required placeholder="اسمك الكامل">
+        <label>رقم الهاتف</label>
+        <input id="f_phone" required placeholder="01xxxxxxxxx">
+        <label>الخدمة المطلوبة</label>
+        <input id="f_service" placeholder="زراعة / هوليوود سمايل / تقويم ...">
+        <label>الموعد المفضّل</label>
+        <input id="f_time" placeholder="مثال: السبت مساءً">
+        <label>رسالتك</label>
+        <textarea id="f_msg" rows="3" placeholder="اكتب أي تفاصيل إضافية"></textarea>
+        <button class="btn" type="submit">إرسال طلب الحجز عبر واتساب</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container foot">
+    <div style="flex:1 1 260px">
+      <div class="logo"><img src="assets/logo_white.png" alt="حياة اليت"></div>
+      <p style="font-size:14.5px">مركز حياة اليت لطب الأسنان — نصمّم ابتسامتك بعناية بأحدث التقنيات وأمهر الأطباء.</p>
+      <div class="social">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Instagram">◎</a>
+        <a href="https://wa.me/2001000000000" title="WhatsApp">✆</a>
+      </div>
+    </div>
+    <div>
+      <h4>روابط سريعة</h4>
+      <a href="#about">من نحن</a>
+      <a href="#services">خدماتنا</a>
+      <a href="#gallery">معرض الابتسامات</a>
+      <a href="#contact">احجز موعد</a>
+    </div>
+    <div>
+      <h4>خدماتنا</h4>
+      <a href="#services">زراعة الأسنان</a>
+      <a href="#services">هوليوود سمايل</a>
+      <a href="#services">التقويم</a>
+      <a href="#services">التركيبات والتيجان</a>
+    </div>
+    <div>
+      <h4>تواصل معنا</h4>
+      <a href="tel:0228440012">📞 0228440012 / 0228440013</a>
+      <a href="https://wa.me/201003033566">✆ واتساب: 01003033566</a>
+      <a href="#contact">📍 المقطم، القاهرة</a>
+    </div>
+  </div>
+  <div class="copy">© 2026 مركز حياة اليت لطب ا
