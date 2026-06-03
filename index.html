@@ -317,3 +317,43 @@
     </div>
   </div>
   <div class="copy">© 2026 مركز حياة اليت لطب ا�
+<script>
+async function sendWA(event) {
+    event.preventDefault();
+
+    const data = {
+        name: document.getElementById("f_name").value,
+        phone: document.getElementById("f_phone").value,
+        service: document.getElementById("f_service").value,
+        time: document.getElementById("f_time").value,
+        message: document.getElementById("f_msg").value
+    };
+
+    try {
+
+        const response = await fetch(
+            "https://n8n.hyattelitedc.com/webhook/website-booking",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }
+        );
+
+        if (response.ok) {
+            alert("تم إرسال طلب الحجز بنجاح");
+        } else {
+            alert("حدث خطأ أثناء الإرسال");
+        }
+
+    } catch (error) {
+        console.error(error);
+        alert("تعذر الاتصال بالخادم");
+    }
+}
+</script>
+
+</body>
+</html>
