@@ -92,12 +92,21 @@
   .why .grid3 .card p{color:#e3eef4}
   .why .ico{background:rgba(255,255,255,.15)}
 
-  /* Testimonials */
-  .tst-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .tst{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:26px}
+  /* Testimonials slider */
+  .tst-slider{display:flex;align-items:stretch;gap:12px}
+  .tst-track{display:flex;gap:22px;overflow-x:auto;flex:1;scroll-snap-type:x mandatory;padding:8px 4px 18px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .tst-track::-webkit-scrollbar{display:none}
+  .tst{flex:0 0 calc((100% - 44px)/3);scroll-snap-align:start;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:26px;display:flex;flex-direction:column}
   .tst .stars{color:var(--gold);font-size:18px;margin-bottom:10px}
-  .tst p{color:#46555e;font-size:15px;margin-bottom:14px;font-style:italic}
+  .tst p{color:#46555e;font-size:15px;margin-bottom:14px;font-style:italic;flex:1}
   .tst b{color:var(--navy)}
+  .tst-arrow{align-self:center;flex-shrink:0;width:46px;height:46px;border-radius:50%;border:1px solid #d4e2ea;background:#fff;color:var(--teal);font-size:26px;line-height:1;cursor:pointer;box-shadow:var(--shadow);transition:.2s}
+  .tst-arrow:hover{background:var(--teal);color:#fff}
+  .tst-footer{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:10px}
+  .tst-dots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+  .tst-dots button{width:9px;height:9px;border-radius:50%;border:none;padding:0;background:#d4e2ea;cursor:pointer;transition:.2s}
+  .tst-dots button.active{background:var(--teal);transform:scale(1.3)}
+  .tst-counter{color:var(--muted);font-size:13px;font-weight:700;min-width:52px}
 
   /* Contact */
   .contact{background:#eef6fa}
@@ -131,8 +140,10 @@
     .menu{display:none;position:absolute;top:78px;right:0;left:0;background:#fff;flex-direction:column;padding:18px;box-shadow:0 10px 20px rgba(0,0,0,.1)}
     .menu.open{display:flex}
     .burger{display:block}
-    .grid3,.svc-grid,.tst-grid,.gal-grid,.contact-wrap{grid-template-columns:1fr}
+    .grid3,.svc-grid,.gal-grid,.contact-wrap{grid-template-columns:1fr}
     .gal-grid{grid-template-columns:1fr 1fr}
+    .tst{flex-basis:100%}
+    .tst-arrow{display:none}
     .hero-txt h1{font-size:34px}
     .nav .cta .btn{display:none}
   }
@@ -150,6 +161,7 @@
       <a href="#services">خدماتنا</a>
       <a href="#gallery">معرض الابتسامات</a>
       <a href="#why">لماذا نحن</a>
+      <a href="#reviews">آراء العملاء</a>
       <a href="#contact">تواصل واحجز</a>
     </nav>
     <div class="cta">
@@ -250,10 +262,14 @@
     <div style="text-align:center"><span class="tag">آراء عملائنا</span></div>
     <h2>ثقة تتحدّث عنّا</h2>
     <p class="lead">رضاء مرضانا هو أكبر إنجازاتنا.</p>
-    <div class="tst-grid">
-      <div class="tst"><div class="stars">★★★★★</div><p>"أفضل تجربة علاج أسنان مريت بيها. الدكتور محترف والنتيجة فاقت توقعاتي."</p><b>— مريم ت.</b></div>
-      <div class="tst"><div class="stars">★★★★★</div><p>"عملت هوليوود سمايل وطلعت طبيعية جدًا. شكرًا لكل الفريق على الاهتمام."</p><b>— أحمد ع.</b></div>
-      <div class="tst"><div class="stars">★★★★★</div><p>"مكان نظيف ومنظّم والتعامل راقي. رجّعولي ثقتي في ابتسامتي."</p><b>— دعاء س.</b></div>
+    <div class="tst-slider">
+      <button class="tst-arrow" id="tstPrev" aria-label="السابق">‹</button>
+      <div class="tst-track" id="tstTrack"></div>
+      <button class="tst-arrow" id="tstNext" aria-label="التالي">›</button>
+    </div>
+    <div class="tst-footer">
+      <div class="tst-dots" id="tstDots"></div>
+      <span class="tst-counter" id="tstCounter"></span>
     </div>
   </div>
 </section>
@@ -322,8 +338,112 @@
       <a href="#contact">📍 المقطم، القاهرة</a>
     </div>
   </div>
-  <div class="copy">© 2026 مركز حياة اليت لطب ا�
+  <div class="copy">© 2026 مركز حياة اليت لطب الأسنان — جميع الحقوق محفوظة.</div>
+</footer>
+
 <script>
+// آراء العملاء (25 رأي — مؤقتة، استبدلها بالآراء الحقيقية)
+const TESTIMONIALS = [
+  { text: "أفضل تجربة علاج أسنان مريت بيها. الدكتور محترف والنتيجة فاقت توقعاتي.", name: "مريم ت." },
+  { text: "عملت هوليوود سمايل وطلعت طبيعية جدًا. شكرًا لكل الفريق على الاهتمام.", name: "أحمد ع." },
+  { text: "مكان نظيف ومنظّم والتعامل راقي. رجّعولي ثقتي في ابتسامتي.", name: "دعاء س." },
+  { text: "زرعت سنتين والنتيجة ممتازة، مفيش أي ألم والمتابعة كانت مستمرة.", name: "محمد ر." },
+  { text: "بنتي كانت خايفة من دكتور الأسنان، الفريق تعامل معاها بصبر وحنية. شكراً.", name: "هالة م." },
+  { text: "التقويم خلص في الميعاد بالظبط والنتيجة أحسن مما توقعت.", name: "كريم س." },
+  { text: "تعقيم ونظافة على أعلى مستوى، وحجز المواعيد دقيق ومحترم.", name: "نورهان ع." },
+  { text: "عملت تبييض ليزر والفرق واضح من أول جلسة. تجربة ممتازة.", name: "شريف ح." },
+  { text: "أسعار واضحة من البداية ومفيش مفاجآت. ده اللي خلاني أكمل معاهم.", name: "أماني ف." },
+  { text: "علاج العصب اللي كنت خايف منه عدى بسلام تام. دكاترة بجد محترفين.", name: "طارق ج." },
+  { text: "التركيبات الزيركون شكلها طبيعي جداً، محدش بيفرق بينها وبين أسناني.", name: "سلمى ن." },
+  { text: "استقبال محترم ومواعيد منضبطة، وده نادر تلاقيه.", name: "حسام ب." },
+  { text: "جالي طوارئ بالليل وردوا عليا على الواتساب وظبطولي ميعاد تاني يوم.", name: "إيمان ق." },
+  { text: "خلع ضرس العقل كان أسهل من المتوقع بكتير. تخدير ممتاز ومتابعة بعد الخلع.", name: "عمرو د." },
+  { text: "ابتسامتي اتغيرت تماماً بعد الفينير. شكراً لذوقكم واهتمامكم.", name: "ريهام ز." },
+  { text: "أهم حاجة عندهم إنهم بيشرحولك كل خطوة قبل ما يعملوها.", name: "ياسر ل." },
+  { text: "مكان مريح نفسياً، والتعامل بيخليك تنسى إنك عند دكتور أسنان.", name: "منة الله أ." },
+  { text: "عملت تنظيف جير وتلميع، والدكتورة نصحتني بروتين عناية كامل ببلاش.", name: "خالد و." },
+  { text: "أمي كبيرة في السن واتعاملوا معاها برفق واحترام شديد. ربنا يباركلهم.", name: "سارة ي." },
+  { text: "حشو تجميلي ليزر ممتاز، اللون مظبوط على لون سناني بالظبط.", name: "مصطفى ص." },
+  { text: "بقالي سنتين باتابع معاهم أنا وعيلتي كلها. ثقة مستمرة.", name: "غادة ر." },
+  { text: "زراعة فورية في جلسة واحدة! تكنولوجيا حديثة فعلاً.", name: "وليد م." },
+  { text: "خطة الدفع بالتقسيط ساعدتني أعمل العلاج اللي كنت مأجله من سنين.", name: "نادية ح." },
+  { text: "متابعة ما بعد العلاج عندهم حاجة تانية، بيطمنوا عليك بنفسهم.", name: "إسلام ع." },
+  { text: "من أول استشارة لآخر جلسة: احترافية وأمانة في التشخيص. أنصح بيهم بشدة.", name: "رانيا ك." },
+];
+
+// سلايدر آراء العملاء
+(function () {
+  const track = document.getElementById("tstTrack");
+  if (!track) return;
+
+  track.innerHTML = TESTIMONIALS.map(t => `
+    <div class="tst">
+      <div class="stars">★★★★★</div>
+      <p>"${t.text}"</p>
+      <b>— ${t.name}</b>
+    </div>`).join("");
+
+  const cards = [...track.children];
+  const dotsBox = document.getElementById("tstDots");
+  dotsBox.innerHTML = TESTIMONIALS.map((_, i) =>
+    `<button data-i="${i}" aria-label="رأي ${i + 1}"></button>`).join("");
+  const dots = [...dotsBox.children];
+  const counter = document.getElementById("tstCounter");
+
+  let current = 0;
+
+  // الانتقال لكارت معيّن (يدعم RTL: محاذاة حافة البداية)
+  function goTo(i) {
+    current = (i + cards.length) % cards.length;
+    const card = cards[current];
+    const delta = card.getBoundingClientRect().right - track.getBoundingClientRect().right;
+    track.scrollTo({ left: track.scrollLeft + delta, behavior: "smooth" });
+  }
+
+  function updateUI() {
+    dots.forEach((d, i) => d.classList.toggle("active", i === current));
+    counter.textContent = (current + 1) + " / " + cards.length;
+  }
+
+  // تحديد الكارت الظاهر حالياً عند السحب اليدوي
+  let scrollTimer;
+  track.addEventListener("scroll", () => {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      const trackRight = track.getBoundingClientRect().right;
+      let best = 0, bestDist = Infinity;
+      cards.forEach((c, i) => {
+        const d = Math.abs(c.getBoundingClientRect().right - trackRight);
+        if (d < bestDist) { bestDist = d; best = i; }
+      });
+      current = best;
+      updateUI();
+    }, 120);
+  });
+
+  document.getElementById("tstNext").addEventListener("click", () => { goTo(current + 1); restartAuto(); });
+  document.getElementById("tstPrev").addEventListener("click", () => { goTo(current - 1); restartAuto(); });
+  dots.forEach(d => d.addEventListener("click", () => { goTo(+d.dataset.i); restartAuto(); }));
+
+  // تشغيل تلقائي — يتوقف مع الهوفر/اللمس، ويعمل فقط عندما يكون السكشن ظاهراً
+  let timer = null, visible = false;
+  const startAuto = () => { if (!timer && visible) timer = setInterval(() => goTo(current + 1), 4000); };
+  const stopAuto = () => { clearInterval(timer); timer = null; };
+  const restartAuto = () => { stopAuto(); startAuto(); };
+
+  track.addEventListener("pointerenter", stopAuto);
+  track.addEventListener("pointerleave", startAuto);
+  track.addEventListener("touchstart", stopAuto, { passive: true });
+  track.addEventListener("touchend", () => setTimeout(startAuto, 3000), { passive: true });
+
+  new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting;
+    visible ? startAuto() : stopAuto();
+  }, { threshold: 0.3 }).observe(track);
+
+  updateUI();
+})();
+
 async function sendWA(event) {
     event.preventDefault();
 
