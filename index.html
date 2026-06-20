@@ -11,7 +11,7 @@
     --bg:#f7fbfd; --ink:#1f2a30; --muted:#5b6b75; --white:#fff;
     --radius:16px; --shadow:0 10px 30px rgba(20,80,110,.12);
   }
-  *{margin:0;padding:0;box-sizing:border-box} 
+  *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{font-family:'Segoe UI','Tahoma',sans-serif;color:var(--ink);background:var(--bg);line-height:1.8}
   a{text-decoration:none;color:inherit}
@@ -135,6 +135,56 @@
   .social a:hover{background:var(--red)}
   .copy{text-align:center;border-top:1px solid rgba(255,255,255,.15);margin-top:30px;padding-top:18px;font-size:13px;opacity:.8}
 
+  /* Smile Design Animation (motion-graphic window) */
+  .sda-wrap{background:linear-gradient(135deg,#0e3a52,#1f7aa8)}
+  .sda-wrap h2{color:#fff}
+  .sda-wrap .lead{color:#d6e6ef}
+  .sda-window{max-width:820px;margin:0 auto;background:#0b2a3c;border:1px solid rgba(255,255,255,.18);border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+  .sda-bar{display:flex;align-items:center;gap:7px;padding:11px 16px;background:rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.1)}
+  .sda-dot{width:11px;height:11px;border-radius:50%;background:#ff5f57}
+  .sda-dot:nth-child(2){background:#febc2e}
+  .sda-dot:nth-child(3){background:#28c840}
+  .sda-title{margin-inline-start:10px;color:#cfe3ee;font-size:13px;font-weight:700;letter-spacing:.3px}
+  .sda-stage{position:relative;width:100%;aspect-ratio:16/9;background:radial-gradient(circle at 50% 42%,#15445e 0%,#0b2a3c 70%);overflow:hidden}
+  .sda-svg{position:absolute;inset:0;width:100%;height:100%}
+  .sda-ring{fill:none;stroke:#36b3d6;opacity:0;transform-origin:400px 200px;animation:sdaRing 3.2s ease-out infinite}
+  .sda-ring.r2{animation-delay:1.05s;stroke:#7fd0e8}
+  .sda-ring.r3{animation-delay:2.1s;stroke:#ffd966}
+  @keyframes sdaRing{0%{opacity:.55;transform:scale(.45)}80%{opacity:0;transform:scale(1.5)}100%{opacity:0;transform:scale(1.5)}}
+  .sda-particle{fill:#9fe0f2;opacity:.0;animation:sdaFloat 5s linear infinite}
+  @keyframes sdaFloat{0%{opacity:0;transform:translateY(20px)}15%{opacity:.7}85%{opacity:.5}100%{opacity:0;transform:translateY(-60px)}}
+  .sda-tooth-line{fill:none;stroke:#bfe0ee;stroke-width:2.4;stroke-linejoin:round;stroke-dasharray:100;stroke-dashoffset:100;animation:sdaDraw 1.7s ease-out .2s forwards}
+  @keyframes sdaDraw{to{stroke-dashoffset:0}}
+  .sda-tooth-fill{fill:#ffffff;fill-opacity:0;animation:sdaFill 1.5s ease-out 1s forwards}
+  @keyframes sdaFill{to{fill-opacity:1}}
+  .sda-shine{fill:url(#sdaShineGrad);opacity:.9;animation:sdaShine 3s ease-in-out 2.4s infinite}
+  @keyframes sdaShine{0%{transform:translateX(-30px)}55%,100%{transform:translateX(150px)}}
+  .sda-spark{fill:#ffe9a8;opacity:0;transform-box:fill-box;transform-origin:center;animation:sdaTwinkle 2.6s ease-in-out infinite}
+  .sda-spark.s2{animation-delay:.7s}
+  .sda-spark.s3{animation-delay:1.3s}
+  .sda-spark.s4{animation-delay:1.9s}
+  @keyframes sdaTwinkle{0%,100%{opacity:0;transform:scale(.2)}45%{opacity:1;transform:scale(1)}70%{opacity:.3;transform:scale(.7)}}
+  .sda-glow{fill:url(#sdaGlowGrad);opacity:.0;animation:sdaGlow 1.4s ease-out 1.6s forwards}
+  @keyframes sdaGlow{to{opacity:.9}}
+  .sda-caption{position:absolute;left:0;right:0;bottom:16px;text-align:center;pointer-events:none}
+  .sda-step{position:absolute;left:0;right:0;color:#fff;font-size:clamp(15px,2.4vw,19px);font-weight:800;opacity:0;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+  .sda-step .badge{display:inline-block;background:rgba(255,217,102,.18);border:1px solid rgba(255,217,102,.5);color:#ffd966;border-radius:30px;padding:5px 16px}
+  .sda-step1{animation:sdaCap 9s ease-in-out infinite}
+  .sda-step2{animation:sdaCap 9s ease-in-out infinite;animation-delay:3s}
+  .sda-step3{animation:sdaCap 9s ease-in-out infinite;animation-delay:6s}
+  @keyframes sdaCap{0%{opacity:0;transform:translateY(8px)}4%,29%{opacity:1;transform:translateY(0)}33%,100%{opacity:0;transform:translateY(-8px)}}
+  .sda-progress{height:4px;background:rgba(255,255,255,.1)}
+  .sda-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#1f7aa8,#ffd966);animation:sdaProg 9s linear infinite}
+  @keyframes sdaProg{from{width:0}to{width:100%}}
+  @media(prefers-reduced-motion:reduce){.sda-ring,.sda-particle,.sda-shine,.sda-spark,.sda-step1,.sda-step2,.sda-step3,.sda-progress i{animation:none}.sda-tooth-line{stroke-dashoffset:0}.sda-tooth-fill{fill-opacity:1}.sda-step3{opacity:1}}
+
+  /* Cases fan carousel (عرض الحالات المروحي) */
+  .fan-layout{position:relative;display:flex;justify-content:center;align-items:center;width:100%;min-height:clamp(360px,44vw,540px);margin-top:6px}
+  .fan-card{position:absolute;top:50%;left:50%;width:clamp(150px,19vw,215px);aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:#0b2a3c;border:4px solid #fff;box-shadow:0 16px 40px rgba(20,80,110,.30);cursor:pointer;transform-origin:center center;transition:transform .55s cubic-bezier(.22,.9,.27,1.12),box-shadow .35s,opacity .5s;opacity:0;will-change:transform}
+  .fan-card img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+  .fan-card:hover{box-shadow:0 28px 62px rgba(20,80,110,.45)}
+  .fan-hint{text-align:center;color:var(--muted);font-size:13px;margin-top:10px}
+
   /* Floating WhatsApp */
   .wa{position:fixed;bottom:22px;left:22px;z-index:60;background:#25d366;color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 8px 22px rgba(37,211,102,.5)}
   .wa:hover{transform:scale(1.08)}
@@ -162,6 +212,7 @@
       <a href="#home">الرئيسية</a>
       <a href="#about">من نحن</a>
       <a href="#services">خدماتنا</a>
+      <a href="#smile-design">كيف نصمّمها</a>
       <a href="#gallery">معرض الابتسامات</a>
       <a href="#why">لماذا نحن</a>
       <a href="#reviews">آراء العملاء</a>
@@ -229,19 +280,86 @@
   </div>
 </section>
 
+<!-- SMILE DESIGN ANIMATION -->
+<section class="sec sda-wrap" id="smile-design">
+  <div class="container">
+    <div style="text-align:center"><span class="tag" style="color:#ffd966">نصمّم ابتسامتك</span></div>
+    <h2>كيف نصمّم ابتسامتك</h2>
+    <p class="lead">من المسح الرقمي حتى الابتسامة النهائية — تصميم دقيق بأحدث التقنيات.</p>
+    <div class="sda-window">
+      <div class="sda-bar">
+        <span class="sda-dot"></span><span class="sda-dot"></span><span class="sda-dot"></span>
+        <span class="sda-title">Digital Smile Design — حياة اليت</span>
+      </div>
+      <div class="sda-stage">
+        <svg class="sda-svg" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet" aria-label="أنيميشن تصميم الابتسامة">
+          <defs>
+            <linearGradient id="sdaShineGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+              <stop offset="0.5" stop-color="#fff" stop-opacity="0.85"/>
+              <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </linearGradient>
+            <radialGradient id="sdaGlowGrad" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0" stop-color="#ffd966" stop-opacity="0.55"/>
+              <stop offset="1" stop-color="#ffd966" stop-opacity="0"/>
+            </radialGradient>
+            <clipPath id="sdaToothClip">
+              <path d="M60 8 C 36 8, 20 24, 20 48 C 20 68, 27 90, 36 106 C 41 115, 50 119, 55 110 C 59 102, 59 88, 61 88 C 63 88, 63 102, 67 110 C 72 119, 81 115, 86 106 C 95 90, 102 68, 102 48 C 102 24, 86 8, 62 8 Z"/>
+            </clipPath>
+          </defs>
+
+          <!-- pulsing rings -->
+          <circle class="sda-ring" cx="400" cy="200" r="120"/>
+          <circle class="sda-ring r2" cx="400" cy="200" r="120"/>
+          <circle class="sda-ring r3" cx="400" cy="200" r="120"/>
+
+          <!-- floating particles -->
+          <circle class="sda-particle" cx="250" cy="300" r="3.5" style="animation-delay:0s"/>
+          <circle class="sda-particle" cx="540" cy="280" r="2.6" style="animation-delay:1.2s"/>
+          <circle class="sda-particle" cx="320" cy="320" r="3" style="animation-delay:2.4s"/>
+          <circle class="sda-particle" cx="500" cy="320" r="2.2" style="animation-delay:3.1s"/>
+          <circle class="sda-particle" cx="430" cy="300" r="3.2" style="animation-delay:1.8s"/>
+
+          <!-- tooth -->
+          <g transform="translate(319,120) scale(1.33)">
+            <ellipse class="sda-glow" cx="61" cy="62" rx="85" ry="85"/>
+            <path class="sda-tooth-fill" pathLength="100" d="M60 8 C 36 8, 20 24, 20 48 C 20 68, 27 90, 36 106 C 41 115, 50 119, 55 110 C 59 102, 59 88, 61 88 C 63 88, 63 102, 67 110 C 72 119, 81 115, 86 106 C 95 90, 102 68, 102 48 C 102 24, 86 8, 62 8 Z"/>
+            <path class="sda-tooth-line" pathLength="100" d="M60 8 C 36 8, 20 24, 20 48 C 20 68, 27 90, 36 106 C 41 115, 50 119, 55 110 C 59 102, 59 88, 61 88 C 63 88, 63 102, 67 110 C 72 119, 81 115, 86 106 C 95 90, 102 68, 102 48 C 102 24, 86 8, 62 8 Z"/>
+            <g clip-path="url(#sdaToothClip)">
+              <rect class="sda-shine" x="-30" y="-10" width="34" height="140" transform="skewX(-18)"/>
+            </g>
+            <!-- sparkles -->
+            <path class="sda-spark"    d="M96 18 L99 27 L108 30 L99 33 L96 42 L93 33 L84 30 L93 27 Z"/>
+            <path class="sda-spark s2" d="M22 40 L24 46 L30 48 L24 50 L22 56 L20 50 L14 48 L20 46 Z"/>
+            <path class="sda-spark s3" d="M104 70 L106 76 L112 78 L106 80 L104 86 L102 80 L96 78 L102 76 Z"/>
+            <path class="sda-spark s4" d="M40 100 L42 106 L48 108 L42 110 L40 116 L38 110 L32 108 L38 106 Z"/>
+          </g>
+        </svg>
+        <div class="sda-caption">
+          <span class="sda-step sda-step1"><span class="badge">① مسح رقمي ثلاثي الأبعاد</span></span>
+          <span class="sda-step sda-step2"><span class="badge">② تصميم الابتسامة بدقة</span></span>
+          <span class="sda-step sda-step3"><span class="badge">③ ابتسامة جاهزة ✨</span></span>
+        </div>
+      </div>
+      <div class="sda-progress"><i></i></div>
+    </div>
+  </div>
+</section>
+
 <!-- GALLERY -->
 <section class="sec" id="gallery">
   <div class="container">
     <div style="text-align:center"><span class="tag">معرض الابتسامات</span></div>
     <h2>نتائج حقيقية لمرضانا</h2>
     <p class="lead">نماذج من حالات قبل وبعد — كل ابتسامة قصة ثقة استعادها صاحبها.</p>
-    <div class="gal-grid">
-      <img src="assets/case1.jpg" alt="حالة قبل وبعد 1">
-      <img src="assets/case2.jpg" alt="حالة قبل وبعد 2">
-      <img src="assets/case3.jpg" alt="حالة قبل وبعد 3">
-      <img src="assets/case4.jpg" alt="حالة قبل وبعد 4">
+    <div class="fan-layout" id="fanLayout">
+      <div class="fan-card"><img src="assets/case1.jpg" loading="lazy" alt="حالة قبل وبعد 1"></div>
+      <div class="fan-card"><img src="assets/case2.jpg" loading="lazy" alt="حالة قبل وبعد 2"></div>
+      <div class="fan-card"><img src="assets/case3.jpg" loading="lazy" alt="حالة قبل وبعد 3"></div>
+      <div class="fan-card"><img src="assets/case4.jpg" loading="lazy" alt="حالة قبل وبعد 4"></div>
     </div>
-    <p style="text-align:center;color:var(--muted);margin-top:18px;font-size:14px">النتائج تختلف من حالة لأخرى حسب التشخيص.</p>
+    <p class="fan-hint">مرّر أو اضغط على أي حالة لتكبيرها ورؤية التفاصيل.</p>
+    <p style="text-align:center;color:var(--muted);margin-top:6px;font-size:14px">النتائج تختلف من حالة لأخرى حسب التشخيص.</p>
   </div>
 </section>
 
@@ -449,6 +567,98 @@ function starsHTML(rating) {
   }, { threshold: 0.3 }).observe(track);
 
   updateUI();
+})();
+
+// معرض الحالات — عرض مروحي (fan carousel)
+(function () {
+  const layout = document.getElementById("fanLayout");
+  if (!layout) return;
+  const cards = Array.from(layout.querySelectorAll(".fan-card"));
+  const n = cards.length;
+  if (!n) return;
+  const SPREAD = 0.5;            // rem لكل وحدة من إحداثيات المروحة
+  const center = (n - 1) / 2;
+
+  function respMult(w) {
+    if (w < 480) return 0.46;
+    if (w < 640) return 0.6;
+    if (w < 768) return 0.74;
+    if (w < 1024) return 0.88;
+    return 1;
+  }
+  function slotConfig(slot) {
+    const distance = center ? (slot - center) / center : 0;
+    const abs = Math.abs(distance);
+    return {
+      rot: distance * 21,
+      scale: 1 - 0.2244 * abs * abs,
+      x: distance * 30,
+      y: abs * abs * 7.3,
+      z: Math.round(10 - Math.abs(slot - center)),
+    };
+  }
+  function apply(el, t) {
+    el.style.transform =
+      "translate(-50%,-50%) translate(" + t.x + "rem," + t.y + "rem) rotate(" + t.rot + "deg) scale(" + t.scale + ")";
+    el.style.zIndex = t.z;
+  }
+  let mult = respMult(window.innerWidth);
+  function baseT(slot) {
+    const c = slotConfig(slot);
+    return { x: c.x * SPREAD * mult, y: c.y * SPREAD * mult, rot: c.rot, scale: c.scale, z: c.z };
+  }
+  function layoutBase() {
+    mult = respMult(window.innerWidth);
+    cards.forEach((el, i) => { apply(el, baseT(i)); el.style.opacity = "1"; });
+  }
+
+  // تكبير الحالة (هوفر على الكمبيوتر / لمس على الجوال) ودفع الباقي للجانبين
+  function focusSlot(slot) {
+    cards.forEach((c2, s2) => {
+      const b = baseT(s2);
+      if (s2 === slot) {
+        b.y -= 2.5 * mult; b.scale *= 1.08; b.z = 20;
+      } else {
+        const dist = Math.abs(s2 - slot);
+        const normalized = center ? (s2 - center) / center : 0;
+        const push = 8 * (1 - Math.abs(normalized)) * (1 + 0.2 * Math.max(0, 3 - dist)) * SPREAD * mult;
+        if (s2 < slot) { b.x -= push; b.rot -= 3 / (dist + 1); }
+        else { b.x += push; b.rot += 3 / (dist + 1); }
+      }
+      apply(c2, b);
+    });
+  }
+  let activeSlot = null;
+  cards.forEach((el, slot) => {
+    el.addEventListener("mouseenter", () => focusSlot(slot));
+    el.addEventListener("click", () => {
+      if (activeSlot === slot) { activeSlot = null; layoutBase(); }
+      else { activeSlot = slot; focusSlot(slot); }
+    });
+  });
+  layout.addEventListener("mouseleave", () => { activeSlot = null; layoutBase(); });
+  window.addEventListener("resize", layoutBase);
+
+  // ظهور تدريجي عند دخول القسم لأول مرة
+  function reveal() {
+    mult = respMult(window.innerWidth);
+    cards.forEach((el, i) => {
+      el.style.transition = "none";
+      el.style.opacity = "0";
+      apply(el, { x: 0, y: 6 * mult, rot: 0, scale: 0.6, z: 0 });
+      void el.offsetWidth;
+      el.style.transition = "";
+      setTimeout(() => { apply(el, baseT(i)); el.style.opacity = "1"; }, 90 + i * 90);
+    });
+  }
+  if ("IntersectionObserver" in window) {
+    let done = false;
+    new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting && !done) { done = true; reveal(); } });
+    }, { threshold: 0.25 }).observe(layout);
+  } else {
+    layoutBase();
+  }
 })();
 
 async function sendWA(event) {
