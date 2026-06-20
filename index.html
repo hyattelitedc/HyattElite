@@ -166,8 +166,8 @@
   @keyframes sdaTwinkle{0%,100%{opacity:0;transform:scale(.2)}45%{opacity:1;transform:scale(1)}70%{opacity:.3;transform:scale(.7)}}
   .sda-glow{fill:url(#sdaGlowGrad);opacity:.0;animation:sdaGlow 1.4s ease-out 1.6s forwards}
   @keyframes sdaGlow{to{opacity:.9}}
-  .sda-caption{position:absolute;left:0;right:0;bottom:16px;text-align:center;pointer-events:none}
-  .sda-step{position:absolute;left:0;right:0;color:#fff;font-size:clamp(15px,2.4vw,19px);font-weight:800;opacity:0;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+  .sda-caption{position:absolute;left:0;right:0;bottom:18px;text-align:center;pointer-events:none;height:0}
+  .sda-step{position:absolute;left:0;right:0;bottom:0;color:#fff;font-size:clamp(14px,2.2vw,18px);font-weight:800;opacity:0;text-shadow:0 2px 10px rgba(0,0,0,.5)}
   .sda-step .badge{display:inline-block;background:rgba(255,217,102,.18);border:1px solid rgba(255,217,102,.5);color:#ffd966;border-radius:30px;padding:5px 16px}
   .sda-step1{animation:sdaCap 9s ease-in-out infinite}
   .sda-step2{animation:sdaCap 9s ease-in-out infinite;animation-delay:3s}
@@ -184,6 +184,14 @@
   .fan-card img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
   .fan-card:hover{box-shadow:0 28px 62px rgba(20,80,110,.45)}
   .fan-hint{text-align:center;color:var(--muted);font-size:13px;margin-top:10px}
+
+  /* Case lightbox (تكبير الحالة) */
+  .case-lb{position:fixed;inset:0;z-index:100;background:rgba(8,25,36,.93);display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out;opacity:0;transition:opacity .25s}
+  .case-lb.open{display:flex;opacity:1}
+  .case-lb img{max-width:94vw;max-height:88vh;border-radius:14px;border:4px solid #fff;box-shadow:0 20px 60px rgba(0,0,0,.6);cursor:default;animation:lbIn .3s ease}
+  @keyframes lbIn{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+  .case-lb-close{position:absolute;top:18px;inset-inline-start:18px;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;font-size:22px;cursor:pointer;display:grid;place-items:center}
+  .case-lb-close:hover{background:rgba(255,255,255,.3)}
 
   /* Floating WhatsApp */
   .wa{position:fixed;bottom:22px;left:22px;z-index:60;background:#25d366;color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 8px 22px rgba(37,211,102,.5)}
@@ -462,6 +470,12 @@
   <div class="copy">© 2026 مركز حياة اليت لطب الأسنان — جميع الحقوق محفوظة.</div>
 </footer>
 
+<!-- CASE LIGHTBOX -->
+<div class="case-lb" id="caseLightbox">
+  <button class="case-lb-close" type="button" aria-label="إغلاق">✕</button>
+  <img src="" alt="حالة">
+</div>
+
 <script>
 // آراء العملاء (آراء حقيقية لعملاء المركز — مرتّبة بشكل طبيعي مع تقييمات متنوّعة)
 const TESTIMONIALS = [
@@ -628,15 +642,33 @@ function starsHTML(rating) {
       apply(c2, b);
     });
   }
-  let activeSlot = null;
+  // Lightbox: الضغط على أي حالة يكبّرها بالكامل
+  const lb = document.getElementById("caseLightbox");
+  const lbImg = lb ? lb.querySelector("img") : null;
+  function openLightbox(imgEl) {
+    if (!lb || !lbImg) return;
+    lbImg.src = imgEl.currentSrc || imgEl.src;
+    lbImg.alt = imgEl.alt || "حالة";
+    lb.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+  function closeLightbox() {
+    if (!lb) return;
+    lb.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+  if (lb) {
+    lb.addEventListener("click", closeLightbox);
+    lbImg.addEventListener("click", (e) => e.stopPropagation());
+    lb.querySelector(".case-lb-close").addEventListener("click", closeLightbox);
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
+  }
+
   cards.forEach((el, slot) => {
     el.addEventListener("mouseenter", () => focusSlot(slot));
-    el.addEventListener("click", () => {
-      if (activeSlot === slot) { activeSlot = null; layoutBase(); }
-      else { activeSlot = slot; focusSlot(slot); }
-    });
+    el.addEventListener("click", () => openLightbox(el.querySelector("img")));
   });
-  layout.addEventListener("mouseleave", () => { activeSlot = null; layoutBase(); });
+  layout.addEventListener("mouseleave", layoutBase);
   window.addEventListener("resize", layoutBase);
 
   // ظهور تدريجي عند دخول القسم لأول مرة
