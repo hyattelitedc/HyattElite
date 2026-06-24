@@ -23,13 +23,16 @@
 <meta property="og:title" content="حياة اليت لطب الأسنان بالمقطم | نصمّم ابتسامتك بعناية">
 <meta property="og:description" content="زراعة الأسنان، هوليوود سمايل، تقويم، وتركيبات زيركون بأحدث التقنيات وأمهر الأطباء في المقطم، القاهرة. احجز موعدك الآن.">
 <meta property="og:url" content="https://hyattelitedc.com/">
-<meta property="og:image" content="https://hyattelitedc.com/assets/logo.png">
+<meta property="og:image" content="https://hyattelitedc.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="مركز حياة اليت لطب الأسنان — We Design Your Smile">
 <meta property="og:locale" content="ar_AR">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="حياة اليت لطب الأسنان بالمقطم | نصمّم ابتسامتك بعناية">
 <meta name="twitter:description" content="زراعة الأسنان، هوليوود سمايل، تقويم، وتركيبات زيركون بأحدث التقنيات في المقطم، القاهرة.">
-<meta name="twitter:image" content="https://hyattelitedc.com/assets/logo.png">
+<meta name="twitter:image" content="https://hyattelitedc.com/assets/og-image.png">
 <!-- Structured data: Dentist / Local Business -->
 <script type="application/ld+json">
 {
@@ -49,6 +52,11 @@
   "medicalSpecialty":"Dentistry",
   "areaServed":{"@type":"City","name":"القاهرة"},
   "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"17","bestRating":"5","worstRating":"4"},
+  "review":[
+    {"@type":"Review","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"author":{"@type":"Person","name":"مني جمال"},"reviewBody":"عملت هوليوود سمايل من 4 سنين وبتابع للحفاظ عليها، ومازالت ممتازة كأني عاملاها جديد."},
+    {"@type":"Review","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"author":{"@type":"Person","name":"علي أيمن"},"reviewBody":"زرعت فك علوي كامل في جلسة لمدة نص ساعة، والحمد لله ماحسيتش بأي ألم."},
+    {"@type":"Review","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"author":{"@type":"Person","name":"سيد راضي"},"reviewBody":"متابع أنا والأولاد مع المركز من 8 سنين، وبصراحة ممتازين وتعاملهم محترم."}
+  ],
   "availableService":[
     {"@type":"MedicalProcedure","name":"زراعة الأسنان"},
     {"@type":"MedicalProcedure","name":"هوليوود سمايل"},
@@ -97,6 +105,8 @@
   button{font-family:inherit;cursor:pointer}
   ::selection{background:var(--teal);color:#fff}
   .container{width:min(var(--maxw),92%);margin-inline:auto}
+  .skip-link{position:absolute;inset-inline-start:-9999px;top:8px;z-index:9999;background:var(--navy);color:#fff;padding:10px 18px;border-radius:10px;font-weight:700}
+  .skip-link:focus{inset-inline-start:8px}
 
   /* ===== Buttons ===== */
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 28px;border-radius:40px;font-weight:700;font-size:15.5px;border:none;transition:transform .2s var(--ease),box-shadow .25s,background .25s,color .25s;white-space:nowrap}
@@ -438,6 +448,7 @@
   <div class="pl-tag">WE DESIGN YOUR SMILE</div>
 </div>
 
+<a href="#main" class="skip-link">تخطّي إلى المحتوى الرئيسي</a>
 <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
 
 <!-- ===== HEADER ===== -->
@@ -487,6 +498,7 @@
   </div>
 </div>
 
+<main id="main">
 <!-- ===== HERO ===== -->
 <section class="hero" id="home">
   <div class="container">
@@ -494,7 +506,7 @@
       <div class="hero-text">
         <span class="hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21.4 8 14 2 9.4h7.6z"/></svg> We Design Your Smile</span>
         <h1>ابتسامتك تستحق <span class="grad">عناية النخبة</span></h1>
-        <p class="lead">في مركز حياة اليت نصمّم لك ابتسامة طبيعية وواثقة بأحدث تقنيات زراعة الأسنان والهوليوود سمايل والتقويم — على يد نخبة من الأطباء.</p>
+        <p class="lead">في مركز حياة اليت لطب الأسنان بالمقطم، القاهرة، نصمّم لك ابتسامة طبيعية وواثقة بأحدث تقنيات زراعة الأسنان والهوليوود سمايل والتقويم — على يد نخبة من الأطباء.</p>
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary">احجز استشارتك الآن
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
@@ -614,10 +626,10 @@
       <p>نماذج من حالات قبل وبعد — كل ابتسامة قصة ثقة استعادها صاحبها.</p>
     </div>
     <div class="fan-layout reveal" data-d="1" id="fanLayout">
-      <div class="fan-card"><img src="assets/case1.jpg" loading="lazy" alt="حالة قبل وبعد 1"></div>
-      <div class="fan-card"><img src="assets/case2.jpg" loading="lazy" alt="حالة قبل وبعد 2"></div>
-      <div class="fan-card"><img src="assets/case3.jpg" loading="lazy" alt="حالة قبل وبعد 3"></div>
-      <div class="fan-card"><img src="assets/case4.jpg" loading="lazy" alt="حالة قبل وبعد 4"></div>
+      <div class="fan-card"><img src="assets/case1.jpg" loading="lazy" width="1080" height="1350" alt="حالة قبل وبعد - هوليوود سمايل في مركز حياة اليت بالمقطم"></div>
+      <div class="fan-card"><img src="assets/case2.jpg" loading="lazy" width="1080" height="1350" alt="حالة قبل وبعد - تركيبات وتيجان زيركون للأسنان"></div>
+      <div class="fan-card"><img src="assets/case3.jpg" loading="lazy" width="1080" height="1350" alt="حالة قبل وبعد - زراعة أسنان بالمقطم"></div>
+      <div class="fan-card"><img src="assets/case4.jpg" loading="lazy" width="1080" height="1350" alt="حالة قبل وبعد - تجميل وتبييض الأسنان"></div>
     </div>
     <p class="fan-hint">مرّر أو اضغط على أي حالة لتكبيرها ورؤية التفاصيل.</p>
     <p class="disclaim">النتائج تختلف من حالة لأخرى حسب التشخيص.</p>
@@ -713,6 +725,8 @@
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- ===== FOOTER ===== -->
 <footer>
