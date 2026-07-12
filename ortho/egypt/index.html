@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تقويم الأسنان — احجز استشارتك | حياة اليت لطب الأسنان</title>
+<meta name="description" content="تقويم الأسنان في مركز حياة اليت لطب الأسنان — تحسين اصطفاف الأسنان والعضة وتناسق الابتسامة. تقويم ثابت أو شفاف. ابدأ بمقدم 10,000 وقسّط الباقي على سنة. أرسل أشعتك ويتواصل معك فريقنا الطبي.">
+<link rel="icon" href="../../logo.png">
+<meta property="og:title" content="تقويم الأسنان — حياة اليت لطب الأسنان">
+<meta property="og:description" content="ابتسامتك مش بس شكل جميل — ابدأ تقويمك بمقدم 10,000 وقسّط الباقي على سنة. أرسل أشعتك الآن.">
+<meta property="og:image" content="https://hyattelitedc.com/ortho/egypt/assets/ortho-after.jpg">
+<meta property="og:url" content="https://hyattelitedc.com/ortho/egypt/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#14506e; --navy-deep:#0d3a52; --teal:#1f7aa8;
+  --gold:#c9a227; --gold-soft:#ffd966; --red:#e0352b;
+  --ink:#132430; --muted:#5a6b76; --cream:#f7fafc; --line:#e6eef3;
+  --shadow:0 20px 55px -22px rgba(13,58,82,.42);
+  --shadow-sm:0 10px 26px -14px rgba(13,58,82,.30);
+  --radius:20px; --maxw:1120px;
+  --sp:clamp(64px,9vw,104px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"Cairo",system-ui,Tahoma,sans-serif;color:var(--ink);background:var(--cream);line-height:1.85;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:1rem 2rem;border-radius:999px;font-weight:800;font-size:1.06rem;transition:transform .25s,box-shadow .25s,background .25s;cursor:pointer;border:2px solid transparent}
+.btn svg{width:22px;height:22px;fill:currentColor}
+.btn-wa{background:#25d366;color:#fff;box-shadow:0 16px 32px -12px rgba(37,211,102,.6)}
+.btn-wa:hover{transform:translateY(-3px);box-shadow:0 20px 40px -12px rgba(37,211,102,.7)}
+.btn-gold{background:linear-gradient(135deg,var(--gold-soft),var(--gold));color:#3d2f05}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.btn-line{border-color:rgba(255,255,255,.55);color:#fff;background:rgba(255,255,255,.08)}
+.btn-line:hover{background:#fff;color:var(--navy)}
+
+/* header */
+.hd{position:sticky;top:0;z-index:50;background:rgba(13,58,82,.94);backdrop-filter:blur(12px);color:#fff;border-bottom:1px solid rgba(255,255,255,.08)}
+.hd .wrap{display:flex;align-items:center;justify-content:space-between;padding-block:.65rem}
+.hd .lg{display:flex;align-items:center;gap:.65rem}
+.hd .lg img{height:44px}
+.hd .lg b{font-size:1.06rem;line-height:1.1}
+.hd .lg small{display:block;font-size:.72rem;color:var(--gold-soft);letter-spacing:.3px}
+.hd .back{font-size:.9rem;opacity:.85;transition:.25s}
+.hd .back:hover{color:var(--gold-soft);opacity:1}
+
+/* before/after primitive */
+.ba{position:relative;border-radius:var(--radius);overflow:hidden;background:#000;line-height:0}
+.ba>img{width:100%;height:100%;object-fit:cover;background:#000}
+.ba .tag{position:absolute;top:14px;z-index:2;font-size:.82rem;font-weight:800;letter-spacing:.4px;padding:.34rem .95rem;border-radius:999px;line-height:1.4;backdrop-filter:blur(4px)}
+.ba .tag.before{right:14px;background:rgba(19,36,48,.78);color:#e7eef3;border:1px solid rgba(255,255,255,.22)}
+.ba .tag.after{right:14px;background:rgba(37,211,102,.92);color:#08351b;border:1px solid rgba(255,255,255,.35)}
+
+/* hero */
+.hero{background:linear-gradient(150deg,var(--navy-deep),var(--navy) 55%,var(--teal));color:#fff;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(255,217,102,.16),transparent 70%);top:-190px;left:-150px}
+.hero .wrap{padding:clamp(48px,7vw,72px) 22px clamp(60px,8vw,88px);display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,54px);align-items:center;position:relative}
+.hero-copy{text-align:right}
+.badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,217,102,.14);border:1px solid rgba(255,217,102,.42);color:var(--gold-soft);padding:.45rem 1.15rem;border-radius:999px;font-weight:800;font-size:.9rem;margin-bottom:1.4rem}
+.hero h1{font-size:clamp(1.85rem,4.6vw,3rem);font-weight:900;line-height:1.28;letter-spacing:-.3px}
+.hero h1 .hl{color:var(--gold-soft)}
+.hero .sub{font-size:clamp(1.02rem,2.2vw,1.2rem);color:#d6e8f2;margin-top:1rem;font-weight:500;line-height:1.9;max-width:48ch}
+.offer-box{margin:1.9rem 0 1.5rem;display:flex;align-items:center;gap:1rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,217,102,.3);border-radius:20px;padding:18px 24px;backdrop-filter:blur(8px);max-width:440px}
+.offer-box .oi{width:52px;height:52px;flex:none;border-radius:14px;background:linear-gradient(135deg,var(--gold-soft),var(--gold));display:grid;place-items:center}
+.offer-box .oi svg{width:28px;height:28px;fill:#3d2f05}
+.offer-box .ot b{display:block;font-size:1.15rem;color:#fff;line-height:1.4}
+.offer-box .ot b .amt{color:var(--gold-soft);font-variant-numeric:tabular-nums}
+.offer-box .ot small{font-size:.9rem;color:#cfe4ef}
+.hero-cta{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:.3rem}
+.hero-note{margin-top:1.3rem;font-size:.9rem;color:#a9c8d8;display:flex;align-items:center;gap:.45rem}
+.hero-note svg{width:16px;height:16px;fill:currentColor;opacity:.9}
+.hero-media{position:relative}
+.hero-media .ba{box-shadow:0 34px 80px -28px rgba(0,0,0,.75);border:3px solid rgba(255,217,102,.32)}
+.hero-media .ba>img{aspect-ratio:4/3}
+
+/* sections */
+.sec{padding:var(--sp) 0}
+.s-head{text-align:center;max-width:680px;margin:0 auto clamp(40px,5vw,56px)}
+.s-head .eye{display:inline-block;color:var(--teal);font-weight:800;font-size:.9rem;letter-spacing:.6px;margin-bottom:.4rem}
+.s-head h2{font-size:clamp(1.55rem,3.4vw,2.3rem);font-weight:900;color:var(--navy-deep);line-height:1.35}
+.s-head p{color:var(--muted);margin-top:.7rem;font-size:1.05rem;line-height:1.85}
+
+/* benefits */
+.ben-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.ben{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px;box-shadow:var(--shadow-sm);transition:transform .3s,box-shadow .3s}
+.ben:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.ben .ic{width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,var(--teal),var(--navy));display:grid;place-items:center;margin-bottom:1rem}
+.ben .ic svg{width:30px;height:30px;fill:#fff}
+.ben h3{font-size:1.13rem;font-weight:800;color:var(--navy-deep);line-height:1.4}
+.ben p{color:var(--muted);font-size:.96rem;margin-top:.4rem;line-height:1.75}
+
+/* types */
+.types{background:linear-gradient(180deg,#fff,var(--cream))}
+.types-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.type{background:#fff;border:1px solid var(--line);border-radius:calc(var(--radius) + 2px);padding:32px 28px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+.type::before{content:"";position:absolute;top:0;right:0;width:100%;height:5px;background:linear-gradient(90deg,var(--teal),var(--gold))}
+.type .ic{width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,var(--teal),var(--navy));display:grid;place-items:center;margin-bottom:1rem}
+.type .ic svg{width:32px;height:32px;fill:#fff}
+.type h3{font-size:1.3rem;font-weight:900;color:var(--navy-deep)}
+.type p{color:var(--muted);margin-top:.5rem;font-size:.98rem;line-height:1.8}
+
+/* gallery */
+.g-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(18px,2.5vw,26px)}
+.g-card{background:#fff;border:1px solid var(--line);border-radius:calc(var(--radius) + 4px);padding:14px;box-shadow:var(--shadow-sm);transition:transform .3s,box-shadow .3s}
+.g-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.g-card .ba>img{aspect-ratio:4/3}
+.g-card .cap{display:flex;align-items:center;gap:.5rem;padding:.9rem .4rem .3rem;font-weight:800;font-size:1rem}
+.g-card .cap svg{width:20px;height:20px;flex:none}
+.g-card.b .cap{color:var(--muted)}.g-card.b .cap svg{fill:var(--muted)}
+.g-card.a .cap{color:var(--teal)}.g-card.a .cap svg{fill:var(--teal)}
+.g-note{text-align:center;color:var(--muted);font-size:.92rem;margin-top:1.6rem}
+
+/* consult / offer band */
+.band{background:linear-gradient(150deg,var(--navy-deep),var(--navy));color:#fff;text-align:center}
+.band .wrap{padding:var(--sp) 22px}
+.band .eye{color:var(--gold-soft);font-weight:800;font-size:.9rem;letter-spacing:.6px}
+.band h2{font-size:clamp(1.6rem,3.6vw,2.4rem);font-weight:900;margin-top:.4rem}
+.band p{color:#c9dded;max-width:52ch;margin:1rem auto 0;line-height:1.9}
+.band .big-offer{display:inline-flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.6rem 1.2rem;margin:2rem auto 1.8rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,217,102,.35);border-radius:20px;padding:20px 32px}
+.band .big-offer .dp{font-size:clamp(1.6rem,4vw,2.3rem);font-weight:900;color:var(--gold-soft);font-variant-numeric:tabular-nums}
+.band .big-offer .txt{font-size:1.05rem;font-weight:700}
+.band .big-offer .sep{width:1px;height:34px;background:rgba(255,255,255,.25)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:20px;counter-reset:st}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px;text-align:center;box-shadow:var(--shadow-sm)}
+.step::before{counter-increment:st;content:counter(st);width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--navy));color:#fff;font-weight:900;font-size:1.2rem;display:grid;place-items:center;margin:0 auto .9rem}
+.step h3{font-size:1.08rem;font-weight:800;color:var(--navy-deep)}
+.step p{color:var(--muted);font-size:.94rem;margin-top:.35rem;line-height:1.7}
+
+/* final */
+.final{background:linear-gradient(135deg,var(--red),#b7261d);color:#fff;text-align:center}
+.final .wrap{padding:clamp(52px,7vw,72px) 22px}
+.final h2{font-size:clamp(1.55rem,3.6vw,2.35rem);font-weight:900}
+.final p{margin:.7rem auto 1.7rem;opacity:.96;max-width:46ch;line-height:1.85}
+
+/* footer */
+.ft{background:var(--navy-deep);color:#bcd6e4;text-align:center;padding:40px 22px}
+.ft img{height:52px;margin:0 auto 14px}
+.ft .row{display:flex;gap:1.6rem;justify-content:center;flex-wrap:wrap;font-size:.95rem;margin-bottom:.9rem}
+.ft .row a,.ft .row span{display:inline-flex;align-items:center;gap:.4rem}
+.ft a:hover{color:var(--gold-soft)}
+.ft .cp{font-size:.82rem;opacity:.65}
+
+/* floating wa */
+.wa-f{position:fixed;bottom:22px;right:22px;width:60px;height:60px;border-radius:50%;background:#25d366;display:grid;place-items:center;z-index:70;box-shadow:0 16px 32px -10px rgba(37,211,102,.65);animation:bob 2.8s ease-in-out infinite}
+.wa-f svg{width:33px;height:33px;fill:#fff}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,.84,.44,1),transform .7s cubic-bezier(.16,.84,.44,1)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.wa-f{animation:none}}
+
+@media(max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;text-align:center}
+  .hero-copy{text-align:center}
+  .hero .sub{margin-inline:auto}
+  .offer-box{margin-inline:auto;text-align:right}
+  .hero-note{justify-content:center}
+  .hero-media{max-width:480px;margin:0 auto}
+  .types-grid{grid-template-columns:1fr}
+  .g-grid{grid-template-columns:1fr;max-width:520px;margin-inline:auto}
+}
+@media(max-width:600px){.hd .lg b{font-size:.94rem}}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap">
+    <a class="lg" href="../../">
+      <img src="../../logo_white.png" alt="حياة اليت لطب الأسنان">
+      <span><b>حياة اليت لطب الأسنان</b><small>We Design Your Smile</small></span>
+    </a>
+    <a class="back" href="../../">← الموقع الرئيسي</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="badge">✦ تقويم الأسنان — Hyatt Elite</span>
+      <h1>ابتسامتك <span class="hl">مش بس</span> شكل جميل</h1>
+      <p class="sub">تقويم الأسنان يساعد على تحسين اصطفاف الأسنان، ودعم تناسق الابتسامة، وتعزيز الثقة في كل يوم.</p>
+      <div class="offer-box">
+        <div class="oi"><svg viewBox="0 0 24 24"><path d="M21 7H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm-9 7a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zM5 10a2 2 0 0 1-2-2h2zm14-2a2 2 0 0 1-2 2V8zM3 14a2 2 0 0 1 2 2H3zm16 2a2 2 0 0 1 2-2v2z"/></svg></div>
+        <div class="ot"><b>ابدأ بمقدم <span class="amt">10,000</span> جنيه فقط</b><small>وقسّط الباقي على سنة كاملة</small></div>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-wa" href="https://wa.me/201003033566?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AA%D9%82%D9%88%D9%8A%D9%85%20%D8%A7%D9%84%D8%A3%D8%B3%D9%86%D8%A7%D9%86%20%D9%88%D8%A5%D8%B1%D8%B3%D8%A7%D9%84%20%D8%A3%D8%B4%D8%B9%D8%AA%D9%8A" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm5.4 14.4c-.2.6-1.3 1.2-1.8 1.3-.5.1-1.1.1-1.7-.1-.4-.1-1-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.1-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4-.1.6.4.3.5.8 1.8.9 2 .1.1.1.3 0 .5-.1.2-.2.3-.3.5l-.5.5c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.2.4.1.6 0 .1-.2.6-.7.8-1 .1-.4.3-.3.6-.2.3.1 1.7.7 2 .9.3.1.5.2.6.3.1.1.1.7-.1 1.3z"/></svg>
+          أرسل أشعتك عبر واتساب
+        </a>
+        <a class="btn btn-line" href="tel:0228440012">اتصل بالعيادة</a>
+      </div>
+      <p class="hero-note"><svg viewBox="0 0 24 24"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 8 12 8 12s8-6.6 8-12a8 8 0 0 0-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg> مركز حياة اليت لطب الأسنان — المقطم، القاهرة</p>
+    </div>
+    <div class="hero-media">
+      <div class="ba">
+        <span class="tag after">بعد التقويم ✦</span>
+        <img src="assets/ortho-after.jpg" alt="اصطفاف الأسنان بعد تقويم الأسنان في حياة اليت">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits -->
+<section class="sec">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <span class="eye">ليه التقويم؟</span>
+      <h2>أكثر من مجرد شكل جميل</h2>
+      <p>مع الخطة المناسبة، التقويم يساهم في تحسين عضة الأسنان، وتسهيل تنظيفها، ودعم صحة الفم على المدى الطويل.</p>
+    </div>
+    <div class="ben-grid">
+      <div class="ben reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h10v2H4z"/></svg></div>
+        <h3>اصطفاف أفضل للأسنان</h3>
+        <p>ترتيب الأسنان وتحسين تناسق الابتسامة لمظهر متناغم وطبيعي.</p>
+      </div>
+      <div class="ben reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 4.5 5 8c0 2.5 1 4.5 1.5 6.5.5 2 .5 7.5 2.5 7.5s1.5-4 3-4 1 4 3 4 2-5.5 2.5-7.5C18 12.5 19 10.5 19 8c0-3.5-3-6-7-6z"/></svg></div>
+        <h3>عضة أسنان متزنة</h3>
+        <p>تحسين إطباق الأسنان يقلل الضغط الزائد ويريح الفكين.</p>
+      </div>
+      <div class="ben reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2s7 3 7 10a7 7 0 0 1-14 0c0-7 7-10 7-10zm0 4c-2 2-3 3-3 5a3 3 0 0 0 6 0c0-2-1-3-3-5z"/></svg></div>
+        <h3>تنظيف أسهل</h3>
+        <p>أسنان مصطفّة أسهل في التنظيف وتقلل تراكم التسوس والجير.</p>
+      </div>
+      <div class="ben reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.6 8.6 2 5 5.3 5c1.9 0 3.2 1 3.7 2.3C9.5 6 10.8 5 12 5s2.5 1 3 2.3C15.5 6 16.8 5 18.7 5 22 5 23.4 8.6 22 11.7 19.5 16.4 12 21 12 21z"/></svg></div>
+        <h3>صحة فم طويلة المدى</h3>
+        <p>دعم صحة اللثة والأسنان والحفاظ عليها لأطول فترة ممكنة.</p>
+      </div>
+      <div class="ben reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5c0 2 1 3.5 2 4.5V15a3 3 0 0 0 6 0v-3.5c1-1 2-2.5 2-4.5a5 5 0 0 0-5-5zM9 19h6v1a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z"/></svg></div>
+        <h3>ثقة في كل يوم</h3>
+        <p>ابتسامة متناسقة تعزّز ثقتك بنفسك في كل مناسبة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Types -->
+<section class="types sec">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <span class="eye">اختر الأنسب لك</span>
+      <h2>تقويم ثابت أو تقويم شفاف</h2>
+      <p>سواء كنت تفكر في التقويم الثابت أو التقويم الشفاف، اختيار العلاج الأنسب يبدأ باستشارة متخصصة لتقييم حالة الأسنان والفكين بدقة.</p>
+    </div>
+    <div class="types-grid">
+      <div class="type reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 8h18v2H3zm2 4h2v4H5zm4 0h2v4H9zm4 0h2v4h-2zm4 0h2v4h-2z"/></svg></div>
+        <h3>التقويم الثابت</h3>
+        <p>الحل الأقوى لحالات عدم الاصطفاف المتوسطة والمتقدمة — دقيق وفعّال في تحريك الأسنان لأماكنها الصحيحة.</p>
+      </div>
+      <div class="type reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2C7 2 4 6 4 11s3 11 8 11 8-6 8-11-3-9-8-9zm0 3c3 0 5 3 5 6H7c0-3 2-6 5-6z" opacity=".55"/><path d="M7 11h10c0 4-2 8-5 8s-5-4-5-8z"/></svg></div>
+        <h3>التقويم الشفاف</h3>
+        <p>شبه غير مرئي ومريح وقابل للإزالة — خيار مثالي لمن يبحث عن حل عملي وأنيق لا يظهر أثناء الحديث.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Before/After gallery -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <span class="eye">حالة حقيقية</span>
+      <h2>قبل &amp; بعد التقويم</h2>
+      <p>تحسّن ملحوظ في اصطفاف الأسنان وتناسق القوس بعد خطة التقويم المناسبة.</p>
+    </div>
+    <div class="g-grid">
+      <figure class="g-card b reveal">
+        <div class="ba"><span class="tag before">قبل</span>
+          <img src="assets/ortho-before.jpg" alt="اصطفاف الأسنان قبل التقويم" loading="lazy"></div>
+        <figcaption class="cap"><svg viewBox="0 0 24 24"><path d="M11 7h2v6h-2zm0 8h2v2h-2z"/><path d="M12 2 1 21h22L12 2zm0 4 7.5 13h-15z"/></svg> قبل التقويم — عدم اصطفاف</figcaption>
+      </figure>
+      <figure class="g-card a reveal">
+        <div class="ba"><span class="tag after">بعد ✦</span>
+          <img src="assets/ortho-after.jpg" alt="اصطفاف الأسنان بعد التقويم" loading="lazy"></div>
+        <figcaption class="cap"><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> بعد التقويم — اصطفاف متناسق</figcaption>
+      </figure>
+    </div>
+    <p class="g-note">* صورة لحالة حقيقية — النتائج تختلف من حالة لأخرى حسب وضع الأسنان والفكين.</p>
+  </div>
+</section>
+
+<!-- Offer band -->
+<section class="band">
+  <div class="wrap">
+    <span class="eye reveal">عرض التقسيط</span>
+    <h2 class="reveal">ابدأ تقويمك اليوم بمقدم بسيط</h2>
+    <div class="big-offer reveal">
+      <span><span class="dp">10,000</span> <span class="txt">مقدم فقط</span></span>
+      <span class="sep"></span>
+      <span class="txt">وتقسيط الباقي على سنة كاملة</span>
+    </div>
+    <p class="reveal">احجز استشارتك في Hyatt Elite، ودع فريقنا يساعدك تختار خطة تقويم مناسبة لاحتياجاتك وابتسامتك.</p>
+  </div>
+</section>
+
+<!-- Steps -->
+<section class="sec">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <span class="eye">إزاي تبدأ؟</span>
+      <h2>3 خطوات بسيطة</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><h3>أرسل أشعتك</h3><p>ابعت أشعة أسنانك على واتساب العيادة.</p></div>
+      <div class="step reveal"><h3>تواصل فريقنا الطبي</h3><p>يتواصل معك فريقنا الطبي في أسرع وقت لتقييم حالتك.</p></div>
+      <div class="step reveal"><h3>خطة تقويم مناسبة</h3><p>نساعدك تختار التقويم الثابت أو الشفاف الأنسب لك.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final">
+  <div class="wrap">
+    <h2 class="reveal">جاهز تبدأ رحلة ابتسامتك؟</h2>
+    <p class="reveal">أرسل لنا أشعتك الآن وسيقوم فريقنا الطبي بالتواصل معك في أسرع وقت — وابدأ تقويمك بمقدم 10,000 وتقسيط الباقي على سنة.</p>
+    <a class="btn btn-gold reveal" href="https://wa.me/201003033566?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AA%D9%82%D9%88%D9%8A%D9%85%20%D8%A7%D9%84%D8%A3%D8%B3%D9%86%D8%A7%D9%86%20%D9%88%D8%A5%D8%B1%D8%B3%D8%A7%D9%84%20%D8%A3%D8%B4%D8%B9%D8%AA%D9%8A" target="_blank" rel="noopener">أرسل أشعتك عبر واتساب</a>
+  </div>
+</section>
+
+<footer class="ft">
+  <img src="../../logo_white.png" alt="حياة اليت">
+  <div class="row">
+    <a href="tel:0228440012">📞 0228440012</a>
+    <a href="https://wa.me/201003033566" target="_blank" rel="noopener">💬 واتساب</a>
+    <span>📍 شارع 9 أعلى الشبراوي، المقطم، القاهرة</span>
+  </div>
+  <p class="cp">© مركز حياة اليت لطب الأسنان — We Design Your Smile</p>
+</footer>
+
+<a class="wa-f" href="https://wa.me/201003033566?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AA%D9%82%D9%88%D9%8A%D9%85%20%D8%A7%D9%84%D8%A3%D8%B3%D9%86%D8%A7%D9%86" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm5.4 14.4c-.2.6-1.3 1.2-1.8 1.3-.5.1-1.1.1-1.7-.1-.4-.1-1-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.1-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4-.1.6.4.3.5.8 1.8.9 2 .1.1.1.3 0 .5-.1.2-.2.3-.3.5l-.5.5c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.2.4.1.6 0 .1-.2.6-.7.8-1 .1-.4.3-.3.6-.2.3.1 1.7.7 2 .9.3.1.5.2.6.3.1.1.1.7-.1 1.3z"/></svg>
+</a>
+
+<script>
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4)*70+'ms';io.observe(el)});
+</script>
+</body>
+</html>
