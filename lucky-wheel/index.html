@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>العجلة المحظوظة من حياة إيليت</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- ==========================================================================
+         Client-side API shim for static hosting (GitHub Pages).
+         The React app was built to call an Express backend (/api/status,
+         /api/spin, /api/prizes). There is no backend on static hosting, so this
+         script patches window.fetch to answer those 3 endpoints locally using
+         localStorage — mirroring server/index.js exactly (same prizes, same
+         weighted draw, same 6-month cooldown, now per-browser instead of per-IP).
+         Runs before the deferred app module, so fetch is patched in time.
+    =========================================================================== -->
+    <script>
+    (function () {
+      var PRIZES = [
+        { label: 'تبييض الأسنان',            weight: 0  },
+        { label: 'تنظيف وتلميع الأسنان',     weight: 50 },
+        { label: 'زراعة سن مجانية',          weight: 0  },
+        { label: 'تاج سن مجاني',             weight: 0  },
+        { label: 'حظ أوفر في المرة القادمة', weight: 50 }
+      ];
+      var COOLDOWN_MS = 182 * 24 * 60 * 60 * 1000; // 6 months
+      var KEY = 'hyattelite_luckywheel_v1';
+
+      function load() {
+        try { return JSON.parse(localStorage.getItem(KEY)) || {}; }
+        catch (e) { return {}; }
+      }
+      function save(rec) {
+        try { localStorage.setItem(KEY, JSON.stringify(rec)); } catch (e) {}
+      }
+      function pickPrize() {
+        var total = PRIZES.reduce(function (s, p) { return s + p.weight; }, 0);
+        var r = Math.random() * total;
+        for (var i = 0; i < PRIZES.length; i++) { r -= PRIZES[i].weight; if (r < 0) return i; }
+        return PRIZES.length - 1;
+      }
+      function statusFor(rec) {
+        if (!rec || !rec.lastSpinAt) {
+          return { canSpin: true, nextAvailableAt: null, lastPrize: rec ? rec.lastPrize : null };
+        }
+        var next = new Date(rec.lastSpinAt).getTime() + COOLDOWN_MS;
+        if (Date.now() >= next) return { canSpin: true, nextAvailableAt: null, lastPrize: rec.lastPrize };
+        return { canSpin: false, nextAvailableAt: new Date(next).toISOString(), lastPrize: rec.lastPrize };
+      }
+      function json(body, status) {
+        return new Response(JSON.stringify(body), {
+          status: status || 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+
+      var _fetch = window.fetch ? window.fetch.bind(window) : null;
+      window.fetch = function (input, init) {
+        var url = (typeof input === 'string') ? input : (input && input.url) || '';
+        var method = ((init && init.method) || (input && input.method) || 'GET').toUpperCase();
+        try {
+          if (url.indexOf('/api/prizes') !== -1) {
+            return Promise.resolve(json({ prizes: PRIZES.map(function (p) { return p.label; }) }));
+          }
+          if (url.indexOf('/api/status') !== -1) {
+            return Promise.resolve(json(statusFor(load())));
+          }
+          if (url.indexOf('/api/spin') !== -1 && method === 'POST') {
+            var rec = load();
+            var st = statusFor(rec);
+            if (!st.canSpin) {
+              return Promise.resolve(json({ canSpin: false, nextAvailableAt: st.nextAvailableAt }, 429));
+            }
+            var idx = pickPrize();
+            var prize = PRIZES[idx].label;
+            var now = new Date();
+            save({ lastSpinAt: now.toISOString(), lastPrize: prize });
+            return Promise.resolve(json({
+              canSpin: true,
+              prizeIndex: idx,
+              prize: prize,
+              nextAvailableAt: new Date(now.getTime() + COOLDOWN_MS).toISOString()
+            }));
+          }
+        } catch (e) { /* fall through to network */ }
+        return _fetch ? _fetch(input, init) : Promise.reject(new Error('fetch unavailable'));
+      };
+    })();
+    </script>
+    <script type="module" crossorigin src="./assets/index-B2G0nOVw.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DMpl6VQq.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
