@@ -84,6 +84,8 @@ form{padding:26px 0 60px}
 .note{font-size:.86rem;color:var(--muted);margin-top:1rem;line-height:1.7}
 .thanks{display:none;background:#eaf7ef;border:1.5px solid #b7e3c8;border-radius:14px;padding:18px;margin-top:1rem;color:#177a45;font-weight:700;text-align:center}
 .thanks.show{display:block}
+.errbox{display:none;background:#fdecea;border:1.5px solid #f5b7b1;border-radius:14px;padding:18px;margin-top:1rem;color:#a93226;font-weight:700;text-align:center}
+.errbox.show{display:block}
 
 .ft{background:var(--navy-deep);color:#bcd6e4;text-align:center;padding:26px 18px;font-size:.86rem}
 .ft a:hover{color:var(--gold-soft)}
@@ -180,8 +182,9 @@ form{padding:26px 0 60px}
 
   <div class="submit-wrap">
     <button type="submit" class="btn btn-primary">إرسال التقييم</button>
-    <p class="note">عند الضغط على «إرسال» سيتم فتح تطبيق البريد لديك برسالة جاهزة إلى العيادة — فقط اضغط «إرسال» داخل البريد لإتمام إرسال تقييمك.</p>
-    <div class="thanks" id="thanks">✓ شكراً لك! تم تجهيز تقييمك وفتح البريد لإتمام الإرسال. نقدّر وقتك وملاحظاتك.</div>
+    <p class="note">عند الضغط على «إرسال» يصل تقييمك مباشرةً إلى العيادة. بياناتك تُستخدم لتحسين جودة الخدمة فقط.</p>
+    <div class="thanks" id="thanks">✓ شكراً لك! تم استلام تقييمك بنجاح. نقدّر وقتك وملاحظاتك.</div>
+    <div class="errbox" id="errbox">تعذّر إرسال التقييم — من فضلك تأكد من اتصالك بالإنترنت واضغط «إعادة المحاولة». بياناتك محفوظة في الصفحة ولن تفقدها.</div>
   </div>
 </form>
 </div>
@@ -192,7 +195,8 @@ form{padding:26px 0 60px}
 
 <script>
 (function(){
-  var CLINIC_EMAIL="hyattelitedc@gmail.com";
+  // n8n webhook — يستقبل التقييم ويرسله تلقائياً لبريد العيادة (المستلم مضبوط داخل n8n)
+  var N8N_WEBHOOK="https://n8n.hyattelitedc.com/webhook/hyatt-survey";
 
   // rating questions per section
   var sections={
@@ -288,11 +292,62 @@ form{padding:26px 0 60px}
 
     var subject='استبيان رضا المرضى'+(name?(' - '+name):'')+' - '+date;
     var body=L.join('\n');
-    var url='mailto:'+CLINIC_EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
 
-    document.getElementById('thanks').classList.add('show');
-    document.getElementById('thanks').scrollIntoView({block:'center',behavior:'smooth'});
-    setTimeout(function(){ window.location.href=url; },500);
+    // payload منظّم يُرسل إلى n8n
+    var payload={
+      submittedAt:d.toISOString(),
+      date:date,
+      name:name,
+      phone:phone,
+      liked:liked,
+      improve:improve,
+      overall:Number((form.querySelector('input[name="overall"]:checked')||{}).value)||null,
+      nps:Number((form.querySelector('input[name="nps"]:checked')||{}).value)||null,
+      sections:Object.keys(sections).map(function(sec){
+        var pfx=(sec==="الاستقبال والعيادة"?'s1_':'s2_');
+        return {title:sec,answers:sections[sec].map(function(q,i){
+          return {question:q,value:Number((form.querySelector('input[name="'+pfx+i+'"]:checked')||{}).value)||null,max:5};
+        })};
+      }),
+      textSummary:body,
+      subject:subject,
+      source:location.href
+    };
+
+    var btn=form.querySelector('button[type="submit"]');
+    if(btn){btn.disabled=true;btn.textContent='جارٍ الإرسال…';}
+
+    var err=document.getElementById('errbox');
+
+    function done(){
+      err.classList.remove('show');
+      document.getElementById('thanks').classList.add('show');
+      document.getElementById('thanks').scrollIntoView({block:'center',behavior:'smooth'});
+      if(btn){btn.textContent='تم الإرسال ✓';}
+    }
+
+    function fail(){
+      // لا نفتح بريد المريض إطلاقاً — نطلب منه إعادة المحاولة فقط
+      err.classList.add('show');
+      err.scrollIntoView({block:'center',behavior:'smooth'});
+      if(btn){btn.disabled=false;btn.textContent='إعادة المحاولة';}
+    }
+
+    function send(){
+      return fetch(N8N_WEBHOOK,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload)
+      }).then(function(r){
+        if(!r.ok) throw new Error('HTTP '+r.status);
+        return true;
+      });
+    }
+
+    // محاولة واحدة إضافية تلقائياً قبل إظهار رسالة الخطأ
+    send().catch(function(){
+      return new Promise(function(res){ setTimeout(res,1500); }).then(send);
+    }).then(done).catch(fail);
   });
 })();
 </script>
