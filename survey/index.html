@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>استبيان قياس رضا المرضى | حياة اليت لطب الأسنان</title>
+<meta name="description" content="استبيان قياس رضا المرضى في مركز حياة اليت لطب الأسنان — قيّم تجربتك لتطوير خدماتنا وتحسين جودة الرعاية الطبية.">
+<link rel="icon" href="../logo.png">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#14506e; --navy-deep:#0d3a52; --teal:#1f7aa8;
+  --gold:#c9a227; --gold-soft:#ffd966; --red:#e0352b; --green:#1e9e5a;
+  --ink:#132430; --muted:#5a6b76; --cream:#f2f6f9; --line:#e0e9ef;
+  --shadow:0 20px 55px -22px rgba(13,58,82,.42);
+  --shadow-sm:0 10px 26px -14px rgba(13,58,82,.28);
+  --radius:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"Cairo",system-ui,Tahoma,sans-serif;color:var(--ink);background:var(--cream);line-height:1.8;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px}
+
+/* header */
+.hd{background:linear-gradient(150deg,var(--navy-deep),var(--navy) 60%,var(--teal));color:#fff;position:relative;overflow:hidden}
+.hd::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,217,102,.16),transparent 70%);top:-160px;left:-120px}
+.hd .wrap{position:relative;padding:26px 18px 30px}
+.hd .top{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.hd .lg{display:flex;align-items:center;gap:.6rem}
+.hd .lg img{height:42px}
+.hd .lg b{font-size:1.02rem;line-height:1.1}
+.hd .lg small{display:block;font-size:.72rem;color:var(--gold-soft)}
+.hd .back{font-size:.86rem;opacity:.9}
+.hd .back:hover{color:var(--gold-soft)}
+.hd h1{font-size:clamp(1.5rem,4vw,2.1rem);font-weight:900;margin-top:1.4rem}
+.hd .intro{color:#d6e8f2;margin-top:.6rem;font-size:1rem;line-height:1.85}
+.hd .welcome{margin-top:1rem;background:rgba(255,255,255,.09);border:1px solid rgba(255,217,102,.3);border-radius:14px;padding:14px 18px;font-size:.96rem;color:#eaf3f8}
+
+/* legend */
+.legend{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-sm);padding:12px 16px;margin:-18px auto 0;position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:.5rem 1rem;justify-content:center;font-size:.86rem;font-weight:700}
+.legend span{display:inline-flex;align-items:center;gap:.35rem;color:var(--muted)}
+.legend b{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;color:#fff;font-size:.8rem}
+.l1{background:#e0574d}.l2{background:#e79a3c}.l3{background:#e6c34a;color:#4a3a08!important}.l4{background:#67b56b}.l5{background:#1e9e5a}
+
+form{padding:26px 0 60px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:22px 20px;margin-bottom:20px}
+.sec-title{display:flex;align-items:center;gap:.7rem;font-size:1.2rem;font-weight:900;color:var(--navy-deep);margin-bottom:.4rem}
+.sec-title .n{width:34px;height:34px;flex:none;border-radius:10px;background:linear-gradient(135deg,var(--teal),var(--navy));color:#fff;display:grid;place-items:center;font-size:.95rem}
+.sec-sub{color:var(--muted);font-size:.9rem;margin-bottom:1.2rem}
+
+.field{margin-bottom:1rem}
+.field label.lbl{display:block;font-weight:700;font-size:.95rem;margin-bottom:.45rem;color:var(--navy-deep)}
+.field label.lbl .opt{color:var(--muted);font-weight:500;font-size:.85rem}
+.field input[type=text],.field textarea{width:100%;padding:.8rem 1rem;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:1rem;background:var(--cream);transition:.2s}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--teal);background:#fff;box-shadow:0 0 0 4px rgba(31,122,168,.12)}
+.field textarea{resize:vertical;min-height:96px}
+
+/* rating question */
+.q{border:0;padding:0;margin:0 0 1.1rem}
+.q:last-child{margin-bottom:0}
+.q legend{font-weight:700;font-size:.98rem;color:var(--ink);margin-bottom:.55rem;padding:0}
+.q .req{color:var(--red)}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem}
+.scale.nps{grid-template-columns:repeat(11,1fr);gap:.3rem}
+.scale label{position:relative;cursor:pointer}
+.scale input{position:absolute;opacity:0;width:0;height:0}
+.scale .pill{display:grid;place-items:center;height:46px;border:1.5px solid var(--line);border-radius:12px;font-weight:800;font-size:1.05rem;color:var(--muted);background:#fff;transition:.2s}
+.scale.nps .pill{height:40px;font-size:.92rem;border-radius:10px}
+.scale label:hover .pill{border-color:var(--teal);color:var(--teal)}
+.scale input:checked + .pill{background:linear-gradient(135deg,var(--teal),var(--navy));border-color:var(--navy);color:#fff;transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.scale input:focus-visible + .pill{box-shadow:0 0 0 4px rgba(31,122,168,.25)}
+.nps-ends{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);margin-top:.4rem;font-weight:600}
+
+/* submit */
+.submit-wrap{text-align:center;margin-top:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;padding:1rem 2.4rem;border-radius:999px;font-weight:800;font-size:1.1rem;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s;font-family:inherit}
+.btn-primary{background:linear-gradient(135deg,var(--teal),var(--navy));color:#fff;box-shadow:var(--shadow-sm)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.note{font-size:.86rem;color:var(--muted);margin-top:1rem;line-height:1.7}
+.thanks{display:none;background:#eaf7ef;border:1.5px solid #b7e3c8;border-radius:14px;padding:18px;margin-top:1rem;color:#177a45;font-weight:700;text-align:center}
+.thanks.show{display:block}
+
+.ft{background:var(--navy-deep);color:#bcd6e4;text-align:center;padding:26px 18px;font-size:.86rem}
+.ft a:hover{color:var(--gold-soft)}
+@media(max-width:520px){
+  .scale .pill{height:42px;font-size:.98rem}
+  .scale.nps{grid-template-columns:repeat(6,1fr)}
+  .card{padding:18px 15px}
+}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap">
+    <div class="top">
+      <a class="lg" href="../"><img src="../logo_white.png" alt="حياة اليت"><span><b>حياة اليت لطب الأسنان</b><small>We Design Your Smile</small></span></a>
+      <a class="back" href="../">← الموقع الرئيسي</a>
+    </div>
+    <h1>استبيان قياس رضا المرضى</h1>
+    <p class="intro">يهدف هذا النموذج إلى قياس مدى رضاك عن الخدمات المقدمة في العيادة لتطوير تجربة المريض وتحسين جودة الرعاية الطبية.</p>
+    <div class="welcome">شكراً لاختيارك عيادتنا! نرجو منك تخصيص دقيقتين من وقتك لتقييم تجربتك اليوم، فملاحظاتك هي أساس تطوير خدماتنا.</div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="legend">
+    <span><b class="l1">1</b> سيء</span>
+    <span><b class="l2">2</b> مقبول</span>
+    <span><b class="l3">3</b> جيد</span>
+    <span><b class="l4">4</b> جيد جداً</span>
+    <span><b class="l5">5</b> ممتاز</span>
+  </div>
+</div>
+
+<div class="wrap">
+<form id="surveyForm" novalidate>
+
+  <!-- optional identity -->
+  <div class="card">
+    <div class="field">
+      <label class="lbl" for="pname">الاسم <span class="opt">(اختياري)</span></label>
+      <input type="text" id="pname" name="pname" placeholder="اكتب اسمك (اختياري)">
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label class="lbl" for="pphone">رقم الهاتف <span class="opt">(اختياري)</span></label>
+      <input type="text" id="pphone" name="pphone" inputmode="tel" placeholder="للتواصل معك إن رغبت (اختياري)">
+    </div>
+  </div>
+
+  <!-- Section 1 -->
+  <div class="card">
+    <div class="sec-title"><span class="n">1</span> الاستقبال والعيادة</div>
+    <div class="sec-sub">Check-In &amp; Facility</div>
+    <div class="q-list" data-section="الاستقبال والعيادة"></div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="card">
+    <div class="sec-title"><span class="n">2</span> الرعاية الطبية والكادر الطبي</div>
+    <div class="sec-sub">Medical Care</div>
+    <div class="q-list" data-section="الرعاية الطبية"></div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="card">
+    <div class="sec-title"><span class="n">3</span> التقييم العام والتوصية</div>
+    <div class="sec-sub">Overall Experience &amp; NPS</div>
+
+    <fieldset class="q" data-q="مدى الرضا العام عن زيارة اليوم" data-max="5">
+      <legend>مدى رضاك العام عن زيارة اليوم <span class="req">*</span></legend>
+      <div class="scale" data-name="overall" data-range="1-5"></div>
+    </fieldset>
+
+    <fieldset class="q" data-q="احتمال ترشيح العيادة للأصدقاء (NPS)" data-max="10" style="margin-bottom:0">
+      <legend>ما مدى احتمال ترشيحك لعيادتنا للأقارب والأصدقاء؟ <span class="req">*</span></legend>
+      <div class="scale nps" data-name="nps" data-range="0-10"></div>
+      <div class="nps-ends"><span>0 = غير محتمل أبداً</span><span>10 = محتمل جداً</span></div>
+    </fieldset>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="card">
+    <div class="sec-title"><span class="n">4</span> ملاحظات واقتراحات إضافية</div>
+    <div class="sec-sub">Open Feedback</div>
+    <div class="field">
+      <label class="lbl" for="liked">ما أكثر شيء أعجبك خلال زيارتك اليوم؟ <span class="opt">(اختياري)</span></label>
+      <textarea id="liked" name="liked" placeholder="شاركنا رأيك..."></textarea>
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label class="lbl" for="improve">ما الذي يمكننا تحسينه لتكون زيارتك القادمة أفضل؟ <span class="opt">(اختياري)</span></label>
+      <textarea id="improve" name="improve" placeholder="اقتراحاتك تهمنا..."></textarea>
+    </div>
+  </div>
+
+  <div class="submit-wrap">
+    <button type="submit" class="btn btn-primary">إرسال التقييم</button>
+    <p class="note">عند الضغط على «إرسال» سيتم فتح تطبيق البريد لديك برسالة جاهزة إلى العيادة — فقط اضغط «إرسال» داخل البريد لإتمام إرسال تقييمك.</p>
+    <div class="thanks" id="thanks">✓ شكراً لك! تم تجهيز تقييمك وفتح البريد لإتمام الإرسال. نقدّر وقتك وملاحظاتك.</div>
+  </div>
+</form>
+</div>
+
+<footer class="ft">
+  <p>© مركز حياة اليت لطب الأسنان — المقطم، القاهرة · <a href="../">الموقع الرئيسي</a></p>
+</footer>
+
+<script>
+(function(){
+  var CLINIC_EMAIL="hyattelitedc@gmail.com";
+
+  // rating questions per section
+  var sections={
+    "الاستقبال والعيادة":[
+      "سهولة حجز وتنسيق الموعد",
+      "لباقة وتعاون موظفي الاستقبال",
+      "مدى ملاءمة وقت الانتظار",
+      "نظافة وراحة العيادة ومرفقاتها"
+    ],
+    "الرعاية الطبية":[
+      "استماع الطبيب لاستفساراتك واهتمامه بها",
+      "وضوح الشرح وخطة العلاج والتعليمات الطبية",
+      "الوقت الكافي المخصص لزيارتك ومعاينتك"
+    ]
+  };
+
+  function buildScale(container,name,min,max){
+    for(var v=min;v<=max;v++){
+      var lab=document.createElement('label');
+      var inp=document.createElement('input');
+      inp.type='radio'; inp.name=name; inp.value=v; inp.required=true;
+      var pill=document.createElement('span'); pill.className='pill'; pill.textContent=v;
+      lab.appendChild(inp); lab.appendChild(pill);
+      container.appendChild(lab);
+    }
+  }
+
+  // build section 1 & 2 rating rows
+  document.querySelectorAll('.q-list').forEach(function(list){
+    var secName=list.getAttribute('data-section');
+    (sections[secName]||[]).forEach(function(q,idx){
+      var fs=document.createElement('fieldset'); fs.className='q';
+      fs.setAttribute('data-q',q); fs.setAttribute('data-max','5');
+      var lg=document.createElement('legend'); lg.innerHTML=q+' <span class="req">*</span>';
+      var sc=document.createElement('div'); sc.className='scale';
+      var nm=(secName==="الاستقبال والعيادة"?'s1_':'s2_')+idx;
+      sc.setAttribute('data-name',nm); sc.setAttribute('data-range','1-5');
+      fs.appendChild(lg); fs.appendChild(sc);
+      list.appendChild(fs);
+      buildScale(sc,nm,1,5);
+    });
+  });
+
+  // build section 3 scales
+  document.querySelectorAll('.scale[data-range]').forEach(function(sc){
+    if(sc.children.length) return; // already built (section1/2)
+    var r=sc.getAttribute('data-range').split('-');
+    buildScale(sc,sc.getAttribute('data-name'),parseInt(r[0]),parseInt(r[1]));
+  });
+
+  var form=document.getElementById('surveyForm');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!form.checkValidity()){
+      form.reportValidity();
+      // scroll to first invalid
+      var bad=form.querySelector(':invalid');
+      if(bad){var fs=bad.closest('.q,.field,.card'); if(fs) fs.scrollIntoView({block:'center',behavior:'smooth'});}
+      return;
+    }
+    var name=(document.getElementById('pname').value||'').trim();
+    var phone=(document.getElementById('pphone').value||'').trim();
+    var liked=(document.getElementById('liked').value||'').trim();
+    var improve=(document.getElementById('improve').value||'').trim();
+    var d=new Date();
+    var date=d.getFullYear()+'/'+('0'+(d.getMonth()+1)).slice(-2)+'/'+('0'+d.getDate()).slice(-2);
+
+    var L=[];
+    L.push('استبيان قياس رضا المرضى — حياة اليت لطب الأسنان');
+    L.push('التاريخ: '+date);
+    L.push('الاسم: '+(name||'غير محدد'));
+    if(phone) L.push('الهاتف: '+phone);
+    L.push('');
+    L.push('— القسم الأول: الاستقبال والعيادة —');
+    sections["الاستقبال والعيادة"].forEach(function(q,i){
+      var v=(form.querySelector('input[name="s1_'+i+'"]:checked')||{}).value;
+      L.push('• '+q+': '+v+'/5');
+    });
+    L.push('');
+    L.push('— القسم الثاني: الرعاية الطبية —');
+    sections["الرعاية الطبية"].forEach(function(q,i){
+      var v=(form.querySelector('input[name="s2_'+i+'"]:checked')||{}).value;
+      L.push('• '+q+': '+v+'/5');
+    });
+    L.push('');
+    L.push('— القسم الثالث: التقييم العام والتوصية —');
+    L.push('• مدى الرضا العام: '+((form.querySelector('input[name="overall"]:checked')||{}).value)+'/5');
+    L.push('• احتمال الترشيح (NPS): '+((form.querySelector('input[name="nps"]:checked')||{}).value)+'/10');
+    L.push('');
+    L.push('— القسم الرابع: ملاحظات واقتراحات —');
+    L.push('• أكثر شيء أعجبك: '+(liked||'—'));
+    L.push('• اقتراحات التحسين: '+(improve||'—'));
+
+    var subject='استبيان رضا المرضى'+(name?(' - '+name):'')+' - '+date;
+    var body=L.join('\n');
+    var url='mailto:'+CLINIC_EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+
+    document.getElementById('thanks').classList.add('show');
+    document.getElementById('thanks').scrollIntoView({block:'center',behavior:'smooth'});
+    setTimeout(function(){ window.location.href=url; },500);
+  });
+})();
+</script>
+</body>
+</html>
