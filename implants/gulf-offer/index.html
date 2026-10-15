@@ -12,14 +12,14 @@
 <meta property="og:url" content="https://hyattelitedc.com/implants/gulf-offer/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Marcellus&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#14506e; --navy-deep:#0d3a52; --teal:#1f7aa8;
-  --gold:#c9a227; --gold-soft:#ffd966; --red:#e0352b;
-  --ink:#132430; --muted:#5a6b76; --cream:#f7fafc; --line:#e3ecf1;
-  --shadow:0 18px 50px -20px rgba(13,58,82,.4);
-  --shadow-sm:0 8px 24px -12px rgba(13,58,82,.3);
+  --navy:#24365a; --navy-deep:#17243b; --teal:#a8862f;
+  --gold:#c9a24a; --gold-soft:#e2c67a; --red:#c9a24a;
+  --ink:#17243b; --muted:#5b6577; --cream:#f7f5ef; --line:#ece7db;
+  --shadow:0 18px 50px -20px rgba(23,36,59,.4);
+  --shadow-sm:0 8px 24px -12px rgba(23,36,59,.3);
   --radius:18px; --maxw:1080px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -32,13 +32,13 @@ img{max-width:100%;display:block}
 .btn svg{width:22px;height:22px;fill:currentColor}
 .btn-wa{background:#25d366;color:#fff;box-shadow:0 14px 30px -10px rgba(37,211,102,.55)}
 .btn-wa:hover{transform:translateY(-3px)}
-.btn-gold{background:linear-gradient(135deg,var(--gold-soft),var(--gold));color:#3d2f05}
+.btn-gold{background:linear-gradient(135deg,var(--gold-soft),var(--gold));color:#17243b}
 .btn-gold:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
 .btn-line{border-color:rgba(255,255,255,.55);color:#fff;background:rgba(255,255,255,.08)}
 .btn-line:hover{background:#fff;color:var(--navy)}
 
 /* header */
-.hd{position:sticky;top:0;z-index:50;background:rgba(13,58,82,.92);backdrop-filter:blur(10px);color:#fff}
+.hd{position:sticky;top:0;z-index:50;background:rgba(23,36,59,.92);backdrop-filter:blur(10px);color:#fff}
 .hd .wrap{display:flex;align-items:center;justify-content:space-between;padding-block:.6rem}
 .hd .lg{display:flex;align-items:center;gap:.6rem}
 .hd .lg img{height:44px}
@@ -48,24 +48,24 @@ img{max-width:100%;display:block}
 .hd .back:hover{color:var(--gold-soft)}
 
 /* hero */
-.hero{background:linear-gradient(150deg,var(--navy-deep),var(--navy) 55%,var(--teal));color:#fff;position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(255,217,102,.18),transparent 70%);top:-180px;inset-inline-start:-140px}
+.hero{background:linear-gradient(150deg,var(--navy-deep),var(--navy) 55%,#2b4170);color:#fff;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(226,198,122,.18),transparent 70%);top:-180px;inset-inline-start:-140px}
 .hero .wrap{padding:72px 20px 84px;text-align:center;position:relative}
-.badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,217,102,.15);border:1px solid rgba(255,217,102,.45);color:var(--gold-soft);padding:.4rem 1.1rem;border-radius:999px;font-weight:800;font-size:.92rem;margin-bottom:1.2rem}
-.hero h1{font-size:clamp(1.9rem,5vw,3.2rem);font-weight:900;line-height:1.25}
-.hero .sub{font-size:clamp(1.05rem,2.6vw,1.4rem);color:#dbecf5;margin-top:.8rem;font-weight:600}
+.badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(226,198,122,.15);border:1px solid rgba(226,198,122,.45);color:var(--gold-soft);padding:.4rem 1.1rem;border-radius:999px;font-weight:800;font-size:.92rem;margin-bottom:1.2rem}
+.hero h1{font-size:clamp(1.9rem,5vw,3.2rem);font-weight:800;line-height:1.25}
+.hero .sub{font-size:clamp(1.05rem,2.6vw,1.4rem);color:#dde1e8;margin-top:.8rem;font-weight:600}
 .price-box{margin:2rem auto 1.6rem;display:inline-block;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:22px;padding:22px 42px;backdrop-filter:blur(8px)}
-.price-box .lbl{font-size:.95rem;color:#cfe4ef;font-weight:600}
-.price-box .val{font-size:clamp(2.3rem,7vw,3.6rem);font-weight:900;color:var(--gold-soft);line-height:1.15}
-.price-box .cur{font-size:1rem;color:#dbecf5;font-weight:700}
+.price-box .lbl{font-size:.95rem;color:#d0d5de;font-weight:600}
+.price-box .val{font-size:clamp(2.3rem,7vw,3.6rem);font-weight:800;color:var(--gold-soft);line-height:1.15}
+.price-box .cur{font-size:1rem;color:#dde1e8;font-weight:700}
 .hero-cta{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:.6rem}
-.hero-note{margin-top:1.1rem;font-size:.88rem;color:#b9d4e2}
+.hero-note{margin-top:1.1rem;font-size:.88rem;color:#bcc3cf}
 
 /* sections */
 .pad{padding:78px 0}
 .s-head{text-align:center;max-width:640px;margin:0 auto 44px}
 .s-head .eye{color:var(--teal);font-weight:800;font-size:.92rem}
-.s-head h2{font-size:clamp(1.6rem,3.4vw,2.3rem);font-weight:900;color:var(--navy-deep);margin-top:.3rem}
+.s-head h2{font-size:clamp(1.6rem,3.4vw,2.3rem);font-weight:800;color:var(--navy-deep);margin-top:.3rem}
 .s-head p{color:var(--muted);margin-top:.5rem}
 
 /* include */
@@ -81,12 +81,12 @@ img{max-width:100%;display:block}
 .gulf{background:linear-gradient(150deg,var(--navy-deep),var(--navy));color:#fff}
 .gulf .s-head h2{color:#fff}
 .gulf .s-head .eye{color:var(--gold-soft)}
-.gulf .s-head p{color:#c4dae6}
+.gulf .s-head p{color:#c6ccd7}
 .gulf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
 .gf{display:flex;gap:.8rem;align-items:flex-start;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:15px;padding:1rem 1.1rem}
-.gf .n{width:38px;height:38px;flex:none;border-radius:11px;background:linear-gradient(135deg,var(--gold-soft),var(--gold));color:#3d2f05;font-weight:900;display:grid;place-items:center;font-size:1.05rem}
+.gf .n{width:38px;height:38px;flex:none;border-radius:11px;background:linear-gradient(135deg,var(--gold-soft),var(--gold));color:#17243b;font-weight:800;display:grid;place-items:center;font-size:1.05rem}
 .gf b{display:block;font-size:1rem}
-.gf small{color:#c4dae6;font-size:.86rem;line-height:1.6;display:block}
+.gf small{color:#c6ccd7;font-size:.86rem;line-height:1.6;display:block}
 
 /* cases */
 .cases-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
@@ -97,18 +97,18 @@ img{max-width:100%;display:block}
 /* steps */
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;counter-reset:st}
 .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;text-align:center;box-shadow:var(--shadow-sm);position:relative}
-.step::before{counter-increment:st;content:counter(st);width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--navy));color:#fff;font-weight:900;font-size:1.15rem;display:grid;place-items:center;margin:0 auto .8rem}
+.step::before{counter-increment:st;content:counter(st);width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--navy));color:#fff;font-weight:800;font-size:1.15rem;display:grid;place-items:center;margin:0 auto .8rem}
 .step h3{font-size:1.05rem;font-weight:800;color:var(--navy-deep)}
 .step p{color:var(--muted);font-size:.9rem;margin-top:.3rem}
 
 /* final cta */
-.final{background:linear-gradient(135deg,var(--red),#b7261d);color:#fff;text-align:center}
+.final{background:radial-gradient(120% 140% at 50% 0%,#283c63,var(--navy-deep) 60%,#0c1424);border-top:3px solid var(--gold);color:#fff;text-align:center}
 .final .wrap{padding:60px 20px}
-.final h2{font-size:clamp(1.5rem,3.6vw,2.3rem);font-weight:900}
+.final h2{font-size:clamp(1.5rem,3.6vw,2.3rem);font-weight:800}
 .final p{margin:.6rem 0 1.6rem;opacity:.95}
 
 /* footer */
-.ft{background:var(--navy-deep);color:#c4dae6;text-align:center;padding:36px 20px}
+.ft{background:var(--navy-deep);color:#c6ccd7;text-align:center;padding:36px 20px}
 .ft img{height:52px;margin:0 auto 12px}
 .ft .row{display:flex;gap:1.6rem;justify-content:center;flex-wrap:wrap;font-size:.95rem;margin-bottom:.8rem}
 .ft a:hover{color:var(--gold-soft)}
