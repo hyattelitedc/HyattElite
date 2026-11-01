@@ -132,16 +132,15 @@ h1,h2,h3{text-wrap:balance;line-height:1.2}
 /* hero (T1) */
 .hero{position:relative;padding:150px 0 0;background:radial-gradient(ellipse 80% 70% at 50% 45%,#283c63 0%,var(--navy) 52%,var(--deep) 100%);overflow:hidden;isolation:isolate}
 .hero-copy{text-align:center;position:relative;z-index:2}
-.hero-art{position:absolute;right:clamp(12px,3vw,48px);top:clamp(30px,5vw,80px);width:clamp(200px,21vw,290px);aspect-ratio:1100/513;pointer-events:none;animation:hblIn 2.2s cubic-bezier(.22,.9,.27,1.05) .2s both}
+.hero-art{position:relative;width:clamp(190px,22vw,280px);max-width:70%;margin:0 auto 10px;aspect-ratio:1100/513;pointer-events:none;animation:hblIn 2.2s cubic-bezier(.22,.9,.27,1.05) .2s both}
 .hero-art span{position:absolute;inset:0;-webkit-mask:url(assets/logo_white.png) center/contain no-repeat;mask:url(assets/logo_white.png) center/contain no-repeat}
 .hbl-base{background:url(assets/logo_white.png) center/contain no-repeat;-webkit-mask:none!important;mask:none!important;opacity:1;animation:hblFloat 9s ease-in-out 2.4s infinite}
 .hbl-shine{background:linear-gradient(105deg,transparent 35%,rgba(241,213,144,.0) 40%,rgba(241,213,144,.55) 50%,rgba(241,213,144,0) 60%,transparent 65%) 0 0/250% 100% no-repeat;opacity:.55;animation:hblShine 6s ease-in-out 2.6s infinite,hblFloat 9s ease-in-out 2.4s infinite}
-@keyframes hblIn{from{opacity:0;transform:translateX(18%) scale(.9) rotate(4deg);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
+@keyframes hblIn{from{opacity:0;transform:translateY(-18px) scale(.85);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
 @keyframes hblFloat{0%,100%{transform:translateY(0) rotate(0) scale(1)}33%{transform:translateY(-16px) rotate(-1.2deg) scale(1.02)}66%{transform:translateY(8px) rotate(.8deg) scale(1.01)}}
 @keyframes hblShine{0%{background-position:120% 0}55%,100%{background-position:-60% 0}}
 .hbl-glow{-webkit-mask:none!important;mask:none!important;inset:-20% -10% !important;background:radial-gradient(closest-side,rgba(201,162,74,.22),transparent);z-index:-1;animation:hblGlow 4.5s ease-in-out infinite}
 @keyframes hblGlow{0%,100%{opacity:.5;transform:scale(.95)}50%{opacity:1;transform:scale(1.05)}}
-@media (max-width:1100px){.hero-art{position:relative;right:auto;top:auto;width:min(230px,62%);margin:0 auto 8px}}
 @media (prefers-reduced-motion:reduce){.hero-art,.hero-art span{animation:none!important}.hbl-shine{display:none}}
 .hero h1{font-size:clamp(40px,7.4vw,92px);font-weight:900;margin:18px auto 14px;max-width:14ch;letter-spacing:-.5px}
 .hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--gold-lo),var(--gold-hi) 45%,var(--gold) 70%,var(--gold-hi));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:sheen 6s ease-in-out infinite}
