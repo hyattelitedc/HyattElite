@@ -131,17 +131,20 @@ h1,h2,h3{text-wrap:balance;line-height:1.2}
 
 /* hero (T1) */
 .hero{position:relative;padding:150px 0 0;background:radial-gradient(ellipse 80% 70% at 50% 45%,#283c63 0%,var(--navy) 52%,var(--deep) 100%);overflow:hidden;isolation:isolate}
-.hero-copy{text-align:center;position:relative;z-index:2}
-.hero-bg-logo{position:absolute;right:3%;left:auto;top:clamp(96px,11vw,140px);width:min(860px,62vw);aspect-ratio:1100/513;pointer-events:none;z-index:0;animation:hblIn 2.2s cubic-bezier(.22,.9,.27,1.05) .2s both}
-.hero-bg-logo span{position:absolute;inset:0;-webkit-mask:url(assets/logo_white.png) center/contain no-repeat;mask:url(assets/logo_white.png) center/contain no-repeat}
-.hbl-base{background:url(assets/logo_white.png) center/contain no-repeat;-webkit-mask:none!important;mask:none!important;opacity:.13;animation:hblFloat 9s ease-in-out 2.4s infinite}
+.hero-copy{text-align:center;position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);column-gap:clamp(24px,4vw,64px);align-items:center}
+.hero-copy>*:not(.hero-art){grid-column:2}
+.hero-art{grid-column:1;grid-row:1 / span 5;position:relative;width:100%;max-width:560px;justify-self:center;aspect-ratio:1100/513;pointer-events:none;animation:hblIn 2.2s cubic-bezier(.22,.9,.27,1.05) .2s both}
+.hero-art span{position:absolute;inset:0;-webkit-mask:url(assets/logo_white.png) center/contain no-repeat;mask:url(assets/logo_white.png) center/contain no-repeat}
+.hbl-base{background:url(assets/logo_white.png) center/contain no-repeat;-webkit-mask:none!important;mask:none!important;opacity:1;animation:hblFloat 9s ease-in-out 2.4s infinite}
 .hbl-shine{background:linear-gradient(105deg,transparent 35%,rgba(241,213,144,.0) 40%,rgba(241,213,144,.55) 50%,rgba(241,213,144,0) 60%,transparent 65%) 0 0/250% 100% no-repeat;opacity:.55;animation:hblShine 6s ease-in-out 2.6s infinite,hblFloat 9s ease-in-out 2.4s infinite}
 @keyframes hblIn{from{opacity:0;transform:translateX(18%) scale(.9) rotate(4deg);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
 @keyframes hblFloat{0%,100%{transform:translateY(0) rotate(0) scale(1)}33%{transform:translateY(-16px) rotate(-1.2deg) scale(1.02)}66%{transform:translateY(8px) rotate(.8deg) scale(1.01)}}
 @keyframes hblShine{0%{background-position:120% 0}55%,100%{background-position:-60% 0}}
-@media (max-width:600px){.hero-bg-logo{top:96px;right:-38%;width:125vw}}
-@media (prefers-reduced-motion:reduce){.hero-bg-logo,.hero-bg-logo span{animation:none!important}.hbl-shine{display:none}}
-.hero h1{font-size:clamp(40px,7.4vw,92px);font-weight:900;margin:18px auto 14px;max-width:14ch;letter-spacing:-.5px}
+.hbl-glow{-webkit-mask:none!important;mask:none!important;inset:-20% -10% !important;background:radial-gradient(closest-side,rgba(201,162,74,.22),transparent);z-index:-1;animation:hblGlow 4.5s ease-in-out infinite}
+@keyframes hblGlow{0%,100%{opacity:.5;transform:scale(.95)}50%{opacity:1;transform:scale(1.05)}}
+@media (max-width:860px){.hero-copy{grid-template-columns:1fr}.hero-copy>*:not(.hero-art){grid-column:1}.hero-art{grid-row:auto;width:min(320px,80%);margin-bottom:6px}}
+@media (prefers-reduced-motion:reduce){.hero-art,.hero-art span{animation:none!important}.hbl-shine{display:none}}
+.hero h1{font-size:clamp(38px,5.6vw,76px);font-weight:900;margin:18px auto 14px;max-width:14ch;letter-spacing:-.5px}
 .hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--gold-lo),var(--gold-hi) 45%,var(--gold) 70%,var(--gold-hi));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:sheen 6s ease-in-out infinite}
 @keyframes sheen{0%,100%{background-position:0 0}50%{background-position:100% 0}}
 .hero p{color:var(--muted);font-size:clamp(16px,2vw,19px);max-width:560px;margin-inline:auto}
@@ -500,8 +503,8 @@ footer .copy{border-top:1px solid var(--line);padding-top:20px;text-align:center
 <main id="main">
 <!-- ===== HERO ===== -->
 <section class="hero" id="home" style="padding-bottom:0">
-  <div class="hero-bg-logo" aria-hidden="true"><span class="hbl-base"></span><span class="hbl-shine"></span></div>
   <div class="wrap hero-copy">
+    <div class="hero-art" aria-hidden="true"><span class="hbl-base"></span><span class="hbl-shine"></span><span class="hbl-glow"></span></div>
     <div class="latin load">We Design Your Smile</div>
     <h1 class="load d1">ابتسامتك تستحق <em>عناية النخبة</em></h1>
     <p class="load d2">في مركز حياة اليت لطب الأسنان بالمقطم، القاهرة، نصمّم لك ابتسامة طبيعية وواثقة بأحدث تقنيات زراعة الأسنان والهوليوود سمايل والتقويم — على يد نخبة من الأطباء.</p>
