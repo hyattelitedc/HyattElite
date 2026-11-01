@@ -369,45 +369,125 @@ footer img{height:38px;width:auto}
 .social svg{width:18px;height:18px;fill:#fff}
 @media (max-width:760px){.lw-fab{bottom:calc(84px + env(safe-area-inset-bottom,0px))!important}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.lb .ph.a{clip-path:none}}
+
+/* ===== content carried over from the previous site ===== */
+.hero-trust{display:flex;gap:10px 22px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.hero-trust span{display:flex;align-items:center;gap:8px;font-size:13.5px;color:#d0d5de;font-weight:600}
+.hero-trust svg{width:17px;height:17px;color:var(--gold-hi)}
+.hero-foot .count{font-variant-numeric:tabular-nums}
+
+/* about + why cards */
+.feat3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.feat3 article{border:1px solid var(--line);border-radius:24px;padding:28px 26px;background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,0));transition:transform .35s,border-color .35s;min-width:0}
+.feat3 article:hover{transform:translateY(-6px);border-color:var(--gold)}
+.feat3 .ix{width:52px;height:52px;border-radius:14px;background:rgba(201,162,74,.12);color:var(--gold-hi);display:grid;place-items:center;margin-bottom:16px}
+.feat3 .ix svg{width:26px;height:26px}
+.feat3 h3{font-size:20px;margin-bottom:6px}
+.feat3 p{color:var(--muted);font-size:15px}
+.sub-h{font-size:clamp(22px,3vw,30px);font-weight:900;margin:clamp(40px,6vw,64px) 0 20px;display:flex;align-items:center;gap:14px}
+.sub-h::before{content:"";width:40px;height:3px;border-radius:2px;background:var(--gold)}
+@media (max-width:860px){.feat3{grid-template-columns:1fr}}
+
+/* how we design: video + steps */
+.sd-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(28px,5vw,64px);align-items:center}
+@media (max-width:860px){.sd-grid{grid-template-columns:1fr}}
+.phone{width:min(300px,80%);margin-inline:auto;aspect-ratio:9/16;border-radius:34px;padding:10px;background:linear-gradient(160deg,#2a3c60,#0c1424);border:1px solid var(--line);box-shadow:0 40px 80px rgba(0,0,0,.5);position:relative}
+.phone video,.phone .ph-fallback{width:100%;height:100%;border-radius:26px;object-fit:cover;display:block;background:#101b2e}
+.phone .ph-fallback{display:grid;place-items:center;color:var(--gold-hi);font-weight:800;text-align:center;padding:20px}
+.sd-steps{list-style:none;padding:0;display:grid;gap:14px;margin-top:22px}
+.sd-steps li{display:flex;gap:16px;align-items:flex-start;border:1px solid var(--line);border-radius:18px;padding:18px 20px;background:rgba(255,255,255,.03)}
+.sd-steps .bk{flex:none;width:54px;height:38px;border-radius:10px;background:var(--steel);position:relative;display:grid;place-items:center;font-family:var(--latin);font-weight:700;color:#fff}
+.sd-steps .bk::before{content:"";position:absolute;inset-inline:-8px;top:50%;height:4px;margin-top:-2px;border-radius:2px;background:linear-gradient(90deg,var(--gold-lo),var(--gold-hi),var(--gold-lo));z-index:-1}
+.sd-steps h3{font-size:18px}
+.sd-steps p{color:var(--muted);font-size:14.5px}
+
+/* reviews */
+.chat{max-height:560px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--gold) transparent}
+.msg .st{color:var(--gold);font-size:12px;letter-spacing:2px;margin-inline-start:6px}
+.msg .tg{display:inline-block;font-size:11px;font-weight:700;color:var(--gold-hi);background:rgba(201,162,74,.12);border-radius:10px;padding:0 8px;margin-top:6px}
+
+/* footer */
+footer .fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;padding-bottom:26px}
+footer .fgrid p{margin-top:12px;max-width:34ch}
+footer h4{color:#fff;font-size:15px;margin-bottom:10px}
+footer .fcol{display:flex;flex-direction:column;gap:6px}
+footer .fcol a:hover{color:var(--gold-hi)}
+footer .copy{border-top:1px solid var(--line);padding-top:20px;text-align:center}
+@media (max-width:860px){footer .fgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){footer .fgrid{grid-template-columns:1fr}}
+
+/* mobile menu */
+.burger{display:none;width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;align-items:center;justify-content:center;cursor:pointer}
+.burger svg{width:24px;height:24px}
+@media (max-width:900px){.burger{display:inline-flex}.top .btn-gold{display:none}}
+.drawer{position:fixed;inset:0;z-index:130;background:rgba(6,10,18,.6);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:.3s}
+.drawer.open{opacity:1;visibility:visible}
+.drawer-panel{position:absolute;inset-block:0;inset-inline-start:0;width:min(84%,330px);background:var(--navy);border-inline-end:1px solid var(--line);padding:calc(18px + env(safe-area-inset-top,0px)) 20px 20px;display:flex;flex-direction:column;gap:4px;transform:translateX(100%);transition:transform .35s cubic-bezier(.22,.9,.27,1.05)}
+.drawer.open .drawer-panel{transform:none}
+.drawer-panel a{padding:12px 14px;border-radius:12px;font-weight:700}
+.drawer-panel a:hover{background:rgba(255,255,255,.06);color:var(--gold-hi)}
+.drawer-panel .dclose{align-self:flex-end;width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.08);border:0;color:#fff;font-size:20px;cursor:pointer;margin-bottom:10px}
+.wa-fab{position:fixed;right:22px;bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:90;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 12px 28px rgba(37,211,102,.4);transition:transform .25s}
+.wa-fab:hover{transform:translateY(-3px) scale(1.05)}
+.wa-fab svg{width:30px;height:30px;fill:#fff}
+@media (max-width:760px){.wa-fab{display:none}}
 </style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5V25WXR6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
 <a class="skip" href="#main">تخطّي إلى المحتوى الرئيسي</a>
+
 <header class="top" id="top">
   <div class="wrap">
-    <a href="#hero" aria-label="Hyatt Elite"><img src="assets/logo_white.png" alt="Hyatt Elite Dental"></a>
-    <nav class="nav" aria-label="الأقسام">
-      <a href="#reels">الريلز</a><a href="#services">خدماتنا</a><a href="#cases">قبل وبعد</a><a href="#feed">إنستجرام</a><a href="#reviews">الآراء</a><a href="#faq">أسئلة</a><a href="#book">تواصل</a>
+    <a href="#home" aria-label="مركز حياة اليت لطب الأسنان"><img src="assets/logo_white.png" alt="شعار مركز حياة اليت"></a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a href="#about">من نحن</a><a href="#services">خدماتنا</a><a href="#smile-design">كيف نصمّمها</a><a href="#gallery">المعرض</a><a href="#reviews">الآراء</a><a href="#faq">أسئلة شائعة</a><a href="#contact">تواصل</a>
     </nav>
-    <a class="btn btn-gold" href="#book">احجز موعدك</a>
+    <a class="btn btn-gold" href="#contact">احجز موعدك</a>
+    <button class="burger" id="burger" aria-label="فتح القائمة" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
 </header>
 
+<div class="drawer" id="drawer">
+  <nav class="drawer-panel" aria-label="القائمة">
+    <button class="dclose" id="drawerClose" aria-label="إغلاق">✕</button>
+    <a href="#home">الرئيسية</a><a href="#about">من نحن</a><a href="#services">خدماتنا</a><a href="#smile-design">كيف نصمّمها</a><a href="#gallery">المعرض</a><a href="#reviews">آراء العملاء</a><a href="#faq">أسئلة شائعة</a><a href="#contact">تواصل واحجز</a>
+    <a class="btn btn-gold" href="#contact" style="margin-top:14px;justify-content:center">احجز موعدك</a>
+  </nav>
+</div>
+
 <main id="main">
-<section class="hero" id="hero" style="padding-bottom:0">
+<!-- ===== HERO ===== -->
+<section class="hero" id="home" style="padding-bottom:0">
   <div class="wrap hero-copy">
     <div class="latin load">We Design Your Smile</div>
-    <h1 class="load d1">ابتسامتك <em>مصمّمة</em> بدقّة الذهب</h1>
-    <p class="load d2">مركز حياة اليت لطب الأسنان بالمقطم. زراعة، تقويم، وهوليوود سمايل بتخطيط رقمي ثلاثي الأبعاد وأطباء متخصصين.</p>
+    <h1 class="load d1">ابتسامتك تستحق <em>عناية النخبة</em></h1>
+    <p class="load d2">في مركز حياة اليت لطب الأسنان بالمقطم، القاهرة، نصمّم لك ابتسامة طبيعية وواثقة بأحدث تقنيات زراعة الأسنان والهوليوود سمايل والتقويم — على يد نخبة من الأطباء.</p>
     <div class="cta load d3">
-      <a class="btn btn-gold" href="#book">احجز استشارتك</a>
-      <a class="btn btn-line" href="#reels">شوف الريلز
+      <a class="btn btn-gold" href="#contact">احجز استشارتك الآن</a>
+      <a class="btn btn-line" href="#services">تعرّف على خدماتنا
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
+    </div>
+    <div class="hero-trust load d4">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>أحدث التقنيات الرقمية</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>تعقيم بمعايير عالمية</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>خطط دفع مرنة</span>
     </div>
   </div>
   <svg class="hero-wire" id="heroWire"></svg>
   <div class="hero-foot load d4">
-    <div><b>4.8★</b><span>تقييم جوجل · ١٧ مراجعة</span></div>
-    <div><b>8+</b><span>سنين خبرة</span></div>
-    <div><b>3D</b><span>مسح رقمي للابتسامة</span></div>
+    <div><b class="count" data-to="15" data-suffix="+">15+</b><span>سنة من الخبرة</span></div>
+    <div><b class="count" data-to="8000" data-suffix="+">8,000+</b><span>ابتسامة سعيدة</span></div>
+    <div><b>5.0★</b><span>تقييم العملاء</span></div>
+    <div><b class="count" data-to="6" data-suffix="">6</b><span>تخصصات متكاملة</span></div>
   </div>
 </section>
 
+<!-- ===== REELS ===== -->
 <section id="reels" style="padding-bottom:clamp(40px,6vw,70px)">
   <div class="wrap">
     <div class="sh rv">
-      <div><div class="latin">Now on the grid</div><h2>الريلز الثلاثة بيكمّلوا بعض</h2></div>
+      <div><div class="latin">Now on Instagram</div><h2>نصمّم ابتسامتك بعناية</h2></div>
       <div class="seg" role="group" aria-label="طريقة العرض"><button aria-pressed="true" data-v="pano">بانوراما</button><button aria-pressed="false" data-v="split">٣ بوستات</button></div>
     </div>
     <div class="scroller rv"><div class="pano" id="pano"></div></div>
@@ -415,109 +495,131 @@ footer img{height:38px;width:auto}
   </div>
 </section>
 
-<section id="services" style="padding-top:clamp(40px,6vw,70px)">
+<!-- ===== ABOUT + WHY ===== -->
+<section id="about" style="padding-top:clamp(40px,6vw,70px)">
   <div class="wrap">
     <div class="sh rv">
-      <div><div class="latin">Treatments</div><h2>كل اللي ابتسامتك محتاجاه في مكان واحد</h2></div>
-      <p>خطة علاج واضحة وأسعار معلنة قبل ما نبدأ، مع تقسيط مريح.</p>
+      <div><div class="latin">الفرق مع حياة اليت</div><h2>تجربة مصمّمة من أجلك</h2></div>
+      <p>نهتم ببناء علاقة ثقة معك بقدر اهتمامنا بصحة وجمال أسنانك — رعاية تشعرك بالراحة من أول زيارة.</p>
     </div>
-    <div class="svc rv">
-      <article><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3c-2.5 0-4 2-4 4.5 0 3 1.5 4 2 7 .4 2.5.8 6.5 2.3 6.5s1.6-4 2.7-4 1.3 4 2.8 4 1.8-4 2.2-6.5c.5-3 2-4 2-7C18 5 16.5 3 14 3c-1.4 0-2 .8-3 .8S9.4 3 8 3z"/></svg></div><h3>زراعة الأسنان</h3><p>زراعة فورية وفك كامل في جلسة واحدة، بدون ألم.</p><span class="wire"></span></article>
-      <article><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 11c3 2 6 3 9 3s6-1 9-3"/><rect x="5" y="9.5" width="4" height="3.4" rx="1"/><rect x="10" y="10.8" width="4" height="3.4" rx="1"/><rect x="15" y="9.5" width="4" height="3.4" rx="1"/></svg></div><h3>تقويم الأسنان</h3><p>تقويم معدني وشفاف بخطة حركة محسوبة لكل سنة.</p><span class="wire"></span></article>
-      <article><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.4L12 15l-1.8-4.6L5.5 9l4.7-1.4z"/><path d="M5 17c2.2 2.4 4.5 3.5 7 3.5s4.8-1.1 7-3.5"/></svg></div><h3>هوليوود سمايل</h3><p>فينير وعدسات مصمّمة على شكل وجهك، تجربها قبل التنفيذ.</p><span class="wire"></span></article>
-      <article><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9l3-5h10l3 5-8 11z"/><path d="M4 9h16M9 4l3 16 3-16"/></svg></div><h3>التركيبات والتيجان</h3><p>تيجان زيركون وإيماكس بلون طبيعي ومقاس رقمي.</p><span class="wire"></span></article>
-      <article><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 15c3-3 6-4.5 9-4.5S18 12 21 15"/><path d="M6 13.5V9M10 11V6.5M14 11V6.5M18 13.5V9"/></svg></div><h3>قص اللثة وتجميلها</h3><p>تحديد خط اللثة بالليزر لابتسامة متناسقة.</p><span class="wire"></span></article>
-      <article><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c.8-3.6 3.6-6 7-6s6.2 2.4 7 6"/><path d="M10.5 9.8c.9.6 2.1.6 3 0"/></svg></div><h3>أسنان الأطفال</h3><p>زيارة هادية ومرحة تخلّي الطفل يحب دكتور الأسنان.</p><span class="wire"></span></article>
+    <div class="feat3">
+      <article class="rv"><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3>تقنيات حديثة</h3><p>أحدث الأجهزة والتصميم الرقمي للابتسامة لنتائج دقيقة وطبيعية.</p></article>
+      <article class="rv"><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.4-9-9.3C1.7 8.4 3.9 5 7.3 5c2 0 3.3 1.1 4.7 2.8C13.4 6.1 14.7 5 16.7 5 20.1 5 22.3 8.4 21 11.7 19 16.6 12 21 12 21z"/></svg></div><h3>رعاية تشبه العائلة</h3><p>فريق يهتم بك، يستمع لمخاوفك ويطمئنك في كل خطوة.</p></article>
+      <article class="rv"><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></div><h3>نتائج تدوم</h3><p>خامات عالمية ومعايير تعقيم صارمة لابتسامة صحية تدوم سنوات.</p></article>
+    </div>
+    <h3 class="sub-h rv" id="why">لماذا حياة اليت؟ أسباب تجعلنا اختيارك الأول</h3>
+    <div class="feat3">
+      <article class="rv"><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c.8-3.6 3.6-6 7-6s6.2 2.4 7 6"/></svg></div><h3>نخبة من الأطباء</h3><p>فريق متخصّص في الزراعة والتجميل والتقويم.</p></article>
+      <article class="rv"><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>تعقيم آمن</h3><p>بروتوكولات تعقيم صارمة لسلامتك التامة.</p></article>
+      <article class="rv"><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div><h3>أسعار وخطط مرنة</h3><p>خطط دفع تناسبك مع شفافية كاملة في الأسعار.</p></article>
     </div>
   </div>
 </section>
 
-<section class="ba-band" id="cases">
+<!-- ===== SERVICES ===== -->
+<section id="services" style="padding-top:0">
   <div class="wrap">
     <div class="sh rv">
-      <div><div class="latin">Before · After</div><h2>اسحب وشوف الفرق بنفسك</h2></div>
-      <p>حالات حقيقية من العيادة. حرّك الخط الذهبي بين قبل وبعد.</p>
+      <div><div class="latin">خدماتنا</div><h2>حلول متكاملة لابتسامتك</h2></div>
+      <p>كل ما تحتاجه أسنانك تحت سقف واحد، بأيادي متخصّصة.</p>
+    </div>
+    <div class="svc rv">
+      <article><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 6 5 6 9c0 3 1 6 2 9 .5 1.5 1.3 3 2 3s1-1.5 1.3-3c.2-1 .4-2 .7-2s.5 1 .7 2c.3 1.5.8 3 1.3 3s1.5-1.5 2-3c1-3 2-6 2-9 0-4-2-7-6-7z"/></svg></div><h3>زراعة الأسنان</h3><p>تعويض الأسنان المفقودة بجذور ثابتة تمضغ بها كأسنانك الطبيعية.</p><span class="wire"></span></article>
+      <article><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9c2.5 2 5 3 8 3s5.5-1 8-3"/><path d="M5 9c0 5 3 9 7 9s7-4 7-9"/><path d="M9 12v3M12 12v4M15 12v3"/></svg></div><h3>هوليوود سمايل</h3><p>تصميم ابتسامة متناسقة وطبيعية على مقاس وجهك بأحدث تقنيات التصميم الرقمي.</p><span class="wire"></span></article>
+      <article><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l3.5 9h11L21 8l-5 3.5L12 5 8 11.5z"/><path d="M5 19h14"/></svg></div><h3>التركيبات والتيجان</h3><p>تركيبات زيركون عالية الجودة تجمع بين القوة والمظهر الطبيعي.</p><span class="wire"></span></article>
+      <article><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 11c3 2 6 3 9 3s6-1 9-3"/><rect x="5" y="9.5" width="4" height="3.4" rx="1"/><rect x="10" y="10.8" width="4" height="3.4" rx="1"/><rect x="15" y="9.5" width="4" height="3.4" rx="1"/></svg></div><h3>تقويم الأسنان</h3><p>تقويم معدني وشفاف لابتسامة منتظمة وإطباق صحيح.</p><span class="wire"></span></article>
+      <article><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.4L12 15l-1.8-4.6L5.5 9l4.7-1.4z"/><path d="M5 17c2.2 2.4 4.5 3.5 7 3.5s4.8-1.1 7-3.5"/></svg></div><h3>العلاج العام والتجميلي</h3><p>حشو، علاج عصب، تنظيف، وتبييض احترافي للأسنان.</p><span class="wire"></span></article>
+      <article><div class="ix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M9.5 11.5a3 3 0 0 0 5 0"/><path d="M5 21c0-3 3-5 7-5s7 2 7 5"/></svg></div><h3>طب أسنان الأطفال</h3><p>رعاية لطيفة وآمنة تبني علاقة إيجابية لطفلك مع طبيب الأسنان.</p><span class="wire"></span></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW WE DESIGN ===== -->
+<section class="ba-band" id="smile-design">
+  <div class="wrap sd-grid">
+    <div class="phone rv">
+      <video id="sdVideo" data-src="assets/smile-design.mp4" muted loop playsinline preload="none" disablepictureinpicture aria-label="فيديو تصميم الابتسامة في مركز حياة اليت"></video>
+    </div>
+    <div class="rv">
+      <div class="latin">نصمّم ابتسامتك</div>
+      <h2 style="font-size:clamp(30px,4.6vw,52px);font-weight:900;margin:10px 0 10px">كيف نصمّم ابتسامتك</h2>
+      <p style="color:var(--muted)">من المسح الرقمي حتى الابتسامة النهائية — تصميم دقيق بأحدث التقنيات.</p>
+      <ol class="sd-steps">
+        <li><span class="bk">1</span><div><h3>مسح رقمي ثلاثي الأبعاد</h3><p>صورة رقمية دقيقة لأسنانك بدل الطبعة التقليدية.</p></div></li>
+        <li><span class="bk">2</span><div><h3>تصميم الابتسامة بدقة</h3><p>نصمّم شكل الابتسامة على مقاس وجهك ونجرّبها معك قبل التنفيذ.</p></div></li>
+        <li><span class="bk">3</span><div><h3>ابتسامة جاهزة ✨</h3><p>تنفيذ التصميم النهائي بخامات عالمية.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="sh rv">
+      <div><div class="latin">معرض الابتسامات</div><h2>نتائج حقيقية لمرضانا</h2></div>
+      <p>نماذج من حالات قبل وبعد — كل ابتسامة قصة ثقة استعادها صاحبها. حرّك الخط الذهبي بين قبل وبعد.</p>
     </div>
     <div class="ba-grid rv">
       <div>
         <div class="ba" id="ba" style="--p:50%">
-          <div class="crop a"><img id="imgA" src="assets/case1.jpg" alt="بعد العلاج"></div>
-          <div class="crop b"><img id="imgB" src="assets/case1.jpg" alt="قبل العلاج"></div>
+          <div class="crop a"><img id="imgA" src="assets/case1.jpg" alt="بعد العلاج - هوليوود سمايل"></div>
+          <div class="crop b"><img id="imgB" src="assets/case1.jpg" alt="قبل العلاج - هوليوود سمايل"></div>
           <span class="tag tb">قبل <small>BEFORE</small></span>
           <span class="tag ta">بعد <small>AFTER</small></span>
           <span class="bar"></span>
           <span class="knob"><svg viewBox="0 0 30 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3L3 8l5 5M22 3l5 5-5 5"/></svg></span>
           <input type="range" id="baRange" min="0" max="100" value="50" aria-label="قارن قبل وبعد">
         </div>
-        <p class="note">النتائج تختلف من حالة لحالة حسب التشخيص.</p>
+        <p class="note">النتائج تختلف من حالة لأخرى حسب التشخيص.</p>
       </div>
       <div class="cases" id="cases-list" role="group" aria-label="اختر حالة">
-        <button aria-pressed="true" data-src="assets/case1.jpg"><span class="th"><span class="crop"><img src="assets/case1.jpg" alt=""></span></span><span><b>تصميم ابتسامة</b><span>حالة ١</span></span></button>
-        <button aria-pressed="false" data-src="assets/case2.jpg"><span class="th"><span class="crop"><img src="assets/case2.jpg" alt=""></span></span><span><b>تصميم ابتسامة</b><span>حالة ٢</span></span></button>
-        <button aria-pressed="false" data-src="assets/case3.jpg"><span class="th"><span class="crop"><img src="assets/case3.jpg" alt=""></span></span><span><b>تصميم ابتسامة</b><span>حالة ٣</span></span></button>
-        <button aria-pressed="false" data-src="assets/case4.jpg"><span class="th"><span class="crop"><img src="assets/case4.jpg" alt=""></span></span><span><b>تصميم ابتسامة</b><span>حالة ٤</span></span></button>
+        <button aria-pressed="true" data-src="assets/case1.jpg" data-t="هوليوود سمايل"><span class="th"><span class="crop"><img src="assets/case1.jpg" alt=""></span></span><span><b>هوليوود سمايل</b><span>حالة قبل وبعد</span></span></button>
+        <button aria-pressed="false" data-src="assets/case2.jpg" data-t="تركيبات وتيجان زيركون"><span class="th"><span class="crop"><img src="assets/case2.jpg" alt=""></span></span><span><b>تركيبات وتيجان زيركون</b><span>حالة قبل وبعد</span></span></button>
+        <button aria-pressed="false" data-src="assets/case3.jpg" data-t="زراعة أسنان"><span class="th"><span class="crop"><img src="assets/case3.jpg" alt=""></span></span><span><b>زراعة أسنان</b><span>حالة قبل وبعد</span></span></button>
+        <button aria-pressed="false" data-src="assets/case4.jpg" data-t="تجميل وتبييض الأسنان"><span class="th"><span class="crop"><img src="assets/case4.jpg" alt=""></span></span><span><b>تجميل وتبييض الأسنان</b><span>حالة قبل وبعد</span></span></button>
       </div>
     </div>
   </div>
 </section>
 
-<section id="feed">
+<!-- ===== INSTAGRAM FEED ===== -->
+<section id="feed" style="padding-top:0">
   <div class="wrap">
     <div class="sh rv">
       <div><div class="latin">From Instagram</div><h2>تابع التحوّلات أول بأول</h2></div>
-      <p><a class="handle" href="https://www.instagram.com/hyatt_elite" target="_blank" rel="noopener" dir="ltr">@hyatt_elite</a><br>اختار نوع العلاج واضغط على أي بوست يفتح كستوري.</p>
+      <p><a class="handle" href="https://www.instagram.com/hyatt_elite" target="_blank" rel="noopener" dir="ltr">@hyatt_elite</a><br>اختار نوع العلاج واضغط على أي حالة تفتح كستوري.</p>
     </div>
     <div class="hl" id="hl" role="group" aria-label="فلترة الحالات">
       <button aria-pressed="true" data-f="all"><span class="c"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></i></span>الكل</button>
-      <button aria-pressed="false" data-f="smile"><span class="c"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.4L12 15l-1.8-4.6L5.5 9l4.7-1.4z"/></svg></i></span>هوليوود</button>
+      <button aria-pressed="false" data-f="smile"><span class="c"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.4L12 15l-1.8-4.6L5.5 9l4.7-1.4z"/></svg></i></span>تجميل</button>
       <button aria-pressed="false" data-f="ortho"><span class="c"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 11c3 2 6 3 9 3s6-1 9-3"/><rect x="5" y="9.5" width="4" height="3.4" rx="1"/><rect x="10" y="10.8" width="4" height="3.4" rx="1"/><rect x="15" y="9.5" width="4" height="3.4" rx="1"/></svg></i></span>تقويم</button>
-      <button aria-pressed="false" data-f="tips"><span class="c"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/></svg></i></span>نصائح</button>
+      <button aria-pressed="false" data-f="implant"><span class="c"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 2C8 2 6 5 6 9c0 3 1 6 2 9 .5 1.5 1.3 3 2 3s1-1.5 1.3-3c.2-1 .4-2 .7-2s.5 1 .7 2c.3 1.5.8 3 1.3 3s1.5-1.5 2-3c1-3 2-6 2-9 0-4-2-7-6-7z"/></svg></i></span>زراعة</button>
+      <button aria-pressed="false" data-f="crown"><span class="c"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 8l3.5 9h11L21 8l-5 3.5L12 5 8 11.5z"/></svg></i></span>تركيبات</button>
     </div>
     <div class="grid" id="grid"></div>
   </div>
 </section>
 
-<section id="journey" style="padding-top:0">
-  <div class="wrap">
-    <div class="sh rv">
-      <div><div class="latin">Your Journey</div><h2>أربع خطوات على السلك لحد ابتسامتك</h2></div>
-      <p>كل خطوة بنوضّحها لك قبل ما نتحرك للي بعدها.</p>
-    </div>
-    <div class="steps rv">
-      <svg class="track" id="stepWire"></svg>
-      <ol>
-        <li><div class="n">STEP 1</div><h3>استشارة وفحص</h3><p>نسمعك ونفحص ونشرح كل الاختيارات.</p></li>
-        <li><div class="n">STEP 2</div><h3>مسح رقمي 3D</h3><p>صورة دقيقة لأسنانك بدل الطبعة التقليدية.</p></li>
-        <li><div class="n">STEP 3</div><h3>تصميم الابتسامة</h3><p>تشوف شكلك الجديد وتوافق عليه قبل التنفيذ.</p></li>
-        <li><div class="n">STEP 4</div><h3>التنفيذ والمتابعة</h3><p>تسليم بدقة ومتابعة دورية بعد العلاج.</p></li>
-      </ol>
-    </div>
-  </div>
-</section>
-
+<!-- ===== REVIEWS ===== -->
 <section id="reviews" style="padding-top:0">
   <div class="wrap dm-grid">
     <div class="rv">
-      <div class="latin">Patients Say</div>
-      <h2 style="font-size:clamp(30px,4.6vw,52px);font-weight:900;margin:10px 0 16px">من الـ DMs</h2>
-      <div class="big">4.8</div>
+      <div class="latin">آراء عملائنا</div>
+      <h2 style="font-size:clamp(30px,4.6vw,52px);font-weight:900;margin:10px 0 12px">ثقة تتحدّث عنّا</h2>
+      <p style="color:var(--muted);margin-bottom:18px">رضاء مرضانا هو أكبر إنجازاتنا — آراء حقيقية لعملاء المركز.</p>
+      <div class="big">5.0</div>
       <div class="stars">★★★★★</div>
-      <p style="color:var(--muted)">تقييم جوجل من ١٧ مراجعة</p>
+      <p style="color:var(--muted)">تقييم العملاء</p>
     </div>
-    <div class="chat">
-      <div class="msg in"><small>مني جمال</small>عملت هوليوود سمايل من 4 سنين وبتابع للحفاظ عليها، ومازالت ممتازة كأني عاملاها جديد.</div>
-      <div class="msg out">ربنا يخليكي، مستنيينك في المتابعة الجاية ✨</div>
-      <div class="msg in"><small>علي أيمن</small>زرعت فك علوي كامل في جلسة لمدة نص ساعة، والحمد لله ماحسيتش بأي ألم.</div>
-      <div class="msg in"><small>سيد راضي</small>متابع أنا والأولاد مع المركز من 8 سنين، وبصراحة ممتازين وتعاملهم محترم.</div>
-      <div class="msg out">شكرًا لثقتكم، دي أحلى حاجة بنسمعها 🤍</div>
-      <div class="typing" aria-hidden="true"><i></i><i></i><i></i></div>
-    </div>
+    <div class="chat" id="chat" tabindex="0" aria-label="آراء العملاء"></div>
   </div>
 </section>
 
+<!-- ===== FAQ ===== -->
 <section id="faq" style="padding-top:0">
   <div class="wrap faq">
-    <div class="rv"><div class="latin">FAQ</div><h2 style="font-size:clamp(30px,4.6vw,52px);font-weight:900;margin-top:10px">أسئلة بتتسأل كتير</h2></div>
+    <div class="rv"><div class="latin">أسئلة شائعة</div><h2 style="font-size:clamp(30px,4.6vw,52px);font-weight:900;margin:10px 0 10px">إجابات لأكثر ما يهمّك</h2><p style="color:var(--muted)">كل ما تريد معرفته قبل زيارتك لمركز حياة اليت.</p></div>
     <div class="rv">
       <details open><summary>هل أحتاج لحجز موعد مسبق؟</summary><p>نعم، يُفضّل الحجز المسبق عبر الهاتف أو واتساب أو نموذج الموقع لضمان وقت مناسب لك وتقليل الانتظار.</p></details>
       <details><summary>كم تستغرق جلسة زراعة الأسنان؟</summary><p>تختلف حسب الحالة، لكن الزراعة الواحدة غالباً تتم في جلسة قصيرة وبدون ألم بفضل التخدير الموضعي وأحدث التقنيات.</p></details>
@@ -528,47 +630,64 @@ footer img{height:38px;width:auto}
   </div>
 </section>
 
-<section id="book" style="padding-top:0">
+<!-- ===== CONTACT ===== -->
+<section id="contact" style="padding-top:0">
   <div class="wrap">
     <div class="book rv">
       <div>
-        <div class="latin">Book a Visit</div>
-        <h2>احجز استشارتك النهارده</h2>
-        <p style="color:var(--muted)">ابعتلنا بياناتك وهنكلمك نحدد معاد يناسبك.</p>
+        <div class="latin">تواصل واحجز</div>
+        <h2>نتطلّع للقائك!</h2>
+        <p style="color:var(--muted)">احجز استشارتك الآن، وسنتواصل معك لتأكيد الموعد في أقرب وقت.</p>
         <dl>
+          <div><dt>الهاتف</dt><dd><a href="tel:0228440012" dir="ltr">0228440012</a> / <a href="tel:0228440013" dir="ltr">0228440013</a></dd></div>
+          <div><dt>واتساب</dt><dd><a href="https://wa.me/201003033566" target="_blank" rel="noopener" dir="ltr">01003033566</a></dd></div>
+          <div><dt>مواعيد العمل</dt><dd>السبت – الخميس: 3 م – 10 م</dd></div>
           <div><dt>العنوان</dt><dd>قطعة 9078، شارع 9 أعلى الشبراوي، المقطم، القاهرة</dd></div>
-          <div><dt>المواعيد</dt><dd>السبت – الخميس · ٣ العصر – ١٠ بالليل</dd></div>
-          <div><dt>تليفون · واتساب</dt><dd><a href="tel:+20228440012" dir="ltr">02 2844 0012</a> · <a href="https://wa.me/201003033566" target="_blank" rel="noopener" dir="ltr">0100 303 3566</a></dd></div>
         </dl>
-        <div class="map" id="mapBox" role="button" tabindex="0" aria-label="اعرض موقع العيادة على الخريطة">
+        <div class="map" id="mapBox" role="button" tabindex="0" aria-label="عرض الموقع على الخريطة">
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><br>اضغط لعرض الموقع على الخريطة</span>
         </div>
       </div>
       <form id="bookingForm" novalidate>
+        <h3 style="font-size:24px;font-weight:900">احجز موعدك</h3>
         <div class="row2">
-          <div><label for="f_name">الاسم *</label><input id="f_name" autocomplete="name" placeholder="اسمك"><span class="err" id="e_name" aria-live="polite"></span></div>
-          <div><label for="f_phone">رقم الموبايل *</label><input id="f_phone" autocomplete="tel" inputmode="tel" placeholder="01xxxxxxxxx" dir="ltr"><span class="err" id="e_phone" aria-live="polite"></span></div>
+          <div><label for="f_name">الاسم *</label><input id="f_name" name="name" autocomplete="name" placeholder="اسمك الكامل"><span class="err" id="e_name" aria-live="polite"></span></div>
+          <div><label for="f_phone">رقم الهاتف *</label><input id="f_phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="01xxxxxxxxx" dir="ltr"><span class="err" id="e_phone" aria-live="polite"></span></div>
         </div>
         <div class="row2">
-          <div><label for="f_service">الخدمة</label><select id="f_service"><option>زراعة الأسنان</option><option>تقويم الأسنان</option><option>هوليوود سمايل</option><option>التركيبات والتيجان</option><option>قص اللثة</option><option>أسنان الأطفال</option><option>كشف عام</option></select></div>
-          <div><label for="f_time">الموعد المفضّل</label><input id="f_time" placeholder="مثلاً: السبت بعد ٦ م"></div>
+          <div><label for="f_service">الخدمة المطلوبة</label><select id="f_service" name="service"><option>زراعة الأسنان</option><option>هوليوود سمايل</option><option>التركيبات والتيجان</option><option>تقويم الأسنان</option><option>العلاج العام والتجميلي</option><option>طب أسنان الأطفال</option><option>أخرى</option></select></div>
+          <div><label for="f_time">الموعد المفضّل</label><input id="f_time" name="time" placeholder="مثال: السبت مساءً"></div>
         </div>
-        <div><label for="f_msg">رسالتك</label><textarea id="f_msg" rows="3" placeholder="اكتب أي تفاصيل حابب نعرفها"></textarea></div>
+        <div><label for="f_msg">رسالتك</label><textarea id="f_msg" name="message" rows="3" placeholder="اكتب أي تفاصيل إضافية"></textarea></div>
         <button class="btn btn-gold" type="submit" id="submitBtn" style="justify-content:center">إرسال طلب الحجز</button>
-        <p class="fnote" id="formNote" aria-live="polite"></p>
+        <p class="fnote" id="formNote" role="status" aria-live="polite"></p>
       </form>
     </div>
   </div>
 </section>
 </main>
 
-<footer><div class="wrap"><img src="assets/logo_white.png" alt="Hyatt Elite"><span>© 2026 مركز حياة اليت لطب الأسنان · نصمّم ابتسامتك بعناية</span>
-  <span class="social">
-    <a href="https://www.facebook.com/share/14hNKUwbDtG/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3c-2.8 0-4 1.7-4 4.3V10H7v4h3v8h4v-8h3l1-4h-4V8.5c0-.3.2-.5.5-.5z"/></svg></a>
-    <a href="https://www.instagram.com/hyatt_elite" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 7.3A4.7 4.7 0 1 0 12 16.7 4.7 4.7 0 0 0 12 7.3zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM17 5.8a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM21.9 7.9c-.1-1.6-.4-3-1.6-4.2S17.7 2.2 16.1 2.1C14.4 2 9.6 2 7.9 2.1 6.3 2.2 4.9 2.5 3.7 3.7S2.2 6.3 2.1 7.9C2 9.6 2 14.4 2.1 16.1c.1 1.6.4 3 1.6 4.2s2.6 1.5 4.2 1.6c1.7.1 6.5.1 8.2 0 1.6-.1 3-.4 4.2-1.6s1.5-2.6 1.6-4.2c.1-1.7.1-6.5 0-8.2z"/></svg></a>
-    <a href="https://wa.me/201003033566" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
-  </span></div></footer>
-<div class="dock"><a class="d1" href="https://wa.me/201003033566">احجز على واتساب</a><a class="d2" href="#book">العنوان والمواعيد</a></div>
+<footer>
+  <div class="wrap" style="display:block">
+    <div class="fgrid">
+      <div>
+        <img src="assets/logo_white.png" alt="شعار حياة اليت">
+        <p>مركز حياة اليت لطب الأسنان — نصمّم ابتسامتك بعناية بأحدث التقنيات وأمهر الأطباء.</p>
+        <div class="social" style="margin-top:14px">
+          <a href="https://www.facebook.com/share/14hNKUwbDtG/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3c-2.8 0-4 1.7-4 4.3V10H7v4h3v8h4v-8h3l1-4h-4V8.5c0-.3.2-.5.5-.5z"/></svg></a>
+          <a href="https://www.instagram.com/hyatt_elite" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 7.3A4.7 4.7 0 1 0 12 16.7 4.7 4.7 0 0 0 12 7.3zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM17 5.8a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM21.9 7.9c-.1-1.6-.4-3-1.6-4.2S17.7 2.2 16.1 2.1C14.4 2 9.6 2 7.9 2.1 6.3 2.2 4.9 2.5 3.7 3.7S2.2 6.3 2.1 7.9C2 9.6 2 14.4 2.1 16.1c.1 1.6.4 3 1.6 4.2s2.6 1.5 4.2 1.6c1.7.1 6.5.1 8.2 0 1.6-.1 3-.4 4.2-1.6s1.5-2.6 1.6-4.2c.1-1.7.1-6.5 0-8.2z"/></svg></a>
+          <a href="https://wa.me/201003033566" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
+        </div>
+      </div>
+      <div class="fcol"><h4>روابط سريعة</h4><a href="#about">من نحن</a><a href="#services">خدماتنا</a><a href="#gallery">معرض الابتسامات</a><a href="#reviews">آراء العملاء</a><a href="#faq">أسئلة شائعة</a></div>
+      <div class="fcol"><h4>خدماتنا</h4><a href="#services">زراعة الأسنان</a><a href="#services">هوليوود سمايل</a><a href="#services">التقويم</a><a href="#services">التركيبات والتيجان</a></div>
+      <div class="fcol"><h4>تواصل معنا</h4><span dir="ltr" style="text-align:right">0228440012 / 0228440013</span><span>واتساب: <span dir="ltr">01003033566</span></span><span>المقطم، القاهرة</span></div>
+    </div>
+    <div class="copy">© 2026 مركز حياة اليت لطب الأسنان — جميع الحقوق محفوظة.</div>
+  </div>
+</footer>
+<div class="dock"><a class="d1" href="https://wa.me/201003033566" target="_blank" rel="noopener">احجز على واتساب</a><a class="d2" href="#contact">العنوان والمواعيد</a></div>
+<a class="wa-fab" href="https://wa.me/201003033566" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="عرض الحالة">
   <div class="card">
@@ -583,20 +702,37 @@ footer img{height:38px;width:auto}
 <script src="assets/wire.js"></script>
 <script>
 HyattWire(document.getElementById('heroWire'),{w:1600,h:360,y0:70,ymid:190,count:16,par:'xMidYMin slice'});
-HyattWire(document.getElementById('stepWire'),{w:1200,h:120,y0:40,ymid:70,count:4,teeth:false,par:'none',stroke:5});
 var top_=document.getElementById('top');
 addEventListener('scroll',function(){top_.classList.toggle('solid',scrollY>40)},{passive:true});
 
-/* reel panorama */
-var LOGO='assets/logo_white.png';
+/* mobile menu */
+(function(){
+  var d=document.getElementById('drawer'),b=document.getElementById('burger');
+  function open(){d.classList.add('open');b.setAttribute('aria-expanded','true');document.body.style.overflow='hidden'}
+  function close(){d.classList.remove('open');b.setAttribute('aria-expanded','false');document.body.style.overflow=''}
+  b.addEventListener('click',open);document.getElementById('drawerClose').addEventListener('click',close);
+  d.addEventListener('click',function(e){if(e.target===d||e.target.tagName==='A')close()});
+})();
+
+/* counters */
+(function(){
+  if(!('IntersectionObserver' in window))return;
+  var fmt=function(n){return n>=1000?n.toLocaleString('en-US'):n};
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);
+    var el=e.target,to=+el.dataset.to,suf=el.dataset.suffix||'',s=null;
+    function step(t){s=s||t;var p=Math.min((t-s)/1400,1);el.textContent=fmt(Math.floor((1-Math.pow(1-p,3))*to))+suf;if(p<1)requestAnimationFrame(step)}
+    requestAnimationFrame(step);})},{threshold:.5});
+  document.querySelectorAll('.count').forEach(function(c){io.observe(c)});
+})();
+
 /* Case photos: `img` = one stacked before/after file (assets/caseN.jpg); `b`/`a` = separate before and after files. */
 var ORTHO={b:'ortho/egypt/assets/ortho-before.jpg',a:'ortho/egypt/assets/ortho-after.jpg'};
-var tiles=[{t:'هوليوود سمايل',img:'assets/case1.jpg',n:'١'},{t:'تقويم الأسنان',b:ORTHO.b,a:ORTHO.a,n:'٢'},{t:'تصميم الابتسامة',img:'assets/case3.jpg',n:'٣'}];
+var LOGO='assets/logo_white.png';
+var tiles=[{t:'زراعة الأسنان',img:'assets/case3.jpg',n:'١'},{t:'تقويم الأسنان',b:ORTHO.b,a:ORTHO.a,n:'٢'},{t:'هوليوود سمايل',img:'assets/case1.jpg',n:'٣'}];
 var arrowSvg='<svg viewBox="0 0 24 24" fill="none" stroke="#c9a24a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg>';
 function pic(p,side){return p.img?'<img src="'+p.img+'" alt="'+(side==='b'?'قبل':'بعد')+'" loading="lazy">':'<img class="full" src="'+p[side]+'" alt="'+(side==='b'?'قبل':'بعد')+'" loading="lazy">';}
 function frames(p){return '<div class="fr b"><div class="crop">'+pic(p,'b')+'</div><span class="pill"><b>قبل</b><small>BEFORE</small></span></div><div class="fr a"><div class="crop">'+pic(p,'a')+'</div><span class="pill"><b>بعد</b><small>AFTER</small></span></div>';}
-var pano=document.getElementById('pano');
-var paneWires=[];
+var pano=document.getElementById('pano'),paneWires=[];
 tiles.forEach(function(t,i){
   var d=document.createElement('div');d.className='tile';
   d.innerHTML='<div class="bg"></div><svg class="pw"></svg><img class="logo" src="'+LOGO+'" alt=""><h3>'+t.t+'</h3><div class="frames">'+frames(t)+'</div><div class="arrow">'+arrowSvg+'</div><div class="cta"><svg viewBox="0 0 24 24" fill="#c9a24a"><path d="M8 5v14l11-7z"/></svg><span>شاهد التحوّل كامل</span></div><span class="guide"></span><span class="order">ينزل '+t.n+'</span>';
@@ -605,15 +741,23 @@ tiles.forEach(function(t,i){
   HyattWire(s,{w:3240,h:1920,y0:1350,ymid:1470,count:18,par:'none',spark:i===1,anim:false});
   paneWires.push(s);
 });
-/* draw the panorama wire when it scrolls into view */
 if('IntersectionObserver' in window){
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){paneWires.forEach(function(s){s.classList.add('hw-anim')});io.disconnect()}})},{threshold:.35});
-  io.observe(pano);
+  var pio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){paneWires.forEach(function(s){s.classList.add('hw-anim')});pio.disconnect()}})},{threshold:.35});
+  pio.observe(pano);
 }
 document.querySelectorAll('.seg button').forEach(function(b){b.addEventListener('click',function(){
   document.querySelectorAll('.seg button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
   pano.classList.toggle('split',b.dataset.v==='split');
 });});
+
+/* smile-design video: loads only near the viewport */
+(function(){
+  var v=document.getElementById('sdVideo');if(!v)return;
+  v.addEventListener('error',function(){v.outerHTML='<div class="ph-fallback">Digital Smile Design<br>حياة اليت</div>'});
+  if(!('IntersectionObserver' in window)){v.src=v.dataset.src;return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){v.src=v.dataset.src;var p=v.play&&v.play();if(p&&p.catch)p.catch(function(){});io.disconnect()}})},{rootMargin:'250px 0px'});
+  io.observe(v);
+})();
 
 /* before / after slider */
 var ba=document.getElementById('ba'),r=document.getElementById('baRange');
@@ -622,7 +766,8 @@ document.querySelectorAll('#cases-list button').forEach(function(b){
   b.addEventListener('click',function(){
     document.querySelectorAll('#cases-list button').forEach(function(x){x.setAttribute('aria-pressed','false')});
     b.setAttribute('aria-pressed','true');
-    document.getElementById('imgA').src=document.getElementById('imgB').src=b.dataset.src;
+    var A=document.getElementById('imgA'),B=document.getElementById('imgB');
+    A.src=B.src=b.dataset.src;A.alt='بعد العلاج - '+b.dataset.t;B.alt='قبل العلاج - '+b.dataset.t;
     var v=0;r.value=0;ba.style.setProperty('--p','0%');
     var t=setInterval(function(){v+=4;if(v>=50){v=50;clearInterval(t)}r.value=v;ba.style.setProperty('--p',v+'%')},16);
   });
@@ -632,20 +777,18 @@ document.querySelectorAll('#cases-list button').forEach(function(b){
 var posts=[
   {f:'smile',t:'هوليوود سمايل',img:'assets/case1.jpg'},
   {f:'ortho',t:'تقويم الأسنان',b:ORTHO.b,a:ORTHO.a},
-  {f:'tips',t:'بعد الزراعة',tip:['ثلج أول ٢٤ ساعة','أكل طري ٣ أيام','مفيش سجاير','متابعة بعد أسبوع']},
-  {f:'smile',t:'تصميم ابتسامة',img:'assets/case2.jpg'},
-  {f:'smile',t:'تصميم ابتسامة',img:'assets/case4.jpg'},
-  {f:'smile',t:'تصميم ابتسامة',img:'assets/case3.jpg'}
+  {f:'implant',t:'زراعة أسنان',img:'assets/case3.jpg'},
+  {f:'crown',t:'تيجان زيركون',img:'assets/case2.jpg'},
+  {f:'smile',t:'تجميل وتبييض',img:'assets/case4.jpg'},
+  {f:'smile',t:'تصميم ابتسامة',img:'assets/case1.jpg'}
 ];
 var grid=document.getElementById('grid');
 posts.forEach(function(p){
-  var b=document.createElement('button');b.className='post';b.dataset.f=p.f;
-  var inner='<span class="pbg"></span><svg class="mw"></svg><h3>'+p.t+'</h3>';
-  if(!p.tip){inner+='<div class="pf">'+frames(p)+'</div><svg class="reel" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><span class="ov"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>شاهد التحوّل</span></span>';b.setAttribute('aria-label','افتح حالة '+p.t)}
-  else{inner+='<ul class="tip">'+p.tip.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>';b.setAttribute('aria-label','نصيحة: '+p.t);b.style.cursor='default'}
-  b.innerHTML=inner;grid.appendChild(b);
+  var b=document.createElement('button');b.className='post';b.dataset.f=p.f;b.setAttribute('aria-label','افتح حالة '+p.t);
+  b.innerHTML='<span class="pbg"></span><svg class="mw"></svg><h3>'+p.t+'</h3><div class="pf">'+frames(p)+'</div><svg class="reel" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><span class="ov"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>شاهد التحوّل</span></span>';
+  grid.appendChild(b);
   HyattWire(b.querySelector('svg.mw'),{w:600,h:260,y0:90,ymid:150,count:7,spark:false,anim:false,toothOpacity:.1,par:'xMidYMid slice'});
-  if(!p.tip)b.addEventListener('click',function(){openLb(p)});
+  b.addEventListener('click',function(){openLb(p)});
 });
 document.querySelectorAll('#hl button').forEach(function(b){b.addEventListener('click',function(){
   document.querySelectorAll('#hl button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
@@ -663,6 +806,32 @@ function closeLb(){lb.classList.remove('open')}
 document.getElementById('lbX').addEventListener('click',closeLb);
 lb.addEventListener('click',function(e){if(e.target===lb)closeLb()});
 addEventListener('keydown',function(e){if(e.key==='Escape')closeLb()});
+
+/* testimonials (from the previous site) */
+var TESTIMONIALS=[
+  {rating:5,text:"عملت هوليوود سمايل من 4 سنين وبتابع للحفاظ عليها، ومازالت ممتازة كأني عاملاها جديد.",name:"مني جمال",tag:"هوليوود سمايل"},
+  {rating:4.5,text:"بنتي 9 سنين عملت تقويم، والنتايج الحمد لله ممتازة.",name:"هالة رضا",tag:"تقويم أطفال"},
+  {rating:5,text:"زرعت فك علوي كامل في جلسة لمدة نص ساعة، والحمد لله ماحسيتش بأي ألم.",name:"علي أيمن",tag:"زراعة"},
+  {rating:4.5,text:"ركبت كراون زيركون لونه طبيعي زي سناني وكأني طبيعية جداً :)",name:"أسماء إبراهيم",tag:"تركيبات"},
+  {rating:5,text:"عملت تقويم وكنت خايف لا يطول بسبب سني، بس الحمد لله خلصت في 8 شهور وتخلصت من آلام الفك واعوجاج الأسنان. شكراً ليكم.",name:"ماهر حافظ",tag:"تقويم"},
+  {rating:4,text:"زرعت ضرسين في خلال 10 دقايق، وكانت العملية سريعة وبدون ألم.",name:"نادين شوقي",tag:"زراعة"},
+  {rating:5,text:"عملت فينيرز وصممت ابتسامة كاملة ديجيتال في خلال 3 أيام، وبصراحة النتيجة ممتازة. شكراً.",name:"أحمد حمدي",tag:"فينيرز"},
+  {rating:4.5,text:"الفينيرز صغّرتني وخلّت ابتسامتي جميلة. أنا مبسوطة وبشكركم على كل تعبكم.",name:"ندا سامي",tag:"فينيرز"},
+  {rating:5,text:"زرعت فكين علوي وسفلي وركبت الأسنان، والحمد لله عرفت أبتسم وآكل طبيعي بعد زمن. بشكركم على مجهودكم.",name:"سامية كامل",tag:"زراعة كاملة"},
+  {rating:4.5,text:"بصراحة ممتازين وأسعارهم ممتازة. الله يباركلكم ومن نجاح لنجاح.",name:"عادل أمين",tag:"عميل"},
+  {rating:4.5,text:"عملت جراحة ضرس عقل مدفون والحمد لله محستش أثناء الجراحة بأي حاجة. شكراً لدكتور الجراحة، إيده خفيفة.",name:"فيليب موريس",tag:"جراحة"},
+  {rating:5,text:"عملت لابني تقويم والحمد لله خلص في خلال 10 شهور، وابني بقى فرحان إنه بيتصور بضحكته الطبيعية وسنانه جميلة. شكراً لدكاترة التقويم بالمركز.",name:"حنان إسماعيل",tag:"تقويم أطفال"},
+  {rating:4,text:"مكان نظيف جداً ومهتمين بالتعقيم.",name:"سارة أيهاب",tag:"عميلة"},
+  {rating:4.5,text:"خلعت جراحة 4 ضروس عقل والحمد لله تخلصت من وجع كان مزمن.",name:"فريد سيد",tag:"جراحة"},
+  {rating:5,text:"متابع أنا والأولاد مع المركز من 8 سنين، وبصراحة ممتازين وتعاملهم محترم. شكراً ليكم.",name:"سيد راضي",tag:"عميل دائم"},
+  {rating:4.5,text:"عملت حشو لسناني الأمامية تجميلي، والحمد لله مش باينة ونفس لون أسناني الطبيعية.",name:"سلمى حامد",tag:"حشو تجميلي"},
+  {rating:5,text:"زرعت وركبت طقم كامل والحمد لله مخدتش وقت ولا حسيت بألم، والنتيجة ممتازة.",name:"رامي أحمد",tag:"تركيبات"}
+];
+(function(){
+  var chat=document.getElementById('chat');
+  function stars(r){var f=Math.floor(r);return '★★★★★'.slice(0,f)+'☆☆☆☆☆'.slice(0,5-f)+' '+r.toFixed(1)}
+  chat.innerHTML=TESTIMONIALS.map(function(t){return '<div class="msg in"><small>'+t.name+'<span class="st" aria-label="'+t.rating+' من 5">'+stars(t.rating)+'</span></small>'+t.text+'<br><span class="tg">'+t.tag+'</span></div>'}).join('')+'<div class="typing" aria-hidden="true"><i></i><i></i><i></i></div>';
+})();
 
 /* map facade: Google Maps loads only when clicked */
 (function(){
@@ -692,7 +861,7 @@ addEventListener('keydown',function(e){if(e.key==='Escape')closeLb()});
     try{
       var res=await fetch(BOOKING_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
       if(!res.ok)throw new Error('bad');
-      note.style.color='#7fe0a6';note.textContent='تم إرسال طلب الحجز بنجاح ✅ هنتواصل معاك قريب.';form.reset();
+      note.style.color='#7fe0a6';note.textContent='تم إرسال طلب الحجز بنجاح ✅ سنتواصل معك قريباً.';form.reset();
     }catch(err){
       var msg='طلب حجز جديد:%0aالاسم: '+data.name+'%0aالهاتف: '+data.phone+'%0aالخدمة: '+(data.service||'-')+'%0aالموعد: '+(data.time||'-')+'%0aملاحظات: '+(data.message||'-');
       note.style.color='#ff9d8f';note.textContent='جارٍ تحويلك إلى واتساب لإتمام الحجز...';
