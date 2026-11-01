@@ -57,7 +57,7 @@
   "address":{"@type":"PostalAddress","streetAddress":"قطعة 9078، شارع 9 أعلى الشبراوي، المقطم","addressLocality":"المقطم","addressRegion":"القاهرة","addressCountry":"EG"},
   "geo":{"@type":"GeoCoordinates","latitude":30.0081513,"longitude":31.3103562},
   "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday"],"opens":"15:00","closes":"22:00"}],
-  "sameAs":["https://www.facebook.com/share/14hNKUwbDtG/?mibextid=wwXIfr","https://www.instagram.com/hyatt_elite"],
+  "sameAs":["https://www.facebook.com/share/14hNKUwbDtG/?mibextid=wwXIfr","https://www.instagram.com/hyatt_elite","https://www.youtube.com/@HyattElite"],
   "medicalSpecialty":"Dentistry",
   "areaServed":{"@type":"City","name":"القاهرة"},
   "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"17","bestRating":"5","worstRating":"4"},
@@ -195,6 +195,37 @@ section{padding:clamp(72px,10vw,128px) 0;position:relative;scroll-margin-top:70p
 .pano.split .order{opacity:1}
 .swipe{display:none;text-align:center;color:var(--muted);font-size:13px;margin-top:8px}
 @media (max-width:760px){.swipe{display:block}}
+
+/* youtube shorts */
+.yt-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.yt-nav{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .25s,color .25s}
+.yt-nav:hover{background:var(--gold);color:var(--navy)}
+.yt-nav svg{width:20px;height:20px}
+.btn-yt{background:#ff0033;color:#fff;box-shadow:0 10px 26px rgba(255,0,51,.28)}
+.btn-yt:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(255,0,51,.4)}
+.shorts{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(200px,24%,260px);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 18px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent}
+@media (max-width:560px){.shorts{grid-auto-columns:72%}.yt-nav{display:none}}
+.short{scroll-snap-align:start;display:flex;flex-direction:column;gap:10px;min-width:0}
+.short-play,.short iframe{all:unset;position:relative;display:block;width:100%;aspect-ratio:9/16;max-width:100%;border-radius:20px;overflow:hidden;cursor:pointer;background:var(--navy);border:1px solid var(--line);box-sizing:border-box}
+.short iframe{border:0;cursor:auto}
+.short-play:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
+.short-play img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.22,.9,.27,1.05)}
+.short-play:hover img{transform:scale(1.06)}
+.short-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,20,36,0) 55%,rgba(12,20,36,.85))}
+.short-btn{position:absolute;top:50%;left:50%;width:62px;height:62px;margin:-31px 0 0 -31px;border-radius:50%;background:rgba(201,162,74,.92);display:grid;place-items:center;box-shadow:0 0 0 0 rgba(201,162,74,.5);animation:ytPulse 2.4s ease-out infinite;transition:transform .3s}
+.short-play:hover .short-btn{transform:scale(1.1)}
+.short-btn svg{width:28px;height:28px;fill:var(--navy);margin-left:3px}
+@keyframes ytPulse{0%{box-shadow:0 0 0 0 rgba(201,162,74,.55)}70%,100%{box-shadow:0 0 0 18px rgba(201,162,74,0)}}
+.short-badge{position:absolute;top:12px;right:12px;font-family:var(--latin);font-size:11px;letter-spacing:.14em;background:#ff0033;color:#fff;padding:2px 10px;border-radius:20px}
+.short-t{font-weight:700;font-size:14.5px;line-height:1.6;color:#e7ebf2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.short-t:hover{color:var(--gold-hi)}
+.short.more a{aspect-ratio:9/16;border-radius:20px;border:1.5px dashed var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;color:var(--gold-hi);transition:background .3s}
+.short.more a:hover{background:rgba(201,162,74,.08)}
+.short.more svg{width:54px;height:54px;color:#ff0033}
+.short.more b{font-size:17px;color:#fff}
+.shorts-wire{display:block;width:100%;height:70px;margin-top:4px}
+.nav a.nav-yt{color:#fff;display:inline-flex;align-items:center;gap:6px}
+.nav a.nav-yt svg{width:18px;height:18px;fill:#ff0033}
 
 /* services (T1) */
 .svc{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:28px;overflow:hidden}
@@ -442,6 +473,7 @@ footer .copy{border-top:1px solid var(--line);padding-top:20px;text-align:center
     <a href="#home" aria-label="مركز حياة اليت لطب الأسنان"><img src="assets/logo_white.png" alt="شعار مركز حياة اليت"></a>
     <nav class="nav" aria-label="القائمة الرئيسية">
       <a href="#about">من نحن</a><a href="#services">خدماتنا</a><a href="#smile-design">كيف نصمّمها</a><a href="#gallery">المعرض</a><a href="#reviews">الآراء</a><a href="#faq">أسئلة شائعة</a><a href="#contact">تواصل</a>
+      <a class="nav-yt" href="https://www.youtube.com/@HyattElite" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.6.5-4.8.5-4.8s0-3.2-.5-4.8zM9.7 15.1V8.9L15.5 12z" fill="#ff0033"/><path d="M9.7 15.1V8.9L15.5 12z" fill="#fff"/></svg>يوتيوب</a>
     </nav>
     <a class="btn btn-gold" href="#contact">احجز موعدك</a>
     <button class="burger" id="burger" aria-label="فتح القائمة" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -451,7 +483,7 @@ footer .copy{border-top:1px solid var(--line);padding-top:20px;text-align:center
 <div class="drawer" id="drawer">
   <nav class="drawer-panel" aria-label="القائمة">
     <button class="dclose" id="drawerClose" aria-label="إغلاق">✕</button>
-    <a href="#home">الرئيسية</a><a href="#about">من نحن</a><a href="#services">خدماتنا</a><a href="#smile-design">كيف نصمّمها</a><a href="#gallery">المعرض</a><a href="#reviews">آراء العملاء</a><a href="#faq">أسئلة شائعة</a><a href="#contact">تواصل واحجز</a>
+    <a href="#home">الرئيسية</a><a href="#about">من نحن</a><a href="#services">خدماتنا</a><a href="#smile-design">كيف نصمّمها</a><a href="#gallery">المعرض</a><a href="#reviews">آراء العملاء</a><a href="#faq">أسئلة شائعة</a><a href="#contact">تواصل واحجز</a><a href="#videos">فيديوهاتنا</a><a href="https://www.youtube.com/@HyattElite" target="_blank" rel="noopener">قناة يوتيوب ↗</a>
     <a class="btn btn-gold" href="#contact" style="margin-top:14px;justify-content:center">احجز موعدك</a>
   </nav>
 </div>
@@ -483,15 +515,19 @@ footer .copy{border-top:1px solid var(--line);padding-top:20px;text-align:center
   </div>
 </section>
 
-<!-- ===== REELS ===== -->
-<section id="reels" style="padding-bottom:clamp(40px,6vw,70px)">
+<!-- ===== YOUTUBE SHORTS ===== -->
+<section id="videos" style="padding-bottom:clamp(40px,6vw,70px)">
   <div class="wrap">
     <div class="sh rv">
-      <div><div class="latin">Now on Instagram</div><h2>نصمّم ابتسامتك بعناية</h2></div>
-      <div class="seg" role="group" aria-label="طريقة العرض"><button aria-pressed="true" data-v="pano">بانوراما</button><button aria-pressed="false" data-v="split">٣ بوستات</button></div>
+      <div><div class="latin">On YouTube</div><h2>شاهد التحوّل في ٣٠ ثانية</h2></div>
+      <div class="yt-actions">
+        <button class="yt-nav" id="ytPrev" aria-label="الفيديو السابق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="yt-nav" id="ytNext" aria-label="الفيديو التالي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <a class="btn btn-yt" href="https://www.youtube.com/@HyattElite" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.6.5-4.8.5-4.8s0-3.2-.5-4.8zM9.7 15.1V8.9L15.5 12z"/></svg>زور القناة</a>
+      </div>
     </div>
-    <div class="scroller rv"><div class="pano" id="pano"></div></div>
-    <p class="swipe">اسحب يمين وشمال ↔</p>
+    <div class="shorts rv" id="shorts"></div>
+    <svg class="shorts-wire" id="shortsWire"></svg>
   </div>
 </section>
 
@@ -676,10 +712,11 @@ footer .copy{border-top:1px solid var(--line);padding-top:20px;text-align:center
         <div class="social" style="margin-top:14px">
           <a href="https://www.facebook.com/share/14hNKUwbDtG/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3c-2.8 0-4 1.7-4 4.3V10H7v4h3v8h4v-8h3l1-4h-4V8.5c0-.3.2-.5.5-.5z"/></svg></a>
           <a href="https://www.instagram.com/hyatt_elite" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 7.3A4.7 4.7 0 1 0 12 16.7 4.7 4.7 0 0 0 12 7.3zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM17 5.8a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM21.9 7.9c-.1-1.6-.4-3-1.6-4.2S17.7 2.2 16.1 2.1C14.4 2 9.6 2 7.9 2.1 6.3 2.2 4.9 2.5 3.7 3.7S2.2 6.3 2.1 7.9C2 9.6 2 14.4 2.1 16.1c.1 1.6.4 3 1.6 4.2s2.6 1.5 4.2 1.6c1.7.1 6.5.1 8.2 0 1.6-.1 3-.4 4.2-1.6s1.5-2.6 1.6-4.2c.1-1.7.1-6.5 0-8.2z"/></svg></a>
+          <a href="https://www.youtube.com/@HyattElite" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.6.5-4.8.5-4.8s0-3.2-.5-4.8zM9.7 15.1V8.9L15.5 12z"/></svg></a>
           <a href="https://wa.me/201003033566" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
         </div>
       </div>
-      <div class="fcol"><h4>روابط سريعة</h4><a href="#about">من نحن</a><a href="#services">خدماتنا</a><a href="#gallery">معرض الابتسامات</a><a href="#reviews">آراء العملاء</a><a href="#faq">أسئلة شائعة</a></div>
+      <div class="fcol"><h4>روابط سريعة</h4><a href="#about">من نحن</a><a href="#services">خدماتنا</a><a href="#gallery">معرض الابتسامات</a><a href="#reviews">آراء العملاء</a><a href="#faq">أسئلة شائعة</a><a href="#videos">فيديوهاتنا</a><a href="https://www.youtube.com/@HyattElite" target="_blank" rel="noopener">قناة يوتيوب ↗</a></div>
       <div class="fcol"><h4>خدماتنا</h4><a href="#services">زراعة الأسنان</a><a href="#services">هوليوود سمايل</a><a href="#services">التقويم</a><a href="#services">التركيبات والتيجان</a></div>
       <div class="fcol"><h4>تواصل معنا</h4><span dir="ltr" style="text-align:right">0228440012 / 0228440013</span><span>واتساب: <span dir="ltr">01003033566</span></span><span>المقطم، القاهرة</span></div>
     </div>
@@ -727,28 +764,41 @@ addEventListener('scroll',function(){top_.classList.toggle('solid',scrollY>40)},
 
 /* Case photos: `img` = one stacked before/after file (assets/caseN.jpg); `b`/`a` = separate before and after files. */
 var ORTHO={b:'ortho/egypt/assets/ortho-before.jpg',a:'ortho/egypt/assets/ortho-after.jpg'};
-var LOGO='assets/logo_white.png';
-var tiles=[{t:'زراعة الأسنان',img:'assets/case3.jpg',n:'١'},{t:'تقويم الأسنان',b:ORTHO.b,a:ORTHO.a,n:'٢'},{t:'هوليوود سمايل',img:'assets/case1.jpg',n:'٣'}];
-var arrowSvg='<svg viewBox="0 0 24 24" fill="none" stroke="#c9a24a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg>';
 function pic(p,side){return p.img?'<img src="'+p.img+'" alt="'+(side==='b'?'قبل':'بعد')+'" loading="lazy">':'<img class="full" src="'+p[side]+'" alt="'+(side==='b'?'قبل':'بعد')+'" loading="lazy">';}
 function frames(p){return '<div class="fr b"><div class="crop">'+pic(p,'b')+'</div><span class="pill"><b>قبل</b><small>BEFORE</small></span></div><div class="fr a"><div class="crop">'+pic(p,'a')+'</div><span class="pill"><b>بعد</b><small>AFTER</small></span></div>';}
-var pano=document.getElementById('pano'),paneWires=[];
-tiles.forEach(function(t,i){
-  var d=document.createElement('div');d.className='tile';
-  d.innerHTML='<div class="bg"></div><svg class="pw"></svg><img class="logo" src="'+LOGO+'" alt=""><h3>'+t.t+'</h3><div class="frames">'+frames(t)+'</div><div class="arrow">'+arrowSvg+'</div><div class="cta"><svg viewBox="0 0 24 24" fill="#c9a24a"><path d="M8 5v14l11-7z"/></svg><span>شاهد التحوّل كامل</span></div><span class="guide"></span><span class="order">ينزل '+t.n+'</span>';
-  pano.appendChild(d);
-  var s=d.querySelector('svg.pw');
-  HyattWire(s,{w:3240,h:1920,y0:1350,ymid:1470,count:18,par:'none',spark:i===1,anim:false});
-  paneWires.push(s);
-});
-if('IntersectionObserver' in window){
-  var pio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){paneWires.forEach(function(s){s.classList.add('hw-anim')});pio.disconnect()}})},{threshold:.35});
-  pio.observe(pano);
-}
-document.querySelectorAll('.seg button').forEach(function(b){b.addEventListener('click',function(){
-  document.querySelectorAll('.seg button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
-  pano.classList.toggle('split',b.dataset.v==='split');
-});});
+/* YouTube Shorts from the Hyatt Elite channel (@HyattElite). Add new ones at the top of this list. */
+var SHORTS=[
+  {id:'7htGV-n2UhY',t:'ابتسامة هوليوود في ٣٠ ثانية / شاهد التحول الكامل'},
+  {id:'S4izRJy5P1U',t:'أسنانك العلوية بتسبب أزمة في شكل الضحكة؟ شوف التحول الكامل في حياة إليت'},
+  {id:'EY582efSGjc',t:'تعويض ضرس مفقود بالزراعة بدون ألم؟ اعرف عن الزراعة في ٣٠ ثانية'},
+  {id:'r4mlIjjPgrc',t:'تقويم الأسنان / كل اللي محتاج تعرفه في دقيقة'},
+  {id:'pvA2mNS9aAQ',t:'اللثة باينة في ضحكتك؟! علاج الابتسامة اللثوية في ٥٠ ثانية'},
+  {id:'NkeOs_kXJGE',t:'جراحة ضروس مدفونة بدون ألم! كل اللي محتاج تعرفه في ٣٠ ثانية'},
+  {id:'rdI0TrUS1Xc',t:'تسوس الأسنان / من علاج التسوس للحشو التجميلي في ٣٠ ثانية'},
+  {id:'Wg5W3SHZ6dA',t:'جير الأسنان / مش بس شكل وحش ده أخطر من كده بكتير!'},
+  {id:'CeCUyuJxhPs',t:'حياة إليت للأسنان / نصمم لك ابتسامتك'}
+];
+(function(){
+  var box=document.getElementById('shorts');if(!box)return;
+  box.innerHTML=SHORTS.map(function(s){
+    return '<article class="short"><button class="short-play" data-id="'+s.id+'" aria-label="شغّل: '+s.t.replace(/"/g,'')+'">'+
+      '<img src="https://i.ytimg.com/vi/'+s.id+'/oar2.jpg" alt="" loading="lazy" onerror="this.src=\'https://i.ytimg.com/vi/'+s.id+'/hqdefault.jpg\'">'+
+      '<span class="short-shade"></span><span class="short-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>'+
+      '<span class="short-badge">Shorts</span></button>'+
+      '<a class="short-t" href="https://www.youtube.com/shorts/'+s.id+'" target="_blank" rel="noopener">'+s.t+'</a></article>';
+  }).join('')+'<article class="short more"><a href="https://www.youtube.com/@HyattElite" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.6.5-4.8.5-4.8s0-3.2-.5-4.8zM9.7 15.1V8.9L15.5 12z"/></svg><b>شوف كل الفيديوهات</b><span dir="ltr">@HyattElite</span></a></article>';
+  /* click-to-play: the YouTube player loads only when a video is tapped */
+  box.addEventListener('click',function(e){
+    var b=e.target.closest('.short-play');if(!b)return;
+    box.querySelectorAll('.short iframe').forEach(function(f){var a=f.parentNode;a.classList.remove('playing');a.innerHTML=a.dataset.html;});
+    var wrap=b.parentNode;wrap.dataset.html=wrap.innerHTML;wrap.classList.add('playing');
+    wrap.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+b.dataset.id+'?autoplay=1&playsinline=1&rel=0&modestbranding=1" title="فيديو من قناة حياة اليت" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+  });
+  function step(dir){var c=box.querySelector('.short');var w=c?c.getBoundingClientRect().width+16:300;box.scrollBy({left:dir*w*-1,behavior:'smooth'})}
+  document.getElementById('ytNext').addEventListener('click',function(){step(1)});
+  document.getElementById('ytPrev').addEventListener('click',function(){step(-1)});
+  HyattWire(document.getElementById('shortsWire'),{w:1600,h:120,y0:30,ymid:70,count:16,par:'xMidYMid slice',teeth:false,stroke:5});
+})();
 
 /* smile-design video: loads only near the viewport */
 (function(){
