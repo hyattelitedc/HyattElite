@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>مغامرة د. حمص | حياة إيليت</title>
+<title>مغامرات دكتور حمص في العيادة | حياة إيليت</title>
 <meta name="description" content="لعبة تعليمية للأطفال مع د. حمص طبيب الأسنان في عيادة حياة إيليت — تعلّم تحافظ على أسنانك وتحب زيارة طبيب الأسنان." />
 <meta property="og:image" content="homos.jpg" />
 <meta name="theme-color" content="#0c1424" />
@@ -65,7 +65,7 @@ html[dir="rtl"] .progress{flex-direction:row-reverse}
 .screen.on{display:flex}
 @keyframes enter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 h1,h2{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
-h1{font-size:clamp(34px,9vw,48px);color:var(--gold-hi);text-shadow:0 3px 0 rgba(0,0,0,.35)}
+h1{font-size:clamp(30px,8vw,44px);color:var(--gold-hi);text-shadow:0 3px 0 rgba(0,0,0,.35)}
 h2{font-size:clamp(21px,5.6vw,26px);color:#fff}
 .sub{font-size:18px;color:var(--muted);font-weight:700;margin:0}
 .tag{display:inline-flex;align-items:center;gap:6px;background:rgba(201,162,74,.14);color:var(--gold-hi);border:1.5px solid rgba(201,162,74,.55);border-radius:999px;padding:3px 14px;font-weight:800;font-size:14px;letter-spacing:.02em}
@@ -79,7 +79,7 @@ h2{font-size:clamp(21px,5.6vw,26px);color:#fff}
 .link{color:var(--gold-hi);font-weight:700;font-size:15px}
 
 /* ---------- start ---------- */
-.hero{position:relative;width:min(300px,74vw);aspect-ratio:1/1.12;display:flex;align-items:flex-end;justify-content:center;margin-top:4px}
+.hero{position:relative;width:min(270px,64vw);aspect-ratio:1/1.12;display:flex;align-items:flex-end;justify-content:center;margin-top:4px}
 .hero:before{content:"";position:absolute;inset:8% 4% 0;border-radius:50%;background:radial-gradient(circle,rgba(241,213,144,.55),rgba(201,162,74,.15) 55%,transparent 70%)}
 .hero .ring{position:absolute;inset:14% 10% 4%;border-radius:50%;border:3px dashed rgba(241,213,144,.35);animation:spin 30s linear infinite}
 .hero .homos{position:relative;height:100%;filter:drop-shadow(0 14px 18px rgba(0,0,0,.45));animation:float 3.2s ease-in-out infinite}
@@ -308,7 +308,8 @@ html[dir="rtl"] .ouch{direction:rtl}
     <a class="link" href="../" data-t="backSite"></a>
   </section>
 
-  <div class="foot"><span data-t="foot"></span><br />Emoji art: <a href="https://github.com/jdecked/twemoji" target="_blank" rel="noopener">Twemoji</a> (CC-BY 4.0)</div>
+  <!-- Emoji graphics in tw/ are Twemoji by Twitter, Inc. and other contributors, licensed CC-BY 4.0: https://github.com/jdecked/twemoji -->
+  <div class="foot"><span data-t="foot"></span></div>
 </div>
 
 <div class="fb" id="fb" role="dialog" aria-modal="true">
@@ -331,7 +332,7 @@ html[dir="rtl"] .ouch{direction:rtl}
    ========================================================= */
 var T = {
   ar:{
-    title:"مغامرة د. حمص", subtitle:"ساعد د. حمص واحمِ ابتسامتك!",
+    title:"مغامرات دكتور حمص في العيادة", subtitle:"ساعد د. حمص واحمِ ابتسامتك!",
     namePh:"اكتب اسمك هنا ✏️", play:"يلّا نلعب!", levels:"مرحلة", ageTag:"للأطفال من ٤ سنين",
     docName:"د. حمص", hero:"يا بطل",
     lvl1tag:"المرحلة ١ · في الشارع",
@@ -357,7 +358,7 @@ var T = {
     foot:"لعبة تعليمية من عيادة حياة إيليت لطب الأسنان"
   },
   en:{
-    title:"Dr. Homos Adventure", subtitle:"Help Dr. Homos and protect your smile!",
+    title:"Dr. Homos's Clinic Adventures", subtitle:"Help Dr. Homos and protect your smile!",
     namePh:"Type your name ✏️", play:"Let's play!", levels:"levels", ageTag:"For kids 4+",
     docName:"Dr. Homos", hero:"hero",
     lvl1tag:"Level 1 · On the street",
@@ -478,7 +479,7 @@ function nm(s){ return s.replace("{n}", kid ? (lang === "ar" ? "يا " + kid : k
 function applyLang(){
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-  document.title = lang === "ar" ? "مغامرة د. حمص | حياة إيليت" : "Dr. Homos Adventure | Hyatt Elite";
+  document.title = lang === "ar" ? "مغامرات دكتور حمص في العيادة | حياة إيليت" : "Dr. Homos's Clinic Adventures | Hyatt Elite";
   document.querySelectorAll("[data-t]").forEach(function(el){ el.textContent = t(el.getAttribute("data-t")); });
   $("kidName").placeholder = t("namePh");
   $("langBtn").textContent = lang === "ar" ? "EN" : "ع";
