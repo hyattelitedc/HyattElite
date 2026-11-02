@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>مغامرة د. هوموس | حياة إيليت</title>
+<meta name="description" content="لعبة تعليمية للأطفال مع د. هوموس طبيب الأسنان في عيادة حياة إيليت — تعلّم كيف تحافظ على أسنانك وتحب زيارة طبيب الأسنان." />
+<meta property="og:image" content="homos.jpg" />
+<link rel="icon" href="../icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --navy:#1d2f6f; --navy2:#2b4199; --gold:#c9a24a; --gold2:#f3d27a;
+  --mint:#3ccf91; --red:#ff5a5f; --sky1:#8fd3ff; --sky2:#d9f1ff;
+  --cream:#fffaf0; --ink:#1b2340; --card:#ffffff;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{
+  font-family:"Baloo Bhaijaan 2","Fredoka",system-ui,sans-serif;
+  background:linear-gradient(180deg,var(--sky1),var(--sky2));
+  color:var(--ink); overflow-x:hidden; min-height:100dvh;
+}
+html[lang="en"] body{font-family:"Fredoka","Baloo Bhaijaan 2",system-ui,sans-serif}
+button{font-family:inherit;cursor:pointer;border:0}
+.app{max-width:560px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;position:relative;padding:12px 16px 20px}
+
+/* ---------- top bar ---------- */
+.top{display:flex;align-items:center;gap:10px;z-index:5}
+.top img.logo{height:34px}
+.top .sp{flex:1}
+.pill{background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;color:var(--navy);box-shadow:0 3px 0 rgba(0,0,0,.12);font-size:15px;display:flex;align-items:center;gap:6px}
+.icon-btn{width:40px;height:40px;border-radius:50%;background:#fff;box-shadow:0 3px 0 rgba(0,0,0,.12);font-size:19px;display:grid;place-items:center}
+.progress{display:flex;gap:4px;justify-content:center;margin:10px 0 4px;flex-wrap:wrap}
+.progress span{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.6);display:grid;place-items:center;font-size:14px;transition:.3s}
+.progress span.done{background:var(--gold2)}
+.progress span.now{background:#fff;transform:scale(1.2);box-shadow:0 0 0 3px var(--navy2)}
+
+/* ---------- screens ---------- */
+.screen{display:none;flex:1;flex-direction:column;align-items:center;text-align:center;animation:pop .45s ease}
+.screen.on{display:flex}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+
+h1{font-size:clamp(30px,8vw,44px);margin:6px 0 0;color:var(--navy);line-height:1.1;text-shadow:0 3px 0 #fff}
+h2{font-size:clamp(22px,6vw,30px);margin:6px 0;color:var(--navy);line-height:1.2}
+.sub{font-size:18px;margin:6px 0 14px;color:#33416e;font-weight:600}
+
+.big-btn{
+  background:linear-gradient(180deg,#ffcc4d,#f5a623);color:#5a3500;font-size:24px;font-weight:800;
+  padding:14px 38px;border-radius:999px;box-shadow:0 6px 0 #c47c00,0 10px 20px rgba(0,0,0,.15);
+  transition:transform .1s; margin-top:10px
+}
+.big-btn:active{transform:translateY(4px);box-shadow:0 2px 0 #c47c00}
+.big-btn.blue{background:linear-gradient(180deg,#4f7cff,var(--navy2));color:#fff;box-shadow:0 6px 0 #142463,0 10px 20px rgba(0,0,0,.15)}
+.ghost{background:transparent;color:var(--navy);font-weight:700;font-size:16px;text-decoration:underline;margin-top:10px}
+
+/* ---------- start screen ---------- */
+.hero-card{position:relative;width:min(300px,72vw);aspect-ratio:660/1166;border-radius:28px;overflow:hidden;box-shadow:0 14px 30px rgba(29,47,111,.3);border:6px solid #fff;margin-top:8px;animation:float 3s ease-in-out infinite}
+.hero-card img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes float{50%{transform:translateY(-8px)}}
+.name-in{margin-top:12px;font-family:inherit;font-size:20px;padding:10px 16px;border-radius:16px;border:3px solid #fff;width:min(300px,80vw);text-align:center;background:rgba(255,255,255,.85);outline:none}
+.name-in:focus{border-color:var(--gold)}
+
+/* ---------- avatar with bubble ---------- */
+.stage{position:relative;width:100%;border-radius:26px;overflow:hidden;margin-top:6px;box-shadow:0 10px 24px rgba(29,47,111,.22)}
+.face{width:150px;height:150px;border-radius:50%;overflow:hidden;border:6px solid #fff;box-shadow:0 8px 18px rgba(0,0,0,.2);background:#eee;position:relative}
+.face img{width:100%;height:100%;object-fit:cover;display:block;transition:filter .3s}
+.bubble{position:relative;background:#fff;border-radius:22px;padding:12px 16px;font-size:19px;font-weight:700;color:var(--navy);box-shadow:0 5px 0 rgba(0,0,0,.08);max-width:92%;line-height:1.35}
+.bubble:after{content:"";position:absolute;bottom:-14px;inset-inline-start:40px;border:10px solid transparent;border-top:14px solid #fff;border-bottom:0}
+
+/* ---------- street scene ---------- */
+.street{height:300px;background:linear-gradient(180deg,#7ccfff 0%,#bfe9ff 58%,#9be27a 58%,#7cc95d 66%,#6b6f7d 66%,#5b5f6c 100%)}
+.street .sun{position:absolute;top:18px;inset-inline-end:22px;width:54px;height:54px;border-radius:50%;background:#ffd84d;box-shadow:0 0 0 10px rgba(255,216,77,.3);animation:spin 12s linear infinite}
+.street .cloud{position:absolute;font-size:46px;animation:drift 18s linear infinite;opacity:.95}
+@keyframes drift{from{transform:translateX(-60px)}to{transform:translateX(620px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.street .bld{position:absolute;bottom:34%;font-size:58px;line-height:1}
+.street .road-line{position:absolute;bottom:15%;left:0;right:0;height:5px;background:repeating-linear-gradient(90deg,#fff 0 26px,transparent 26px 50px)}
+.street .walker{position:absolute;left:50%;bottom:10%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center}
+.street .walker .face{width:132px;height:132px}
+.ouch{position:absolute;top:10px;inset-inline-start:10px;background:#fff;color:var(--red);font-weight:800;padding:6px 12px;border-radius:16px;font-size:18px;animation:wob .6s ease-in-out infinite alternate;box-shadow:0 3px 0 rgba(0,0,0,.1)}
+@keyframes wob{to{transform:rotate(-6deg) scale(1.06)}}
+.pain-marks{position:absolute;inset:0;pointer-events:none}
+.pain-marks i{position:absolute;font-style:normal;font-size:26px;animation:zap .8s ease-in-out infinite}
+@keyframes zap{50%{transform:scale(1.35) rotate(15deg);opacity:.6}}
+.cheek{position:absolute;bottom:22%;right:6%;width:42%;height:34%;border-radius:50%;background:radial-gradient(circle,rgba(255,90,95,.55),rgba(255,90,95,0) 70%);animation:throb 1s ease-in-out infinite}
+@keyframes throb{50%{transform:scale(1.15);opacity:.7}}
+.face.pain img{filter:saturate(.8) hue-rotate(-8deg)}
+.face.scream{animation:shake .12s linear infinite}
+.face.scream img{filter:sepia(.4) saturate(2.5) hue-rotate(-30deg)}
+@keyframes shake{0%{transform:translate(0,0) rotate(0)}25%{transform:translate(-5px,2px) rotate(-3deg)}50%{transform:translate(4px,-2px) rotate(3deg)}75%{transform:translate(-3px,-1px) rotate(-2deg)}}
+.happy-face img{filter:saturate(1.15) brightness(1.05)}
+
+.choices{display:grid;gap:12px;width:100%;margin-top:16px}
+.choices.two{grid-template-columns:1fr 1fr}
+.choice{
+  background:var(--card);border-radius:22px;padding:14px 12px;font-size:19px;font-weight:700;color:var(--ink);
+  box-shadow:0 6px 0 #c9d6f0;display:flex;align-items:center;gap:12px;text-align:start;transition:transform .1s,background .2s;
+  border:3px solid transparent; min-height:64px
+}
+.choices.two .choice{flex-direction:column;text-align:center;padding:18px 10px;gap:6px}
+.choice .em{font-size:38px;line-height:1;flex-shrink:0}
+.choices.two .choice .em{font-size:60px}
+.choice:active{transform:translateY(4px);box-shadow:0 2px 0 #c9d6f0}
+.choice.right{background:#dcffe9;border-color:var(--mint);box-shadow:0 6px 0 #29a46f}
+.choice.wrong{background:#ffe1e1;border-color:var(--red);box-shadow:0 6px 0 #d4383d;animation:no .4s}
+.choice:disabled{cursor:default}
+@keyframes no{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+
+/* ---------- clinic scene ---------- */
+.clinic{display:flex;gap:12px;align-items:flex-end;padding:14px;background:linear-gradient(180deg,#fdf8ee,#efe4cf);min-height:220px}
+.clinic .doc{width:120px;flex-shrink:0;border-radius:18px;overflow:hidden;border:4px solid #fff;box-shadow:0 6px 14px rgba(0,0,0,.18);aspect-ratio:660/1166;animation:float 3s ease-in-out infinite}
+.clinic .doc img{width:100%;height:100%;object-fit:cover;display:block}
+.clinic .right-col{flex:1;display:flex;flex-direction:column;align-items:flex-start;gap:12px;min-width:0}
+.clinic .bubble{max-width:100%;font-size:18px;text-align:start}
+.clinic .bubble:after{inset-inline-start:auto;inset-inline-end:auto;left:auto;right:auto;bottom:18px;inset-inline-start:-14px;border:10px solid transparent;border-inline-end:14px solid #fff;border-inline-start:0}
+.patient{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.75);border-radius:16px;padding:6px 10px;font-weight:700;color:#5b4a2a;font-size:15px}
+.patient .pe{font-size:34px;animation:bob 1.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-4px) rotate(-5deg)}}
+.lvl-tag{display:inline-block;background:var(--navy);color:#fff;border-radius:999px;padding:4px 14px;font-size:15px;font-weight:700;margin-top:6px}
+.speak{margin-inline-start:6px;vertical-align:middle;background:var(--sky2);border-radius:50%;width:32px;height:32px;font-size:16px}
+
+/* ---------- feedback overlay ---------- */
+.fb{position:fixed;inset:0;background:rgba(18,28,70,.55);display:none;align-items:center;justify-content:center;z-index:30;padding:16px}
+.fb.on{display:flex;animation:pop .35s ease}
+.fb-card{background:#fff;border-radius:28px;padding:22px 20px 20px;max-width:440px;width:100%;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,.3);position:relative}
+.fb-card .fb-em{font-size:70px;line-height:1;margin-top:-62px}
+.fb-card h3{font-size:28px;margin:6px 0;color:var(--navy)}
+.fb-card p{font-size:18px;margin:6px 0 12px;font-weight:600;color:#33416e;line-height:1.45}
+.fb-card .face{width:110px;height:110px;margin:0 auto}
+.stars-earned{font-size:34px;letter-spacing:4px;min-height:40px}
+.stars-earned span{display:inline-block;animation:starIn .6s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes starIn{from{transform:scale(0) rotate(-180deg)}to{transform:none}}
+
+/* ---------- certificate ---------- */
+.cert{background:#fff;border-radius:26px;padding:20px 18px;border:8px double var(--gold);box-shadow:0 14px 30px rgba(0,0,0,.18);width:100%;margin-top:10px;position:relative}
+.cert .face{width:120px;height:120px;margin:-70px auto 6px}
+.cert .medal{font-size:56px;line-height:1}
+.cert .kid{font-size:30px;color:var(--gold);font-weight:800;margin:4px 0}
+.cert .stars-big{font-size:30px;letter-spacing:3px}
+.cert small{display:block;color:#6b7395;margin-top:8px;font-size:14px}
+.cert img.clogo{height:36px;margin-top:10px}
+.cta{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+.cta a{text-decoration:none}
+
+/* ---------- walk transition ---------- */
+.walk{height:260px;background:linear-gradient(180deg,#7ccfff 0%,#bfe9ff 62%,#6b6f7d 62%)}
+.walk .clinic-bld{position:absolute;bottom:38%;inset-inline-end:14px;background:#fff;border-radius:14px 14px 0 0;width:130px;height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 0 rgba(0,0,0,.1);border-top:12px solid var(--navy)}
+.walk .clinic-bld img{width:96px}
+.walk .clinic-bld .door{width:34px;height:44px;background:var(--navy);border-radius:8px 8px 0 0;margin-top:8px}
+.walk .mover{position:absolute;bottom:24%;inset-inline-start:0;width:96px;height:96px;animation:walkTo 2.6s ease-in-out forwards}
+html[dir="rtl"] .walk .mover{animation-name:walkToR}
+.walk .mover .face{width:96px;height:96px;border-width:4px;animation:step .35s ease-in-out infinite alternate}
+@keyframes walkTo{to{transform:translateX(calc(min(560px,100vw) - 290px))}}
+@keyframes walkToR{to{transform:translateX(calc(-1 * (min(560px,100vw) - 290px)))}}
+@keyframes step{to{transform:translateY(-8px) rotate(4deg)}}
+
+/* ---------- confetti ---------- */
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:40}
+.foot{font-size:13px;color:#4b5a8a;margin-top:auto;padding-top:14px;text-align:center}
+
+@media (max-width:380px){
+  .choice{font-size:17px}
+  .clinic .doc{width:96px}
+  .clinic .bubble{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important}
+}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div class="app">
+  <div class="top">
+    <img class="logo" src="../logo.png" alt="Hyatt Elite" />
+    <div class="sp"></div>
+    <div class="pill" id="starPill">⭐ <b id="starCount">0</b></div>
+    <button class="icon-btn" id="soundBtn" aria-label="sound">🔊</button>
+    <button class="icon-btn" id="langBtn" aria-label="language" style="font-size:15px;font-weight:800;color:var(--navy)">EN</button>
+  </div>
+  <div class="progress" id="progress"></div>
+
+  <!-- START -->
+  <section class="screen on" id="s-start">
+    <h1 data-t="title"></h1>
+    <div class="sub" data-t="subtitle"></div>
+    <div class="hero-card"><img src="homos.jpg" alt="Dr. Homos" /></div>
+    <input class="name-in" id="kidName" maxlength="20" autocomplete="off" />
+    <button class="big-btn" id="playBtn" data-t="play"></button>
+  </section>
+
+  <!-- LEVEL 1: STREET -->
+  <section class="screen" id="s-street">
+    <span class="lvl-tag" data-t="lvl1tag"></span>
+    <div class="stage street" id="streetStage">
+      <div class="sun"></div>
+      <div class="cloud" style="top:20px;animation-delay:-4s">☁️</div>
+      <div class="cloud" style="top:60px;animation-delay:-12s;font-size:34px">☁️</div>
+      <div class="bld" style="inset-inline-start:4%">🏢</div>
+      <div class="bld" style="inset-inline-start:26%;font-size:44px">🌳</div>
+      <div class="bld" style="inset-inline-end:26%;font-size:44px">🌳</div>
+      <div class="bld" style="inset-inline-end:4%">🏬</div>
+      <div class="road-line"></div>
+      <div class="ouch" id="ouch" data-t="ouch"></div>
+      <div class="walker">
+        <div class="face pain" id="streetFace">
+          <img src="homos-face.jpg" alt="" />
+          <div class="cheek"></div>
+          <div class="pain-marks"><i style="top:6%;left:4%">💢</i><i style="top:30%;right:-2%;animation-delay:.3s">⚡</i></div>
+        </div>
+      </div>
+    </div>
+    <h2 style="margin-top:14px"><span data-t="q1"></span><button class="speak" data-speak="q1">🔈</button></h2>
+    <div class="choices two">
+      <button class="choice" id="goHome"><span class="em">🏠</span><span data-t="home"></span></button>
+      <button class="choice" id="goDentist"><span class="em">🦷</span><span data-t="dentist"></span></button>
+    </div>
+  </section>
+
+  <!-- WALK TO CLINIC -->
+  <section class="screen" id="s-walk">
+    <h2 data-t="walking"></h2>
+    <div class="stage walk">
+      <div class="sun" style="position:absolute;top:16px;inset-inline-start:20px;width:44px;height:44px;border-radius:50%;background:#ffd84d"></div>
+      <div class="clinic-bld"><img src="../logo.png" alt="" /><div class="door"></div></div>
+      <div class="mover"><div class="face happy-face"><img src="homos-face.jpg" alt="" /></div></div>
+    </div>
+    <div class="bubble" style="margin-top:22px" data-t="walkBubble"></div>
+  </section>
+
+  <!-- CLINIC QUIZ LEVELS -->
+  <section class="screen" id="s-quiz">
+    <span class="lvl-tag" id="qTag"></span>
+    <div class="stage clinic">
+      <div class="doc"><img src="homos.jpg" alt="Dr. Homos" /></div>
+      <div class="right-col">
+        <div class="patient"><span class="pe" id="qPatientEm">🐰</span><span id="qPatient"></span></div>
+        <div class="bubble" id="qText"></div>
+      </div>
+    </div>
+    <h2 style="margin-top:12px;font-size:22px"><span id="qAsk"></span><button class="speak" id="qSpeak">🔈</button></h2>
+    <div class="choices" id="qChoices"></div>
+  </section>
+
+  <!-- END -->
+  <section class="screen" id="s-end">
+    <h1 data-t="endTitle" style="margin-bottom:60px"></h1>
+    <div class="cert">
+      <div class="face happy-face"><img src="homos-face.jpg" alt="" /></div>
+      <div class="medal">🏅</div>
+      <div data-t="certTop" style="font-size:18px;font-weight:700;color:var(--navy)"></div>
+      <div class="kid" id="certName"></div>
+      <div data-t="certBody" style="font-size:18px;font-weight:600"></div>
+      <div class="stars-big" id="certStars"></div>
+      <small data-t="certSign"></small>
+      <img class="clogo" src="../logo.png" alt="Hyatt Elite" />
+    </div>
+    <div class="cta">
+      <button class="big-btn" id="againBtn" data-t="again"></button>
+      <a class="big-btn blue" href="https://wa.me/201003033566" target="_blank" rel="noopener" data-t="book"></a>
+    </div>
+    <a class="ghost" href="../" data-t="backSite"></a>
+  </section>
+
+  <div class="foot" data-t="foot"></div>
+</div>
+
+<!-- feedback popup -->
+<div class="fb" id="fb">
+  <div class="fb-card">
+    <div class="fb-em" id="fbEm">🎉</div>
+    <div class="face" id="fbFace"><img src="homos-face.jpg" alt="" /></div>
+    <h3 id="fbTitle"></h3>
+    <div class="stars-earned" id="fbStars"></div>
+    <p id="fbText"></p>
+    <button class="big-btn" id="fbBtn"></button>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* =========================================================
+   TEXT (Arabic / English)
+   ========================================================= */
+var T = {
+  ar:{
+    title:"مغامرة د. هوموس 🦷", subtitle:"ساعد د. هوموس واحمِ ابتسامتك!",
+    namePh:"اكتب اسمك هنا ✏️", play:"يلّا نلعب! ▶",
+    lvl1tag:"المرحلة ١ — في الشارع",
+    ouch:"آه! سِنّي بيوجعني! 😣",
+    q1:"هوموس عنده ألم في سنّه! يعمل إيه؟",
+    home:"يروح البيت", dentist:"يروح لطبيب الأسنان",
+    screamT:"آآآآآه! 😱", screamP:"الوجع زاد! السن مش هيخف لوحده في البيت. جرّب تاني وساعد هوموس!",
+    tryAgain:"جرّب تاني 🔁",
+    rightT:"برافو عليك! 🎉", rightP:"اختيار صح! طبيب الأسنان هو اللي هيعالج سن هوموس ويخلّي الوجع يروح. إنت أنقذت هوموس!",
+    next:"المرحلة الجاية ▶",
+    walking:"هوموس رايح لعيادة حياة إيليت…",
+    walkBubble:"شكرًا إنك ساعدتني! دلوقتي أنا د. هوموس، تعالى نساعد المرضى في العيادة 🩺",
+    lvl:"المرحلة", of:"من",
+    okT:["صح! 🌟","ممتاز! 🎉","عبقري! 🧠","رائع! 🦷","يا بطل! 💪"],
+    oopsT:"أوبس! 🙈", oopsP:"مش دي… فكّر كمان مرة!",
+    finish:"شوف شهادتك 🏅",
+    endTitle:"إنت بطل الابتسامة! 🏆",
+    certTop:"شهادة بطل الأسنان تُمنح إلى", certBody:"لأنه تعلّم يحافظ على أسنانه ويحب عيادة الأسنان!",
+    certSign:"د. هوموس — عيادة حياة إيليت لطب الأسنان",
+    again:"العب تاني 🔁", book:"احجز زيارة لعيادتنا 📅", backSite:"الرجوع لموقع حياة إيليت",
+    friend:"صديقي البطل",
+    foot:"لعبة تعليمية من عيادة حياة إيليت لطب الأسنان 💙"
+  },
+  en:{
+    title:"Dr. Homos Adventure 🦷", subtitle:"Help Dr. Homos and protect your smile!",
+    namePh:"Type your name ✏️", play:"Let's play! ▶",
+    lvl1tag:"Level 1 — On the street",
+    ouch:"Ouch! My tooth hurts! 😣",
+    q1:"Homos has a toothache! What should he do?",
+    home:"Go home", dentist:"Go to the dentist",
+    screamT:"AAAAAH! 😱", screamP:"The pain got worse! A sick tooth won't get better at home by itself. Try again and save Homos!",
+    tryAgain:"Try again 🔁",
+    rightT:"Well done! 🎉", rightP:"Right choice! The dentist will fix Homos's tooth and make the pain go away. You saved Homos!",
+    next:"Next level ▶",
+    walking:"Homos is going to Hyatt Elite Clinic…",
+    walkBubble:"Thank you for helping me! Now I'm Dr. Homos — let's help the patients in the clinic 🩺",
+    lvl:"Level", of:"of",
+    okT:["Correct! 🌟","Excellent! 🎉","Genius! 🧠","Awesome! 🦷","Super hero! 💪"],
+    oopsT:"Oops! 🙈", oopsP:"Not that one… think again!",
+    finish:"See your certificate 🏅",
+    endTitle:"You are a Smile Hero! 🏆",
+    certTop:"Tooth Hero Certificate awarded to", certBody:"for learning how to protect their teeth and love the dental clinic!",
+    certSign:"Dr. Homos — Hyatt Elite Dental Clinic",
+    again:"Play again 🔁", book:"Book a visit 📅", backSite:"Back to Hyatt Elite website",
+    friend:"My hero friend",
+    foot:"An educational game by Hyatt Elite Dental Clinic 💙"
+  }
+};
+
+/* Clinic levels: each one is a small problem in the clinic that the child solves. */
+var LEVELS = [
+  { pe:"🐰",
+    ar:{p:"الأرنب بوبو", s:"بوبو أسنانه صفرا لأنه بيغسلها مرة واحدة بس في الأسبوع!", q:"كام مرة لازم نغسل أسناننا في اليوم؟",
+        c:[["🌙☀️","مرتين: الصبح وقبل النوم"],["📅","مرة في الأسبوع"],["🙅","مش لازم خالص"]],
+        f:"نغسل أسناننا مرتين كل يوم: بعد الفطار وقبل النوم، عشان الجراثيم ما تعملش تسوّس."},
+    en:{p:"Bobo the Bunny", s:"Bobo's teeth are yellow because he brushes only once a week!", q:"How many times a day should we brush our teeth?",
+        c:[["🌙☀️","Twice: morning and before bed"],["📅","Once a week"],["🙅","Never"]],
+        f:"We brush twice every day — after breakfast and before bed — so germs can't make cavities."}, a:0 },
+  { pe:"🐻",
+    ar:{p:"الدبدوب دودو", s:"دودو بيغسل أسنانه في ٣ ثواني ويجري يلعب!", q:"نغسل أسناننا قد إيه؟",
+        c:[["⚡","٣ ثواني بس"],["⏱️","دقيقتين كاملين"],["🕐","ساعة كاملة"]],
+        f:"دقيقتين كاملين! ممكن تغنّي أغنيتك المفضلة وإنت بتغسل كل الأسنان: قدّام وورا وفوق."},
+    en:{p:"Dodo the Bear", s:"Dodo brushes for 3 seconds and runs off to play!", q:"How long should we brush our teeth?",
+        c:[["⚡","Just 3 seconds"],["⏱️","Two whole minutes"],["🕐","One whole hour"]],
+        f:"Two whole minutes! Sing your favorite song while you brush the front, back and top of every tooth."}, a:1 },
+  { pe:"🐱",
+    ar:{p:"القطة ميمي", s:"ميمي عايزة سناك وهي في الاستراحة. ساعدها تختار!", q:"أنهي سناك أحسن لأسنانك؟",
+        c:[["🍭","مصاصة وحلويات لزقة"],["🍎","تفاحة وقطعة جبنة"],["🥤","شيبسي وعصير مسكّر"]],
+        f:"التفاح والجبنة والجزر بيقوّوا الأسنان وبينضّفوها. الحلويات اللزقة بتحب الجراثيم!"},
+    en:{p:"Mimi the Cat", s:"Mimi wants a snack at break time. Help her choose!", q:"Which snack is best for your teeth?",
+        c:[["🍭","Lollipops and sticky candy"],["🍎","An apple and some cheese"],["🥤","Chips and a sugary drink"]],
+        f:"Apples, cheese and carrots make teeth strong and help clean them. Sticky candy feeds the germs!"}, a:1 },
+  { pe:"🦁",
+    ar:{p:"الأسد ليو", s:"ليو عطشان جدًا بعد الماتش!", q:"إيه أحسن مشروب لأسنانك؟",
+        c:[["🥤","مياه غازية"],["🧃","عصير فيه سكر كتير"],["💧","مياه"]],
+        f:"المياه هي صاحبة أسنانك! بتغسل بقايا الأكل ومفيهاش سكر خالص."},
+    en:{p:"Leo the Lion", s:"Leo is very thirsty after the match!", q:"What is the best drink for your teeth?",
+        c:[["🥤","Fizzy soda"],["🧃","Very sugary juice"],["💧","Water"]],
+        f:"Water is your teeth's best friend! It washes food away and has no sugar at all."}, a:2 },
+  { pe:"🐶",
+    ar:{p:"الكلب روكي", s:"روكي حط معجون كتير قوي على الفرشاة!", q:"الأطفال يحطّوا معجون قد إيه؟",
+        c:[["🟢","قد حبّة البسلة"],["🐍","الفرشاة كلها مليانة"],["🚫","من غير معجون"]],
+        f:"حبّة صغيرة قد البسلة كفاية! وبعد الغسيل نِتفّ المعجون وما نبلعهوش."},
+    en:{p:"Rocky the Puppy", s:"Rocky squeezed way too much toothpaste on his brush!", q:"How much toothpaste should kids use?",
+        c:[["🟢","A pea-sized blob"],["🐍","Cover the whole brush"],["🚫","No toothpaste"]],
+        f:"A tiny pea-sized blob is enough! After brushing, spit it out — don't swallow it."}, a:0 },
+  { pe:"🐼",
+    ar:{p:"الباندا بندق", s:"فرشاة بندق شعرها بقى منكوش ومفتوح خالص!", q:"نغيّر فرشاة الأسنان إمتى؟",
+        c:[["🗓️","كل ٣ شهور"],["🎂","كل ٥ سنين"],["♾️","عمرنا ما نغيّرها"]],
+        f:"نغيّر الفرشاة كل ٣ شهور، أو أول ما شعرها يتنكش، عشان تنضّف كويس."},
+    en:{p:"Panda Pip", s:"Pip's toothbrush bristles are all frayed and messy!", q:"When should we change our toothbrush?",
+        c:[["🗓️","Every 3 months"],["🎂","Every 5 years"],["♾️","Never"]],
+        f:"Change your toothbrush every 3 months, or as soon as the bristles look messy, so it cleans well."}, a:0 },
+  { pe:"🐵",
+    ar:{p:"القرد مشمش", s:"مشمش عنده أكل محشور بين أسنانه والفرشاة مش بتوصله!", q:"إيه اللي ينضّف بين الأسنان؟",
+        c:[["🧵","خيط الأسنان"],["✏️","قلم رصاص"],["🍬","قطعة لبان"]],
+        f:"خيط الأسنان بيوصل للأماكن الضيقة بين الأسنان. اطلب من بابا أو ماما يساعدوك!"},
+    en:{p:"Momo the Monkey", s:"Momo has food stuck between his teeth and the brush can't reach!", q:"What cleans between your teeth?",
+        c:[["🧵","Dental floss"],["✏️","A pencil"],["🍬","Chewing gum"]],
+        f:"Floss reaches the tiny spaces between teeth. Ask mom or dad to help you!"}, a:0 },
+  { pe:"🦒",
+    ar:{p:"الزرافة زوزو", s:"زوزو أسنانها سليمة، بس سألت: لازم أزور الدكتور برضه؟", q:"نزور طبيب الأسنان كل قد إيه؟",
+        c:[["😖","لما السنة توجعنا بس"],["🩺","كل ٦ شهور للكشف"],["👴","لما نكبر"]],
+        f:"كل ٦ شهور! الدكتور بيكتشف أي مشكلة بدري وهي صغيرة، قبل ما توجع."},
+    en:{p:"Zuzu the Giraffe", s:"Zuzu's teeth look fine, but she asks: do I still need a check-up?", q:"How often should we visit the dentist?",
+        c:[["😖","Only when it hurts"],["🩺","Every 6 months for a check-up"],["👴","When we grow up"]],
+        f:"Every 6 months! The dentist finds small problems early, before they ever hurt."}, a:1 },
+  { pe:"🐧",
+    ar:{p:"البطريق بيبو", s:"بيبو خايف يدخل أوضة الكشف!", q:"تقول إيه لبيبو؟",
+        c:[["😱","اهرب! الدكتور مخيف"],["🤗","ما تخافش! الدكتور صاحبك وبيحافظ على ابتسامتك"],["🙈","خبّي سنانك"]],
+        f:"طبيب الأسنان صاحبك! بيعدّ أسنانك، وينضّفها، ويخليها قوية ولامعة. وفي حياة إيليت فيه مفاجآت للأبطال! 🎁"},
+    en:{p:"Bibo the Penguin", s:"Bibo is scared to go into the check-up room!", q:"What do you tell Bibo?",
+        c:[["😱","Run! The dentist is scary"],["🤗","Don't worry! The dentist is your friend who keeps your smile healthy"],["🙈","Hide your teeth"]],
+        f:"The dentist is your friend! They count your teeth, clean them, and keep them strong and shiny. And at Hyatt Elite there are surprises for heroes! 🎁"}, a:1 }
+];
+
+var TOTAL = LEVELS.length + 1; // + street level
+
+/* =========================================================
+   STATE
+   ========================================================= */
+var lang = "ar", sound = true, stars = 0, idx = -1, firstTry = true, kid = "";
+try { var sl = localStorage.getItem("homos_lang"); if (sl === "en" || sl === "ar") lang = sl; } catch(e){}
+
+var $ = function(id){ return document.getElementById(id); };
+function t(k){ return T[lang][k]; }
+
+function applyLang(){
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  document.title = lang === "ar" ? "مغامرة د. هوموس | حياة إيليت" : "Dr. Homos Adventure | Hyatt Elite";
+  document.querySelectorAll("[data-t]").forEach(function(el){ el.textContent = t(el.getAttribute("data-t")); });
+  $("kidName").placeholder = t("namePh");
+  $("langBtn").textContent = lang === "ar" ? "EN" : "ع";
+  if ($("s-quiz").classList.contains("on")) renderQuiz();
+  $("certName").textContent = kid || t("friend");
+}
+
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("on"); });
+  $(id).classList.add("on");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function renderProgress(cur){
+  var p = $("progress"); p.innerHTML = "";
+  if (cur < 0) return;
+  for (var i = 0; i < TOTAL; i++){
+    var s = document.createElement("span");
+    s.textContent = i < cur ? "🦷" : (i === cur ? "⭐" : "");
+    if (i < cur) s.className = "done"; else if (i === cur) s.className = "now";
+    p.appendChild(s);
+  }
+}
+function setStars(n){ stars = n; $("starCount").textContent = n; }
+
+/* =========================================================
+   SOUND (Web Audio, no files needed)
+   ========================================================= */
+var ac = null;
+function ctx(){ if (!ac) { try { ac = new (window.AudioContext||window.webkitAudioContext)(); } catch(e){} } if (ac && ac.state === "suspended") ac.resume(); return ac; }
+function tone(f, d, type, when, vol, slideTo){
+  var a = ctx(); if (!a || !sound) return;
+  var o = a.createOscillator(), g = a.createGain(), t0 = a.currentTime + (when||0);
+  o.type = type || "sine"; o.frequency.setValueAtTime(f, t0);
+  if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t0 + d);
+  g.gain.setValueAtTime(0.0001, t0);
+  g.gain.exponentialRampToValueAtTime(vol||0.2, t0 + 0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001, t0 + d);
+  o.connect(g).connect(a.destination); o.start(t0); o.stop(t0 + d + 0.05);
+}
+function sCheer(){ [523,659,784,1047,1319].forEach(function(f,i){ tone(f,0.25,"triangle",i*0.09,0.22); }); tone(1568,0.5,"sine",0.5,0.15); }
+function sClick(){ tone(660,0.08,"square",0,0.06); }
+function sWrong(){ tone(300,0.18,"square",0,0.1,200); tone(220,0.25,"square",0.15,0.1,150); }
+function sScream(){
+  var a = ctx(); if (!a || !sound) return;
+  var o = a.createOscillator(), g = a.createGain(), lfo = a.createOscillator(), lg = a.createGain(), t0 = a.currentTime;
+  o.type = "sawtooth"; o.frequency.setValueAtTime(900, t0); o.frequency.exponentialRampToValueAtTime(260, t0 + 1.3);
+  lfo.frequency.value = 18; lg.gain.value = 40; lfo.connect(lg).connect(o.frequency);
+  g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(0.18, t0 + 0.05); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 1.4);
+  o.connect(g).connect(a.destination); o.start(t0); lfo.start(t0); o.stop(t0 + 1.5); lfo.stop(t0 + 1.5);
+}
+function speak(text){
+  if (!sound || !("speechSynthesis" in window)) return;
+  try {
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text.replace(/[\u{1F300}-\u{1FAFF}☀-➿]/gu, ""));
+    u.lang = lang === "ar" ? "ar-EG" : "en-US"; u.rate = 0.92; u.pitch = 1.25;
+    speechSynthesis.speak(u);
+  } catch(e){}
+}
+
+/* =========================================================
+   CONFETTI
+   ========================================================= */
+var cv = $("confetti"), cx = cv.getContext("2d"), parts = [], raf = null;
+function fit(){ cv.width = innerWidth; cv.height = innerHeight; } fit(); addEventListener("resize", fit);
+function confetti(n){
+  var cols = ["#ffcc4d","#3ccf91","#4f7cff","#ff7eb6","#c9a24a","#ffffff"];
+  for (var i = 0; i < (n||140); i++){
+    parts.push({ x: innerWidth/2 + (Math.random()-.5)*120, y: innerHeight*0.45, vx:(Math.random()-.5)*14, vy: -Math.random()*14-4,
+      r: Math.random()*7+4, c: cols[i%cols.length], a: Math.random()*6, va:(Math.random()-.5)*.3, tooth: Math.random()<.12 });
+  }
+  if (!raf) loop();
+}
+function loop(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  parts.forEach(function(p){
+    p.vy += .32; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.a += p.va;
+    cx.save(); cx.translate(p.x,p.y); cx.rotate(p.a);
+    if (p.tooth){ cx.font = (p.r*3)+"px serif"; cx.fillText("🦷",0,0); }
+    else { cx.fillStyle = p.c; cx.fillRect(-p.r/2,-p.r/4,p.r,p.r/2); }
+    cx.restore();
+  });
+  parts = parts.filter(function(p){ return p.y < cv.height + 40; });
+  raf = parts.length ? requestAnimationFrame(loop) : (cx.clearRect(0,0,cv.width,cv.height), null);
+}
+
+/* =========================================================
+   FEEDBACK POPUP
+   ========================================================= */
+var fbNext = null;
+function popup(o){
+  $("fbEm").textContent = o.em; $("fbTitle").textContent = o.title; $("fbText").textContent = o.text;
+  $("fbBtn").textContent = o.btn; fbNext = o.next;
+  var face = $("fbFace"); face.className = "face " + (o.scream ? "scream" : "happy-face");
+  var st = $("fbStars"); st.innerHTML = "";
+  for (var i = 0; i < (o.stars||0); i++){ var s = document.createElement("span"); s.textContent = "⭐"; s.style.animationDelay = (i*.15)+"s"; st.appendChild(s); }
+  st.style.display = o.stars ? "" : "none";
+  $("fb").classList.add("on");
+  if (o.say) speak(o.title + ". " + o.text);
+}
+$("fbBtn").onclick = function(){ sClick(); if ("speechSynthesis" in window) speechSynthesis.cancel(); $("fb").classList.remove("on"); var n = fbNext; fbNext = null; if (n) n(); };
+
+/* =========================================================
+   FLOW
+   ========================================================= */
+function start(){
+  kid = $("kidName").value.trim(); $("certName").textContent = kid || t("friend");
+  setStars(0); idx = -1; firstTry = true;
+  showScreen("s-street"); renderProgress(0);
+  $("goHome").disabled = $("goDentist").disabled = false;
+  $("goHome").className = $("goDentist").className = "choice";
+  $("streetFace").className = "face pain";
+  setTimeout(function(){ speak(t("ouch") + " " + t("q1")); }, 400);
+}
+
+$("playBtn").onclick = function(){ sClick(); ctx(); start(); };
+$("kidName").addEventListener("keydown", function(e){ if (e.key === "Enter") $("playBtn").click(); });
+
+$("goHome").onclick = function(){
+  var b = this; b.classList.add("wrong"); firstTry = false;
+  var f = $("streetFace"); f.className = "face scream"; sScream();
+  if (navigator.vibrate) navigator.vibrate([120,60,200]);
+  setTimeout(function(){
+    popup({ em:"😱", title:t("screamT"), text:t("screamP"), btn:t("tryAgain"), scream:true, say:true,
+      next:function(){ b.classList.remove("wrong"); f.className = "face pain"; } });
+  }, 900);
+};
+
+$("goDentist").onclick = function(){
+  this.classList.add("right"); $("goHome").disabled = this.disabled = true;
+  $("streetFace").className = "face happy-face";
+  sCheer(); confetti(180);
+  var earned = firstTry ? 3 : 1; setStars(stars + earned);
+  setTimeout(function(){
+    popup({ em:"🎉", title:t("rightT"), text:t("rightP"), btn:t("next"), stars:earned, say:true, next:walk });
+  }, 600);
+};
+
+function walk(){
+  showScreen("s-walk"); renderProgress(1);
+  // restart walk animation
+  var m = document.querySelector(".walk .mover"); m.style.animation = "none"; void m.offsetWidth; m.style.animation = "";
+  speak(t("walkBubble"));
+  setTimeout(function(){ idx = 0; firstTry = true; showScreen("s-quiz"); renderQuiz(true); }, 3600);
+}
+
+function renderQuiz(sayIt){
+  var L = LEVELS[idx], d = L[lang];
+  renderProgress(idx + 1);
+  $("qTag").textContent = t("lvl") + " " + (idx + 2) + " " + t("of") + " " + TOTAL;
+  $("qPatientEm").textContent = L.pe; $("qPatient").textContent = d.p;
+  $("qText").textContent = d.s; $("qAsk").textContent = d.q;
+  var box = $("qChoices"); box.innerHTML = "";
+  d.c.forEach(function(c, i){
+    var b = document.createElement("button"); b.className = "choice";
+    b.innerHTML = '<span class="em"></span><span></span>';
+    b.firstChild.textContent = c[0]; b.lastChild.textContent = c[1];
+    b.onclick = function(){ answer(i, b); };
+    box.appendChild(b);
+  });
+  if (sayIt) setTimeout(function(){ speak(d.s + " " + d.q); }, 300);
+}
+
+function answer(i, btn){
+  var L = LEVELS[idx], d = L[lang];
+  if (i !== L.a){
+    firstTry = false; btn.classList.add("wrong"); btn.disabled = true; sWrong();
+    if (navigator.vibrate) navigator.vibrate(80);
+    return;
+  }
+  btn.classList.add("right");
+  $("qChoices").querySelectorAll("button").forEach(function(b){ b.disabled = true; });
+  sCheer(); confetti();
+  var earned = firstTry ? 3 : 1; setStars(stars + earned);
+  var last = idx === LEVELS.length - 1;
+  setTimeout(function(){
+    var titles = t("okT");
+    popup({ em: L.pe, title: titles[idx % titles.length], text: d.f, stars: earned, say:true,
+      btn: last ? t("finish") : t("next"),
+      next: function(){
+        if (last) { finish(); return; }
+        idx++; firstTry = true; renderQuiz(true);
+        window.scrollTo({top:0,behavior:"smooth"});
+      }});
+  }, 500);
+}
+
+function finish(){
+  showScreen("s-end"); renderProgress(TOTAL);
+  var max = TOTAL * 3;
+  $("certStars").textContent = "⭐ " + stars + " / " + max;
+  $("certName").textContent = kid || t("friend");
+  sCheer(); confetti(260); setTimeout(function(){ confetti(160); }, 700);
+  speak(t("endTitle"));
+}
+
+$("againBtn").onclick = function(){ sClick(); showScreen("s-start"); renderProgress(-1); setStars(0); };
+
+document.addEventListener("click", function(e){
+  var s = e.target.closest("[data-speak]"); if (s) speak(t(s.getAttribute("data-speak")));
+});
+$("qSpeak").onclick = function(){ var d = LEVELS[idx][lang]; speak(d.s + " " + d.q); };
+
+$("soundBtn").onclick = function(){
+  sound = !sound; this.textContent = sound ? "🔊" : "🔇";
+  if (!sound && "speechSynthesis" in window) speechSynthesis.cancel(); else sClick();
+};
+$("langBtn").onclick = function(){
+  lang = lang === "ar" ? "en" : "ar";
+  try { localStorage.setItem("homos_lang", lang); } catch(e){}
+  applyLang(); sClick();
+};
+
+applyLang();
+})();
+</script>
+</body>
+</html>
