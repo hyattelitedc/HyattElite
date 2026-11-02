@@ -135,7 +135,6 @@ html[dir="rtl"] .ouch{direction:rtl}
 .bubble .who{display:flex;align-items:center;gap:8px;font-weight:900;color:var(--gold-lo);font-size:15px;margin-bottom:2px}
 .bubble .who img{width:26px}
 .ask{display:flex;align-items:center;gap:8px;justify-content:center}
-.speak{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--navy2);border:2px solid var(--gold);display:grid;place-items:center;font-size:16px}
 
 /* ---------- answer cards ---------- */
 .choices{display:grid;gap:12px;width:100%}
@@ -263,7 +262,7 @@ html[dir="rtl"] .ouch{direction:rtl}
       </div>
       <svg class="burst" id="burst" viewBox="0 0 120 90" aria-hidden="true"><path d="M60 2 72 22 96 8 92 32 118 34 98 50 114 72 88 66 82 88 64 70 44 88 40 64 12 74 24 52 2 40 28 30 18 8 44 20Z" fill="#e5625e" stroke="#fbf6ea" stroke-width="4"/><text x="60" y="54" text-anchor="middle" font-family="Baloo Bhaijaan 2,Cairo,sans-serif" font-size="22" font-weight="800" fill="#fbf6ea" id="burstTxt">آآآه!</text></svg>
     </div>
-    <div class="ask"><h2 data-t="q1"></h2><button class="speak" data-speak="q1" aria-label="Read aloud">🔈</button></div>
+    <div class="ask"><h2 data-t="q1"></h2></div>
     <div class="choices two">
       <button class="choice" id="goHome"><img src="tw/1f3e0.svg" alt="" /><span data-t="home"></span></button>
       <button class="choice" id="goDentist"><img src="tw/1f9b7.svg" alt="" /><span data-t="dentist"></span></button>
@@ -285,7 +284,7 @@ html[dir="rtl"] .ouch{direction:rtl}
     <span class="tag" id="lvTag"></span>
     <div class="scene" id="lvScene"></div>
     <div class="bubble" id="lvBubble"><div class="who"><img id="lvWhoImg" src="tw/1f430.svg" alt="" /><span id="lvWho"></span></div><span id="lvText"></span></div>
-    <div class="ask"><h2 id="lvAsk"></h2><button class="speak" id="lvSpeak" aria-label="Read aloud">🔈</button></div>
+    <div class="ask"><h2 id="lvAsk"></h2></div>
     <div id="lvBody" style="width:100%"></div>
   </section>
 
@@ -657,16 +656,67 @@ function sScream(){
   g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(0.18, t0 + 0.05); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 1.4);
   o.connect(g).connect(a.destination); o.start(t0); lfo.start(t0); o.stop(t0 + 1.5); lfo.stop(t0 + 1.5);
 }
-function speak(text){
-  if (!sound || !("speechSynthesis" in window)) return;
-  try {
-    speechSynthesis.cancel();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = lang === "ar" ? "ar-EG" : "en-US"; u.rate = 0.92; u.pitch = 1.2;
-    speechSynthesis.speak(u);
-  } catch(e){}
+/* Background music: a calm music-box tune generated live (no audio files, no spoken voice).
+   C - Am - F - G, 88 bpm, soft pad + music-box melody with a light echo + gentle bass. */
+var MEL = [
+  [72,0,76,79, 76,0,74,72], [69,0,72,76, 74,72,0,69], [65,69,72,0, 74,72,69,0], [67,0,71,74, 72,0,71,0],
+  [79,0,76,72, 74,76,0,72], [76,0,72,69, 72,0,69,0], [72,74,76,0, 77,76,74,72], [71,0,74,0, 67,0,0,0]
+];
+var CHORDS = [[48,60,64,67],[45,57,60,64],[41,57,60,65],[43,55,59,62]];
+var mus = { bus:null, timer:null, step:0, next:0, playing:false };
+function mtof(m){ return 440 * Math.pow(2, (m - 69) / 12); }
+function musicBus(a){
+  if (mus.bus) return mus.bus;
+  var out = a.createGain(); out.gain.value = 0;
+  var lp = a.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 2600;
+  var dl = a.createDelay(1); dl.delayTime.value = 0.34; var fbk = a.createGain(); fbk.gain.value = 0.28; var wet = a.createGain(); wet.gain.value = 0.22;
+  dl.connect(fbk).connect(dl); dl.connect(wet).connect(lp);
+  out.connect(lp); lp.connect(a.destination);
+  mus.bus = { out: out, echo: dl };
+  return mus.bus;
 }
-function hush(){ try { if ("speechSynthesis" in window) speechSynthesis.cancel(); } catch(e){} }
+function note(a, dest, freq, t, dur, vol, type, attack){
+  var o = a.createOscillator(), g = a.createGain();
+  o.type = type; o.frequency.setValueAtTime(freq, t);
+  g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + attack); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.connect(g).connect(dest); o.start(t); o.stop(t + dur + 0.05);
+  return g;
+}
+function schedule(){
+  var a = ac; if (!a || !mus.playing) return;
+  var bus = musicBus(a), eighth = 60 / 88 / 2;
+  while (mus.next < a.currentTime + 0.25){
+    var bar = Math.floor(mus.step / 8) % 8, pos = mus.step % 8, t = mus.next, ch = CHORDS[bar % 4];
+    if (pos === 0){
+      ch.slice(1).forEach(function(m){ note(a, bus.out, mtof(m), t, eighth * 8.2, 0.035, "sine", 0.6); });
+      note(a, bus.out, mtof(ch[0]), t, eighth * 3.5, 0.09, "sine", 0.02);
+    }
+    if (pos === 4) note(a, bus.out, mtof(ch[0] + 7), t, eighth * 3, 0.06, "sine", 0.02);
+    var m = MEL[bar][pos];
+    if (m){
+      var g = note(a, bus.out, mtof(m), t, 1.1, 0.07, "triangle", 0.005);
+      g.connect(bus.echo);
+      note(a, bus.out, mtof(m + 12), t, 0.5, 0.015, "sine", 0.005);
+    }
+    mus.step++; mus.next += eighth;
+  }
+}
+function musicOn(){
+  var a = ctx(); if (!a || !sound || mus.playing) return;
+  var bus = musicBus(a);
+  mus.playing = true; mus.next = a.currentTime + 0.1;
+  bus.out.gain.cancelScheduledValues(a.currentTime);
+  bus.out.gain.setValueAtTime(Math.max(0.0001, bus.out.gain.value), a.currentTime);
+  bus.out.gain.linearRampToValueAtTime(0.9, a.currentTime + 1.5);
+  schedule(); mus.timer = setInterval(schedule, 60);
+}
+function musicOff(){
+  if (!mus.playing) return;
+  mus.playing = false; clearInterval(mus.timer);
+  if (ac && mus.bus){ mus.bus.out.gain.cancelScheduledValues(ac.currentTime); mus.bus.out.gain.setValueAtTime(mus.bus.out.gain.value, ac.currentTime); mus.bus.out.gain.linearRampToValueAtTime(0.0001, ac.currentTime + 0.4); }
+}
+document.addEventListener("visibilitychange", function(){ if (document.hidden) musicOff(); else if (started) musicOn(); });
+var started = false;
 
 /* =========================================================
    CONFETTI (gold / navy / cream to match the brand)
@@ -705,9 +755,8 @@ function popup(o){
   for (var i = 0; i < (o.stars||0); i++){ var s = document.createElement("img"); s.src = tw("2b50"); s.alt = ""; s.style.animationDelay = (i*.15)+"s"; st.appendChild(s); }
   st.style.display = o.stars ? "" : "none";
   $("fb").classList.add("on"); $("fbBtn").focus({preventScroll:true});
-  if (o.say) speak(o.title + ". " + o.text);
 }
-$("fbBtn").onclick = function(){ sClick(); hush(); $("fb").classList.remove("on"); var n = fbNext; fbNext = null; if (n) n(); };
+$("fbBtn").onclick = function(){ sClick(); $("fb").classList.remove("on"); var n = fbNext; fbNext = null; if (n) n(); };
 
 /* =========================================================
    FLOW: start + street
@@ -723,9 +772,8 @@ function start(){
   $("goHome").disabled = $("goDentist").disabled = false;
   $("goHome").className = $("goDentist").className = "choice";
   $("walker").className = "walker"; $("burst").classList.remove("on");
-  setTimeout(function(){ speak(t("ouch") + " " + t("q1")); }, 400);
 }
-$("playBtn").onclick = function(){ sClick(); ctx(); start(); };
+$("playBtn").onclick = function(){ sClick(); ctx(); started = true; musicOn(); start(); };
 $("kidName").addEventListener("keydown", function(e){ if (e.key === "Enter") $("playBtn").click(); });
 
 $("goHome").onclick = function(){
@@ -733,7 +781,7 @@ $("goHome").onclick = function(){
   $("walker").className = "walker scream"; $("burst").classList.add("on"); sScream();
   if (navigator.vibrate) navigator.vibrate([120,60,200]);
   setTimeout(function(){
-    popup({ title:t("screamT"), text:t("screamP"), btn:t("tryAgain"), scream:true, badge:"1f631", say:true,
+    popup({ title:t("screamT"), text:t("screamP"), btn:t("tryAgain"), scream:true, badge:"1f631",
       next:function(){ b.classList.remove("wrong"); $("walker").className = "walker"; $("burst").classList.remove("on"); } });
   }, 1000);
 };
@@ -742,14 +790,13 @@ $("goDentist").onclick = function(){
   $("walker").className = "walker happy"; $("burst").classList.remove("on");
   sCheer(); confetti(180);
   var earned = firstTry ? 3 : 1; addStars(earned);
-  setTimeout(function(){ popup({ title:t("rightT"), text:t("rightP"), btn:t("next"), stars:earned, badge:"1f9b7", say:true, next:walk }); }, 700);
+  setTimeout(function(){ popup({ title:t("rightT"), text:t("rightP"), btn:t("next"), stars:earned, badge:"1f9b7", next:walk }); }, 700);
 };
 
 function walk(){
   showScreen("s-walk"); renderProgress(1);
   $("walkBubble").textContent = nm(t("walkBubble"));
   var m = $("mover"); m.style.animation = "none"; void m.offsetWidth; m.style.animation = "";
-  speak(nm(t("walkBubble")));
   setTimeout(function(){ idx = 0; openLevel(); }, 4200);
 }
 
@@ -768,7 +815,7 @@ function renderText(){
 }
 
 function openLevel(){
-  hush(); firstTry = true;
+  firstTry = true;
   var L = LEVELS[idx];
   showScreen("s-level"); renderProgress(idx + 1);
   var sc = $("lvScene"), body = $("lvBody");
@@ -777,7 +824,6 @@ function openLevel(){
   else if (L.type === "germs") buildGerms(L, sc, body);
   else if (L.type === "scrub") buildScrub(L, sc, body);
   renderText();
-  setTimeout(function(){ var d = L[lang]; speak(d.s + " " + d.q); }, 350);
 }
 
 function clinicScene(sc, pe){
@@ -822,7 +868,7 @@ function win(L, earned){
   sCheer(); confetti(); addStars(earned);
   var last = idx === LEVELS.length - 1, titles = t("okT");
   setTimeout(function(){
-    popup({ title: titles[idx % titles.length], text: L[lang].f, stars: earned, badge: L.pe, say:true,
+    popup({ title: titles[idx % titles.length], text: L[lang].f, stars: earned, badge: L.pe,
       btn: last ? t("finish") : t("next"),
       next: function(){ if (last) finish(); else { idx++; openLevel(); } } });
   }, 550);
@@ -911,13 +957,10 @@ function finish(){
   $("certStars").textContent = stars + " / " + (TOTAL * 3);
   $("certName").textContent = kid || t("friend");
   sCheer(); confetti(260); setTimeout(function(){ confetti(160); }, 700);
-  speak(t("endTitle"));
 }
-$("againBtn").onclick = function(){ sClick(); hush(); showScreen("s-start"); renderProgress(-1); stars = 0; $("starCount").textContent = "0"; };
+$("againBtn").onclick = function(){ sClick(); showScreen("s-start"); renderProgress(-1); stars = 0; $("starCount").textContent = "0"; };
 
-document.addEventListener("click", function(e){ var s = e.target.closest("[data-speak]"); if (s) speak(t(s.getAttribute("data-speak"))); });
-$("lvSpeak").onclick = function(){ var d = LEVELS[idx][lang]; speak(d.s + " " + d.q); };
-$("soundBtn").onclick = function(){ sound = !sound; this.textContent = sound ? "🔊" : "🔇"; if (!sound) hush(); else sClick(); };
+$("soundBtn").onclick = function(){ sound = !sound; this.textContent = sound ? "🔊" : "🔇"; if (!sound) musicOff(); else { sClick(); if (started) musicOn(); } };
 $("langBtn").onclick = function(){
   lang = lang === "ar" ? "en" : "ar";
   try { localStorage.setItem("homos_lang", lang); } catch(e){}
