@@ -482,7 +482,7 @@ footer .copy{border-top:1px solid var(--line);padding-top:20px;text-align:center
   <div class="wrap">
     <a href="#home" aria-label="مركز حياة اليت لطب الأسنان"><img src="assets/logo_white.png" alt="شعار مركز حياة اليت"></a>
     <nav class="nav" aria-label="القائمة الرئيسية">
-      <a href="#about">من نحن</a><a href="#services">خدماتنا</a><a href="#smile-design">كيف نصمّمها</a><a href="#gallery">المعرض</a><a href="#reviews">الآراء</a><a href="#faq">أسئلة شائعة</a><a href="#contact">تواصل</a>
+      <a href="#about">من نحن</a><a href="#services">خدماتنا</a><a href="#smile-design">كيف نصمّمها</a><a href="#gallery">المعرض</a><a href="#reviews">الآراء</a><a href="#kids">ركن الأطفال</a><a href="#faq">أسئلة شائعة</a><a href="#contact">تواصل</a>
       <a class="nav-yt" href="https://www.youtube.com/@HyattElite" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.6.5-4.8.5-4.8s0-3.2-.5-4.8zM9.7 15.1V8.9L15.5 12z" fill="#ff0033"/><path d="M9.7 15.1V8.9L15.5 12z" fill="#fff"/></svg>يوتيوب</a>
     </nav>
     <a class="btn btn-gold" href="#contact">احجز موعدك</a>
@@ -493,7 +493,7 @@ footer .copy{border-top:1px solid var(--line);padding-top:20px;text-align:center
 <div class="drawer" id="drawer">
   <nav class="drawer-panel" aria-label="القائمة">
     <button class="dclose" id="drawerClose" aria-label="إغلاق">✕</button>
-    <a href="#home">الرئيسية</a><a href="#about">من نحن</a><a href="#services">خدماتنا</a><a href="#smile-design">كيف نصمّمها</a><a href="#gallery">المعرض</a><a href="#reviews">آراء العملاء</a><a href="#faq">أسئلة شائعة</a><a href="#contact">تواصل واحجز</a><a href="#videos">فيديوهاتنا</a><a href="https://www.youtube.com/@HyattElite" target="_blank" rel="noopener">قناة يوتيوب ↗</a>
+    <a href="#home">الرئيسية</a><a href="#about">من نحن</a><a href="#services">خدماتنا</a><a href="#smile-design">كيف نصمّمها</a><a href="#gallery">المعرض</a><a href="#reviews">آراء العملاء</a><a href="#kids">ركن الأطفال</a><a href="#faq">أسئلة شائعة</a><a href="#contact">تواصل واحجز</a><a href="#videos">فيديوهاتنا</a><a href="https://www.youtube.com/@HyattElite" target="_blank" rel="noopener">قناة يوتيوب ↗</a>
     <a class="btn btn-gold" href="#contact" style="margin-top:14px;justify-content:center">احجز موعدك</a>
   </nav>
 </div>
@@ -662,6 +662,42 @@ footer .copy{border-top:1px solid var(--line);padding-top:20px;text-align:center
   </div>
 </section>
 
+<!-- ===== KIDS CORNER: Dr. Homos game ===== -->
+<style>
+  .kc{position:relative;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);align-items:center;gap:clamp(16px,4vw,48px);
+    padding:clamp(24px,4vw,48px);border-radius:28px;overflow:hidden;
+    background:radial-gradient(120% 120% at 85% 10%,rgba(241,213,144,.18),transparent 55%),linear-gradient(160deg,#24365a,#17243b 60%,#0c1424);
+    border:1px solid rgba(226,198,122,.45);box-shadow:0 30px 70px -30px rgba(0,0,0,.7)}
+  .kc h2{font-size:clamp(28px,4.4vw,48px);font-weight:900;margin:10px 0 12px;line-height:1.25}
+  .kc p{color:var(--muted);margin:0 0 18px;max-width:52ch;line-height:1.8}
+  .kc-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+  .kc-tags span{border:1px solid rgba(226,198,122,.45);color:var(--gold-hi);border-radius:999px;padding:5px 14px;font-size:13.5px;font-weight:700}
+  .kc-play{display:inline-flex;align-items:center;gap:10px;padding:14px 30px;border-radius:40px;font-weight:900;font-size:17px;text-decoration:none;
+    background:linear-gradient(135deg,var(--gold-hi),var(--gold));color:var(--navy);box-shadow:0 12px 30px rgba(201,162,74,.35);transition:transform .25s}
+  .kc-play:hover{transform:translateY(-3px)}
+  .kc-play svg{width:20px;height:20px;fill:currentColor}
+  .kc-art{position:relative;display:flex;justify-content:center;align-items:flex-end;min-height:260px}
+  .kc-art:before{content:"";position:absolute;inset:6% 0 0;border-radius:50%;background:radial-gradient(circle,rgba(241,213,144,.45),rgba(201,162,74,.1) 55%,transparent 70%)}
+  .kc-art img{position:relative;width:min(260px,100%);height:auto;filter:drop-shadow(0 16px 20px rgba(0,0,0,.5));animation:kcFloat 3.4s ease-in-out infinite}
+  @keyframes kcFloat{50%{transform:translateY(-10px)}}
+  @media(max-width:760px){.kc{grid-template-columns:1fr;text-align:center}.kc p{margin-inline:auto}.kc-tags{justify-content:center}.kc-art{order:-1;min-height:0}.kc-art img{width:min(200px,60vw)}}
+  @media(prefers-reduced-motion:reduce){.kc-art img{animation:none}}
+</style>
+<section id="kids" style="padding-top:0">
+  <div class="wrap">
+    <div class="kc rv">
+      <div>
+        <div class="latin">ركن الأطفال</div>
+        <h2>مغامرات دكتور حمص في العيادة</h2>
+        <p>لعبة تعليمية مجانية لأطفالكم: يساعد الطفل د. حمص في علاج مرضاه بالعيادة، ويتعلّم كيف يغسل أسنانه، ويختار الأكل المفيد، ويعرف ليه التقويم مهم، ويحب زيارة طبيب الأسنان.</p>
+        <div class="kc-tags"><span>١٧ مرحلة</span><span>للأطفال من ٤ سنين</span><span>عربي و English</span></div>
+        <a class="kc-play" href="dr-homos-game/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>العب الآن</a>
+      </div>
+      <div class="kc-art"><img src="dr-homos-game/homos-cut.webp" alt="د. حمص طبيب الأسنان في عيادة حياة اليت" width="552" height="900" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== FAQ ===== -->
 <section id="faq" style="padding-top:0">
   <div class="wrap faq">
@@ -726,7 +762,7 @@ footer .copy{border-top:1px solid var(--line);padding-top:20px;text-align:center
           <a href="https://wa.me/201003033566" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
         </div>
       </div>
-      <div class="fcol"><h4>روابط سريعة</h4><a href="#about">من نحن</a><a href="#services">خدماتنا</a><a href="#gallery">معرض الابتسامات</a><a href="#reviews">آراء العملاء</a><a href="#faq">أسئلة شائعة</a><a href="#videos">فيديوهاتنا</a><a href="https://www.youtube.com/@HyattElite" target="_blank" rel="noopener">قناة يوتيوب ↗</a></div>
+      <div class="fcol"><h4>روابط سريعة</h4><a href="#about">من نحن</a><a href="#services">خدماتنا</a><a href="#gallery">معرض الابتسامات</a><a href="#reviews">آراء العملاء</a><a href="dr-homos-game/">لعبة د. حمص للأطفال</a><a href="#faq">أسئلة شائعة</a><a href="#videos">فيديوهاتنا</a><a href="https://www.youtube.com/@HyattElite" target="_blank" rel="noopener">قناة يوتيوب ↗</a></div>
       <div class="fcol"><h4>خدماتنا</h4><a href="#services">زراعة الأسنان</a><a href="#services">هوليوود سمايل</a><a href="#services">التقويم</a><a href="#services">التركيبات والتيجان</a></div>
       <div class="fcol"><h4>تواصل معنا</h4><span dir="ltr" style="text-align:right">0228440012 / 0228440013</span><span>واتساب: <span dir="ltr">01003033566</span></span><span>المقطم، القاهرة</span></div>
     </div>
