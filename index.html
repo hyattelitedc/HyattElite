@@ -966,6 +966,37 @@ var TESTIMONIALS=[
   });
 })();
 </script>
+<!-- ===== Dr. Homos floating button (kids game) ===== -->
+<style>
+  .hm-fab{position:fixed;left:18px;bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:92;display:flex;flex-direction:column;align-items:center;gap:4px;
+    text-decoration:none;animation:hmIn .6s cubic-bezier(.2,1.4,.4,1) both 1.2s}
+  .hm-fab .hm-say{position:relative;font-weight:900;font-size:14px;color:#17243b;white-space:nowrap;padding:6px 14px;border-radius:999px;
+    background:linear-gradient(135deg,#f1d590,#c9a24a);box-shadow:0 8px 20px -6px rgba(201,162,74,.7)}
+  .hm-fab .hm-say:after{content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);border:6px solid transparent;border-top-color:#d9b55e;border-bottom:0}
+  .hm-fab img{height:104px;width:auto;filter:drop-shadow(0 10px 12px rgba(0,0,0,.45));animation:hmBob 2.6s ease-in-out infinite;transform-origin:50% 100%}
+  .hm-fab:hover img{animation-duration:.9s}
+  .hm-fab:focus-visible{outline:3px solid #f1d590;outline-offset:4px;border-radius:12px}
+  .hm-x{position:absolute;top:-8px;right:-10px;width:22px;height:22px;border-radius:50%;border:0;cursor:pointer;background:rgba(12,20,36,.85);color:#fff;
+    font-size:14px;line-height:1;display:grid;place-items:center}
+  @keyframes hmBob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-6px) rotate(-3deg)}}
+  @keyframes hmIn{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:none}}
+  @media(max-width:760px){.hm-fab{left:12px;bottom:calc(148px + env(safe-area-inset-bottom,0px))}.hm-fab img{height:84px}.hm-fab .hm-say{font-size:12.5px;padding:5px 11px}}
+  @media(prefers-reduced-motion:reduce){.hm-fab,.hm-fab img{animation:none}}
+</style>
+<a class="hm-fab" id="hmFab" href="dr-homos-game/" aria-label="العب وتعلّم مع د. حمص — لعبة للأطفال">
+  <span class="hm-say">العب وتعلّم<button class="hm-x" id="hmX" type="button" aria-label="إخفاء">&times;</button></span>
+  <img src="dr-homos-game/homos-cut.webp" alt="" width="552" height="900">
+</a>
+<script>
+(function(){
+  var fab=document.getElementById('hmFab');
+  try{ if(sessionStorage.getItem('hm_hidden')) fab.style.display='none'; }catch(e){}
+  document.getElementById('hmX').addEventListener('click',function(e){
+    e.preventDefault(); e.stopPropagation(); fab.style.display='none';
+    try{ sessionStorage.setItem('hm_hidden','1'); }catch(err){}
+  });
+})();
+</script>
 <!-- ===== Lucky Wheel popup ===== -->
 <style>
   .lw-fab{position:fixed;left:22px;bottom:22px;z-index:91;display:inline-flex;align-items:center;gap:.5rem;
