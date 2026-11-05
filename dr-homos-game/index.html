@@ -1,0 +1,974 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>مغامرات دكتور حمص في العيادة | حياة إيليت</title>
+<meta name="description" content="لعبة تعليمية للأطفال مع د. حمص طبيب الأسنان في عيادة حياة إيليت — تعلّم تحافظ على أسنانك وتحب زيارة طبيب الأسنان." />
+<meta property="og:image" content="homos.jpg" />
+<meta name="theme-color" content="#0c1424" />
+<link rel="icon" href="../icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@600;700;800&family=Cairo:wght@600;700;800;900&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* Layout: one phone-width column; every level = illustrated scene card on top, answer cards below.
+   Palette follows the Hyatt Elite site + logo: deep navy ground, gold accents, warm cream cards. */
+:root{
+  color-scheme:dark;
+  --night:#0c1424; --navy:#17243b; --navy2:#24365a; --navy3:#33497a;
+  --gold:#c9a24a; --gold-hi:#f1d590; --gold-lo:#8a6d2c;
+  --cream:#fbf6ea; --cream2:#f1e7d0; --ink:#17243b; --muted:#b9c1cf;
+  --good:#3fbf8a; --good-lo:#23845c; --bad:#e5625e; --bad-lo:#b13f3c;
+  --f-display:"Baloo Bhaijaan 2","Cairo",system-ui,sans-serif;
+  --f-body:"Cairo","Baloo Bhaijaan 2",system-ui,sans-serif;
+}
+html[lang="en"]{--f-display:"Fredoka","Baloo Bhaijaan 2",system-ui,sans-serif;--f-body:"Fredoka","Cairo",system-ui,sans-serif}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%}
+body{
+  font-family:var(--f-body);color:#fff;overflow-x:hidden;min-height:100dvh;
+  background:
+    radial-gradient(120% 60% at 50% 0%, #24365a 0%, rgba(36,54,90,0) 70%),
+    radial-gradient(circle at 15% 85%, rgba(201,162,74,.12), transparent 40%),
+    var(--night);
+}
+body:before{ /* faint gold sparkle field */
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(1.5px 1.5px at 20% 30%,var(--gold-hi),transparent),radial-gradient(1px 1px at 70% 20%,#fff,transparent),radial-gradient(1.5px 1.5px at 85% 60%,var(--gold),transparent),radial-gradient(1px 1px at 35% 75%,#fff,transparent),radial-gradient(1.2px 1.2px at 55% 50%,var(--gold-hi),transparent);
+}
+button{font-family:inherit;cursor:pointer;border:0;color:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--gold-hi);outline-offset:3px}
+img{max-width:100%}
+.app{
+  max-width:560px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;position:relative;
+  padding-block:10px 18px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+
+/* ---------- top bar ---------- */
+.top{display:flex;align-items:center;gap:8px;z-index:5}
+.top .logo{height:38px;border-radius:8px}
+.top .sp{flex:1}
+.pill{background:linear-gradient(180deg,var(--gold-hi),var(--gold));color:var(--navy);border-radius:999px;padding:4px 12px 4px 10px;font-weight:900;font-size:16px;display:flex;align-items:center;gap:5px;box-shadow:0 3px 0 var(--gold-lo)}
+.pill img{width:20px;height:20px}
+.pill.bump{animation:bump .5s}
+@keyframes bump{40%{transform:scale(1.25)}}
+.icon-btn{width:40px;height:40px;border-radius:50%;background:var(--navy2);border:2px solid rgba(201,162,74,.5);font-size:18px;display:grid;place-items:center;font-weight:800;color:var(--gold-hi)}
+.progress{display:flex;gap:5px;justify-content:center;margin:12px 0 6px;flex-wrap:wrap;direction:ltr}
+html[dir="rtl"] .progress{flex-direction:row-reverse}
+.progress i{width:14px;height:17px;border-radius:45% 45% 40% 40% / 35% 35% 60% 60%;background:transparent;border:2px solid var(--navy3);transition:.3s}
+.progress i.done{background:var(--gold);border-color:var(--gold)}
+.progress i.now{background:#fff;border-color:#fff;box-shadow:0 0 0 3px rgba(241,213,144,.45);transform:scale(1.2)}
+
+/* ---------- screens ---------- */
+.screen{display:none;flex:1;flex-direction:column;align-items:center;text-align:center;gap:12px;animation:enter .45s ease}
+.screen.on{display:flex}
+@keyframes enter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+h1,h2{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(30px,8vw,44px);color:var(--gold-hi);text-shadow:0 3px 0 rgba(0,0,0,.35)}
+h2{font-size:clamp(21px,5.6vw,26px);color:#fff}
+.sub{font-size:18px;color:var(--muted);font-weight:700;margin:0}
+.tag{display:inline-flex;align-items:center;gap:6px;background:rgba(201,162,74,.14);color:var(--gold-hi);border:1.5px solid rgba(201,162,74,.55);border-radius:999px;padding:3px 14px;font-weight:800;font-size:14px;letter-spacing:.02em}
+
+.btn{
+  font-family:var(--f-display);font-size:23px;font-weight:800;padding:12px 34px;border-radius:999px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(180deg,var(--gold-hi),var(--gold));color:var(--navy);box-shadow:0 6px 0 var(--gold-lo),0 12px 24px rgba(0,0,0,.35);transition:transform .1s,box-shadow .1s
+}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 var(--gold-lo)}
+.btn.alt{background:var(--navy2);color:var(--gold-hi);border:2px solid var(--gold);box-shadow:0 6px 0 #0a1120}
+.link{color:var(--gold-hi);font-weight:700;font-size:15px}
+
+/* ---------- start ---------- */
+.hero{position:relative;width:min(270px,64vw);aspect-ratio:1/1.12;display:flex;align-items:flex-end;justify-content:center;margin-top:4px}
+.hero:before{content:"";position:absolute;inset:8% 4% 0;border-radius:50%;background:radial-gradient(circle,rgba(241,213,144,.55),rgba(201,162,74,.15) 55%,transparent 70%)}
+.hero .ring{position:absolute;inset:14% 10% 4%;border-radius:50%;border:3px dashed rgba(241,213,144,.35);animation:spin 30s linear infinite}
+.hero .homos{position:relative;height:100%;filter:drop-shadow(0 14px 18px rgba(0,0,0,.45));animation:float 3.2s ease-in-out infinite}
+.hero .spark{position:absolute;width:30px;animation:twinkle 2s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes twinkle{50%{transform:scale(.6) rotate(20deg);opacity:.5}}
+.name-in{font-family:inherit;font-size:19px;font-weight:700;padding:10px 16px;border-radius:16px;border:2px solid rgba(201,162,74,.6);width:min(300px,84vw);text-align:center;background:var(--navy2);color:#fff;outline:none}
+.name-in::placeholder{color:var(--muted)}
+.name-in:focus{border-color:var(--gold-hi)}
+.meta-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+
+/* ---------- scene card ---------- */
+.scene{position:relative;width:100%;aspect-ratio:400/250;border-radius:24px;overflow:hidden;border:3px solid var(--gold);box-shadow:0 14px 30px rgba(0,0,0,.45);background:var(--navy);direction:ltr}
+.scene>svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.scene .actor{position:absolute;filter:drop-shadow(0 8px 8px rgba(0,0,0,.35))}
+.scene .doc{right:1%;bottom:1%;height:96%;animation:float 3.4s ease-in-out infinite}
+.scene .patient{left:21%;bottom:31%;width:21%;animation:bob 1.6s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes bob{50%{transform:translateY(-5px) rotate(-4deg)}}
+.scene .car{position:absolute;bottom:3%;width:15%;animation:drive 7s linear infinite}
+@keyframes drive{from{left:-18%}to{left:110%}}
+
+/* street walker + pain */
+.walker{position:absolute;left:50%;bottom:17%;height:74%;transform:translateX(-50%)}
+.walker .wrap{position:relative;height:100%;animation:limp 1.2s ease-in-out infinite;transform-origin:50% 100%}
+.walker img.me{height:100%;display:block;filter:drop-shadow(0 8px 8px rgba(0,0,0,.4))}
+@keyframes limp{25%{transform:rotate(-2.5deg)}75%{transform:rotate(2.5deg)}}
+.cheek{position:absolute;width:26%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(229,98,94,.75),rgba(229,98,94,0) 70%);top:21%;left:62%;animation:throb .9s ease-in-out infinite}
+@keyframes throb{50%{transform:scale(1.25);opacity:.65}}
+.fx{position:absolute;width:20%;animation:zap .8s ease-in-out infinite}
+@keyframes zap{50%{transform:scale(1.3) rotate(12deg);opacity:.55}}
+.ouch{position:absolute;top:5%;left:4%;background:var(--cream);color:var(--bad-lo);font-family:var(--f-display);font-weight:800;padding:4px 12px;border-radius:14px;font-size:clamp(14px,4vw,18px);border:2px solid var(--bad);animation:wob .6s ease-in-out infinite alternate;max-width:56%;line-height:1.3}
+html[dir="rtl"] .ouch{direction:rtl}
+@keyframes wob{to{transform:rotate(-4deg) scale(1.05)}}
+.walker.scream .wrap{animation:shake .1s linear infinite}
+.walker.scream img.me{filter:drop-shadow(0 0 14px rgba(229,98,94,.9)) sepia(.35) saturate(2.2) hue-rotate(-25deg)}
+.walker.happy .wrap{animation:hop .7s ease-in-out infinite}
+.walker.happy .cheek,.walker.happy .fx{display:none}
+@keyframes hop{50%{transform:translateY(-10px)}}
+@keyframes shake{0%{transform:translate(0,0) rotate(0)}25%{transform:translate(-5px,2px) rotate(-3deg)}50%{transform:translate(4px,-2px) rotate(3deg)}75%{transform:translate(-3px,-1px) rotate(-2deg)}}
+.scene>svg.burst{inset:auto;top:4%;right:2%;width:30%;height:auto;display:none;z-index:3}
+.scene>svg.burst.on{display:block;animation:burstIn .35s cubic-bezier(.2,1.6,.4,1)}
+@keyframes burstIn{from{transform:scale(0) rotate(-30deg)}}
+
+/* walk to clinic */
+.mover{position:absolute;bottom:16%;height:62%;left:2%;animation:walkIn 3.2s ease-in-out forwards}
+.mover img{height:100%;animation:hop .45s ease-in-out infinite;filter:drop-shadow(0 8px 8px rgba(0,0,0,.4))}
+@keyframes walkIn{70%{left:52%;transform:scale(1);opacity:1}100%{left:66%;transform:scale(.55);opacity:0}}
+
+/* ---------- speech bubble ---------- */
+.bubble{position:relative;background:var(--cream);color:var(--ink);border-radius:20px;padding:12px 16px;font-size:18px;font-weight:700;line-height:1.5;width:100%;text-align:start;box-shadow:0 6px 0 var(--cream2)}
+.bubble:before{content:"";position:absolute;top:-12px;right:18%;border:12px solid transparent;border-bottom:14px solid var(--cream);border-top:0}
+.bubble .who{display:flex;align-items:center;gap:8px;font-weight:900;color:var(--gold-lo);font-size:15px;margin-bottom:2px}
+.bubble .who img{width:26px}
+.ask{display:flex;align-items:center;gap:8px;justify-content:center}
+
+/* ---------- answer cards ---------- */
+.choices{display:grid;gap:12px;width:100%}
+.choices.two{grid-template-columns:1fr 1fr}
+.choice{
+  background:var(--cream);color:var(--ink);border-radius:20px;padding:10px 14px;font-size:18px;font-weight:800;line-height:1.35;
+  box-shadow:0 6px 0 var(--cream2),0 10px 18px rgba(0,0,0,.25);display:flex;align-items:center;gap:12px;text-align:start;
+  border:3px solid transparent;min-height:68px;transition:transform .1s,background .2s
+}
+.choice img{width:44px;height:44px;flex-shrink:0}
+.choice span{min-width:0}
+.choices.two .choice{flex-direction:column;text-align:center;padding:16px 10px 14px;gap:8px;font-size:19px}
+.choices.two .choice img{width:72px;height:72px}
+.choice:active{transform:translateY(4px);box-shadow:0 2px 0 var(--cream2)}
+.choice.right{background:#dcf7ea;border-color:var(--good);box-shadow:0 6px 0 var(--good-lo)}
+.choice.wrong{background:#fde3e2;border-color:var(--bad);box-shadow:0 6px 0 var(--bad-lo);animation:no .4s;opacity:.75}
+.choice:disabled{cursor:default}
+@keyframes no{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+
+/* ---------- mini games ---------- */
+.game-hud{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--f-display);font-size:22px;font-weight:800;color:var(--gold-hi)}
+.game-hud img{width:30px}
+.germ{position:absolute;width:9.5%;transform:translate(-50%,-50%);cursor:pointer;background:none;padding:0;animation:wiggle 1s ease-in-out infinite}
+.germ img{width:100%;display:block;pointer-events:none}
+.germ.pop{animation:pop .4s forwards;pointer-events:none}
+@keyframes wiggle{50%{transform:translate(-50%,-50%) rotate(14deg) scale(1.08)}}
+@keyframes pop{to{transform:translate(-50%,-50%) scale(1.8);opacity:0}}
+.sparkle{position:absolute;width:12%;transform:translate(-50%,-50%);pointer-events:none;animation:pop .6s forwards}
+#scrubCanvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:none}
+.brush{position:absolute;width:18%;pointer-events:none;transform:translate(-30%,-70%) rotate(-30deg);display:none}
+.meter{width:100%;height:16px;border-radius:999px;background:var(--navy2);border:2px solid var(--gold);overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-hi));transition:width .2s}
+
+/* ortho animation */
+.tooth{transform-box:fill-box;transform-origin:50% 50%;transition:transform 1.3s cubic-bezier(.3,1.4,.5,1)}
+.straight .tooth{transform:none!important}
+.bracket{opacity:0;transition:opacity .35s}
+.fixing .bracket{opacity:1}
+.wire{stroke-dasharray:260;stroke-dashoffset:260;transition:stroke-dashoffset .9s ease .6s}
+.fixing .wire{stroke-dashoffset:0}
+
+/* ---------- popup ---------- */
+.fb{position:fixed;inset:0;background:rgba(6,10,20,.72);display:none;align-items:center;justify-content:center;z-index:30;padding:16px;padding-top:90px}
+.fb.on{display:flex;animation:enter .3s ease}
+.fb-card{background:var(--cream);color:var(--ink);border-radius:28px;padding:0 20px 22px;max-width:420px;width:100%;text-align:center;border:4px solid var(--gold);box-shadow:0 24px 50px rgba(0,0,0,.5);position:relative}
+.fb-homos{height:150px;margin:-112px auto 0;display:block;filter:drop-shadow(0 10px 10px rgba(0,0,0,.35))}
+.fb-homos.scream{animation:shake .1s linear infinite;filter:drop-shadow(0 0 14px rgba(229,98,94,.9)) sepia(.35) saturate(2.2) hue-rotate(-25deg)}
+.fb-badge{position:absolute;top:10px;inset-inline-start:14px;width:54px}
+.fb-card h3{font-family:var(--f-display);font-size:30px;margin:4px 0 2px;color:var(--navy)}
+.fb-card p{font-size:18px;margin:6px 0 14px;font-weight:700;color:#3b4766;line-height:1.55}
+.stars{display:flex;justify-content:center;gap:4px;min-height:38px}
+.stars img{width:36px;animation:starIn .6s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes starIn{from{transform:scale(0) rotate(-180deg)}}
+
+/* ---------- certificate ---------- */
+.cert{position:relative;width:100%;background:linear-gradient(180deg,var(--navy2),var(--navy));border:3px solid var(--gold);outline:2px solid var(--gold-lo);outline-offset:-10px;border-radius:24px;padding:22px 18px 18px;margin-top:70px;box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.cert .homos{height:170px;margin:-120px auto 4px;display:block;filter:drop-shadow(0 10px 12px rgba(0,0,0,.45))}
+.cert .medal{position:absolute;top:14px;inset-inline-end:16px;width:58px;animation:bob 2s ease-in-out infinite}
+.cert .lbl{font-size:13px;letter-spacing:.14em;color:var(--gold);font-weight:800;text-transform:uppercase}
+.cert .kid{font-family:var(--f-display);font-size:clamp(30px,9vw,42px);color:var(--gold-hi);margin:2px 0}
+.cert p{margin:4px 0 10px;font-weight:700;color:#e8ecf5;font-size:17px;line-height:1.5}
+.cert .score{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-display);font-size:26px;color:var(--gold-hi);font-weight:800;font-variant-numeric:tabular-nums}
+.cert .score img{width:30px}
+.cert .sign{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid rgba(201,162,74,.4);margin-top:12px;padding-top:10px;font-size:13px;color:var(--muted);text-align:start}
+.cert .sign img{height:34px;border-radius:6px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:40;width:100%;height:100%}
+.foot{font-size:12px;color:#7d88a3;margin-top:auto;padding-top:16px;text-align:center;line-height:1.6}
+.foot a{color:#9aa6c2}
+
+@media (max-width:380px){
+  .choice{font-size:16px;min-height:60px}
+  .choice img{width:38px;height:38px}
+  .bubble{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*:before{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div class="app">
+  <div class="top">
+    <img class="logo" src="../logo.png" alt="Hyatt Elite" />
+    <div class="sp"></div>
+    <div class="pill" id="starPill"><img src="tw/2b50.svg" alt="" /><b id="starCount">0</b></div>
+    <button class="icon-btn" id="soundBtn" aria-label="Sound">🔊</button>
+    <button class="icon-btn" id="langBtn" aria-label="Language">EN</button>
+  </div>
+  <div class="progress" id="progress"></div>
+
+  <!-- START -->
+  <section class="screen on" id="s-start">
+    <h1 data-t="title"></h1>
+    <p class="sub" data-t="subtitle"></p>
+    <div class="hero">
+      <div class="ring"></div>
+      <img class="spark" src="tw/2728.svg" alt="" style="top:8%;left:6%" />
+      <img class="spark" src="tw/2728.svg" alt="" style="top:22%;right:2%;animation-delay:.7s;width:24px" />
+      <img class="spark" src="tw/1f9b7.svg" alt="" style="bottom:18%;left:0;width:40px;animation-delay:1.2s" />
+      <img class="homos" src="homos-cut.webp" alt="Dr. Homos" />
+    </div>
+    <div class="meta-row"><span class="tag" id="lvlCountTag"></span><span class="tag" data-t="ageTag"></span></div>
+    <input class="name-in" id="kidName" maxlength="20" autocomplete="off" />
+    <button class="btn" id="playBtn" data-t="play"></button>
+  </section>
+
+  <!-- LEVEL 1: STREET -->
+  <section class="screen" id="s-street">
+    <span class="tag" data-t="lvl1tag"></span>
+    <div class="scene" id="streetScene">
+      <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" id="streetSvg" aria-hidden="true"></svg>
+      <img class="car" src="tw/1f68c.svg" alt="" />
+      <div class="ouch" data-t="ouch"></div>
+      <div class="walker" id="walker">
+        <div class="wrap">
+          <img class="me" src="homos-cut.webp" alt="Dr. Homos" />
+          <div class="cheek"></div>
+          <img class="fx" src="tw/1f4a2.svg" alt="" style="top:2%;left:66%" />
+          <img class="fx" src="tw/26a1.svg" alt="" style="top:22%;left:84%;animation-delay:.3s" />
+          <img class="fx" src="tw/1f4a6.svg" alt="" style="top:4%;left:8%;width:16%;animation-delay:.5s" />
+        </div>
+      </div>
+      <svg class="burst" id="burst" viewBox="0 0 120 90" aria-hidden="true"><path d="M60 2 72 22 96 8 92 32 118 34 98 50 114 72 88 66 82 88 64 70 44 88 40 64 12 74 24 52 2 40 28 30 18 8 44 20Z" fill="#e5625e" stroke="#fbf6ea" stroke-width="4"/><text x="60" y="54" text-anchor="middle" font-family="Baloo Bhaijaan 2,Cairo,sans-serif" font-size="22" font-weight="800" fill="#fbf6ea" id="burstTxt">آآآه!</text></svg>
+    </div>
+    <div class="ask"><h2 data-t="q1"></h2></div>
+    <div class="choices two">
+      <button class="choice" id="goHome"><img src="tw/1f3e0.svg" alt="" /><span data-t="home"></span></button>
+      <button class="choice" id="goDentist"><img src="tw/1f9b7.svg" alt="" /><span data-t="dentist"></span></button>
+    </div>
+  </section>
+
+  <!-- WALK TO CLINIC -->
+  <section class="screen" id="s-walk">
+    <span class="tag" data-t="walkTag"></span>
+    <div class="scene">
+      <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" id="walkSvg" aria-hidden="true"></svg>
+      <div class="mover" id="mover"><img src="homos-cut.webp" alt="" /></div>
+    </div>
+    <div class="bubble"><div class="who"><img src="tw/1f9b7.svg" alt="" /><span data-t="docName"></span></div><span id="walkBubble"></span></div>
+  </section>
+
+  <!-- CLINIC LEVELS -->
+  <section class="screen" id="s-level">
+    <span class="tag" id="lvTag"></span>
+    <div class="scene" id="lvScene"></div>
+    <div class="bubble" id="lvBubble"><div class="who"><img id="lvWhoImg" src="tw/1f430.svg" alt="" /><span id="lvWho"></span></div><span id="lvText"></span></div>
+    <div class="ask"><h2 id="lvAsk"></h2></div>
+    <div id="lvBody" style="width:100%"></div>
+  </section>
+
+  <!-- END -->
+  <section class="screen" id="s-end">
+    <h1 data-t="endTitle"></h1>
+    <div class="cert">
+      <img class="medal" src="tw/1f3c5.svg" alt="" />
+      <img class="homos" src="homos-cut.webp" alt="" />
+      <div class="lbl" data-t="certTop"></div>
+      <div class="kid" id="certName"></div>
+      <p data-t="certBody"></p>
+      <div class="score" dir="ltr"><img src="tw/2b50.svg" alt="" /><span id="certStars"></span></div>
+      <div class="sign"><span data-t="certSign"></span><img src="../logo.png" alt="Hyatt Elite" /></div>
+    </div>
+    <div class="cta">
+      <button class="btn" id="againBtn" data-t="again"></button>
+      <a class="btn alt" href="https://wa.me/201003033566" target="_blank" rel="noopener" data-t="book"></a>
+    </div>
+    <a class="link" href="../" data-t="backSite"></a>
+  </section>
+
+  <!-- Emoji graphics in tw/ are Twemoji by Twitter, Inc. and other contributors, licensed CC-BY 4.0: https://github.com/jdecked/twemoji -->
+  <div class="foot"><span data-t="foot"></span></div>
+</div>
+
+<div class="fb" id="fb" role="dialog" aria-modal="true">
+  <div class="fb-card">
+    <img class="fb-homos" id="fbHomos" src="homos-cut.webp" alt="" />
+    <img class="fb-badge" id="fbBadge" src="tw/1f430.svg" alt="" />
+    <h3 id="fbTitle"></h3>
+    <div class="stars" id="fbStars"></div>
+    <p id="fbText"></p>
+    <button class="btn" id="fbBtn"></button>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+var T = {
+  ar:{
+    title:"مغامرات دكتور حمص في العيادة", subtitle:"ساعد د. حمص واحمِ ابتسامتك!",
+    namePh:"اكتب اسمك هنا ✏️", play:"يلّا نلعب!", levels:"مرحلة", ageTag:"للأطفال من ٤ سنين",
+    docName:"د. حمص", hero:"يا بطل",
+    lvl1tag:"المرحلة ١ · في الشارع",
+    ouch:"آه! سِنّي بيوجعني!",
+    q1:"حمص سنّه بيوجعه! يعمل إيه؟",
+    home:"يروح البيت", dentist:"يروح لدكتور الأسنان",
+    scream:"آآآه!",
+    screamT:"آآآآآه!", screamP:"الوجع زاد! السنّة التعبانة مش بتخف لوحدها في البيت. جرّب تاني وأنقذ حمص!",
+    tryAgain:"جرّب تاني",
+    rightT:"برافو عليك!", rightP:"اختيار صح! دكتور الأسنان هيعالج سنّة حمص والوجع هيروح. إنت أنقذت حمص!",
+    next:"المرحلة الجاية",
+    walkTag:"في الطريق لعيادة حياة إيليت",
+    walkBubble:"شكرًا {n}! إنت أنقذتني. دلوقتي أنا د. حمص، تعالى نساعد المرضى في عيادة حياة إيليت!",
+    lvl:"المرحلة", of:"من",
+    okT:["صح!","ممتاز!","عبقري!","رائع!","يا بطل!","تمام كده!"],
+    finish:"شوف شهادتك",
+    germsLeft:"جرثومة باقية", cleanLeft:"نضّف الأسنان بالفرشاة",
+    endTitle:"إنت بطل الابتسامة!",
+    certTop:"شهادة بطل الأسنان", certBody:"اتعلّم يحافظ على أسنانه ويحب عيادة الأسنان. د. حمص فخور بيك!",
+    certSign:"د. حمص · عيادة حياة إيليت لطب الأسنان",
+    again:"العب تاني", book:"احجز زيارة لعيادتنا", backSite:"الرجوع لموقع حياة إيليت",
+    friend:"صديقي البطل",
+    foot:"لعبة تعليمية من عيادة حياة إيليت لطب الأسنان"
+  },
+  en:{
+    title:"Dr. Homos's Clinic Adventures", subtitle:"Help Dr. Homos and protect your smile!",
+    namePh:"Type your name ✏️", play:"Let's play!", levels:"levels", ageTag:"For kids 4+",
+    docName:"Dr. Homos", hero:"hero",
+    lvl1tag:"Level 1 · On the street",
+    ouch:"Ouch! My tooth hurts!",
+    q1:"Homos has a toothache! What should he do?",
+    home:"Go home", dentist:"Go to the dentist",
+    scream:"AAAH!",
+    screamT:"AAAAAH!", screamP:"The pain got worse! A sick tooth doesn't get better at home by itself. Try again and save Homos!",
+    tryAgain:"Try again",
+    rightT:"Well done!", rightP:"Right choice! The dentist will fix Homos's tooth and the pain will go away. You saved Homos!",
+    next:"Next level",
+    walkTag:"On the way to Hyatt Elite Clinic",
+    walkBubble:"Thank you, {n}! You saved me. Now I'm Dr. Homos. Let's help the patients at Hyatt Elite Clinic!",
+    lvl:"Level", of:"of",
+    okT:["Correct!","Excellent!","Genius!","Awesome!","Super hero!","Spot on!"],
+    finish:"See your certificate",
+    germsLeft:"germs left", cleanLeft:"Brush the teeth clean",
+    endTitle:"You are a Smile Hero!",
+    certTop:"Tooth Hero Certificate", certBody:"learned how to protect their teeth and love the dental clinic. Dr. Homos is proud of you!",
+    certSign:"Dr. Homos · Hyatt Elite Dental Clinic",
+    again:"Play again", book:"Book a visit", backSite:"Back to Hyatt Elite website",
+    friend:"My hero friend",
+    foot:"An educational game by Hyatt Elite Dental Clinic"
+  }
+};
+
+/* Clinic levels. type: quiz | germs | scrub | ortho (quiz + braces animation). a = index of the right answer. */
+var LEVELS = [
+  { type:"quiz", pe:"1f430", a:0, ic:["1faa5","1f4c5","1f645"],
+    ar:{p:"الأرنب بوبو", s:"أسنان بوبو صفرا، لأنه بيغسلها مرة واحدة بس في الأسبوع!", q:"نغسل أسناننا كام مرة في اليوم؟",
+        c:["مرتين: الصبح وقبل النوم","مرة في الأسبوع","مش لازم خالص"], f:"نغسل أسناننا مرتين كل يوم: بعد الفطار وقبل النوم، عشان الجراثيم ما تعملش تسوّس."},
+    en:{p:"Bobo the Bunny", s:"Bobo's teeth are yellow because he brushes only once a week!", q:"How many times a day should we brush?",
+        c:["Twice: morning and before bed","Once a week","Never"], f:"Brush twice every day, after breakfast and before bed, so germs can't make cavities."} },
+  { type:"quiz", pe:"1f43b", a:1, ic:["26a1","23f1","1f550"],
+    ar:{p:"الدبدوب دودو", s:"دودو بيغسل أسنانه في ٣ ثواني ويجري يلعب!", q:"نغسل أسناننا قد إيه؟",
+        c:["٣ ثواني بس","دقيقتين كاملين","ساعة كاملة"], f:"دقيقتين كاملين! غنّي أغنيتك المفضلة وإنت بتغسل كل سنّة: من قدّام ومن ورا ومن فوق."},
+    en:{p:"Dodo the Bear", s:"Dodo brushes for 3 seconds and runs off to play!", q:"How long should we brush?",
+        c:["Just 3 seconds","Two whole minutes","One whole hour"], f:"Two whole minutes! Sing your favorite song while you brush the front, back and top of every tooth."} },
+  { type:"germs", pe:"1f99b",
+    ar:{p:"فرس النهر هيبو", s:"بُق هيبو مليان جراثيم بتعمل تسوّس! ساعد د. حمص يطردهم.", q:"دوس على كل الجراثيم!", f:"شاطر! الجراثيم بتحب بقايا الأكل والسكر. لما نغسل أسناننا بنطردهم وأسناننا تفضل سليمة."},
+    en:{p:"Hippo Hugo", s:"Hugo's mouth is full of cavity germs! Help Dr. Homos chase them away.", q:"Tap all the germs!", f:"Great job! Germs love leftover food and sugar. Brushing chases them away and keeps teeth healthy."} },
+  { type:"quiz", pe:"1f431", a:1, ic:["1f36d","1f34e","1f964"],
+    ar:{p:"القطة ميمي", s:"ميمي عايزة سناك في الفسحة. ساعدها تختار!", q:"أنهي سناك أحسن لأسنانك؟",
+        c:["مصاصة وحلويات لزقة","تفاحة وقطعة جبنة","شيبسي وعصير مسكّر"], f:"التفاح والجبنة والجزر بيقوّوا الأسنان وبينضّفوها. الحلويات اللزقة أكل الجراثيم المفضّل!"},
+    en:{p:"Mimi the Cat", s:"Mimi wants a snack at break time. Help her choose!", q:"Which snack is best for your teeth?",
+        c:["Lollipops and sticky candy","An apple and some cheese","Chips and a sugary drink"], f:"Apples, cheese and carrots make teeth strong and help clean them. Sticky candy is the germs' favorite food!"} },
+  { type:"quiz", pe:"1f981", a:2, ic:["1f964","1f9c3","1f4a7"],
+    ar:{p:"الأسد ليو", s:"ليو عطشان جدًا بعد الماتش!", q:"إيه أحسن مشروب لأسنانك؟",
+        c:["مياه غازية","عصير فيه سكر كتير","مياه"], f:"المياه صاحبة أسنانك! بتغسل بقايا الأكل ومفيهاش سكر خالص."},
+    en:{p:"Leo the Lion", s:"Leo is very thirsty after the match!", q:"What is the best drink for your teeth?",
+        c:["Fizzy soda","Very sugary juice","Water"], f:"Water is your teeth's best friend! It washes food away and has no sugar at all."} },
+  { type:"ortho", pe:"1f98a", a:0, ic:["1f9b7","270b","1f937"],
+    ar:{p:"الثعلب ثعلوب", s:"أسنان ثعلوب مش مظبوطة في مكانها، فيه سنّة لقدّام وسنّة مايلة!", q:"نقول لدكتور حمص يعمل إيه؟",
+        c:["يركّب تقويم يرجّع الأسنان مكانها","نزقّ الأسنان بإيدينا","نسيبها كده"], f:"التقويم بيحرّك الأسنان بالراحة لحد ما توصل لمكانها الصح، والابتسامة تبقى مرتّبة وجميلة. فيه تقويم بسلك وتقويم شفاف."},
+    en:{p:"Foxy the Fox", s:"Foxy's teeth aren't in the right place. One sticks out and one is tilted!", q:"What should we ask Dr. Homos to do?",
+        c:["Put on braces to move the teeth into place","Push the teeth with our hands","Leave them like that"], f:"Braces move teeth gently until they reach the right spot, so the smile becomes neat and beautiful. There are wire braces and clear aligners."} },
+  { type:"quiz", pe:"1f428", a:0, ic:["1f36c","1f4a7","1f372"],
+    ar:{p:"الكوالا كوكو", s:"كوكو لسه مركّب تقويم جديد، وبيسأل ياكل إيه!", q:"مع التقويم نبعد عن إيه؟",
+        c:["الحاجات الناشفة واللزقة زي اللبان والكراميل","المياه","الشوربة"], f:"اللبان والكراميل والمكسّرات الناشفة ممكن تفك التقويم. وبعد الأكل نغسل أسناننا كويس حوالين السلك."},
+    en:{p:"Koko the Koala", s:"Koko just got new braces and asks what he can eat!", q:"With braces, what should we avoid?",
+        c:["Hard and sticky food like gum and caramel","Water","Soup"], f:"Gum, caramel and hard nuts can break braces. After eating, brush well around the wires."} },
+  { type:"quiz", pe:"1f436", a:0, ic:["1fadb","1f40d","1f6ab"],
+    ar:{p:"الكلب روكي", s:"روكي حط معجون كتير قوي على الفرشاة!", q:"الأطفال يحطّوا معجون قد إيه؟",
+        c:["قد حبّاية البسلة","الفرشاة كلها مليانة","من غير معجون"], f:"حبّاية صغيرة قد البسلة كفاية! وبعد الغسيل نِتفّ المعجون وما نبلعهوش."},
+    en:{p:"Rocky the Puppy", s:"Rocky squeezed way too much toothpaste on his brush!", q:"How much toothpaste should kids use?",
+        c:["A pea-sized blob","Cover the whole brush","No toothpaste"], f:"A tiny pea-sized blob is enough! After brushing, spit it out. Don't swallow it."} },
+  { type:"scrub", pe:"1f438",
+    ar:{p:"الضفدع فروجي", s:"فروجي نسي يغسل أسنانه، وعليها طبقة صفرا اسمها البلاك!", q:"امسح الطبقة الصفرا بالفرشاة!", f:"أسنان فروجي بتلمع دلوقتي! البلاك بيتشال بالفرشاة والمعجون كل يوم، ولو اتساب بيعمل تسوّس."},
+    en:{p:"Froggy", s:"Froggy forgot to brush and his teeth have a yellow layer called plaque!", q:"Scrub the yellow layer away!", f:"Froggy's teeth are shining now! Plaque comes off with a brush and toothpaste every day. If it stays, it causes cavities."} },
+  { type:"quiz", pe:"1f43c", a:0, ic:["1f5d3","1f382","267e"],
+    ar:{p:"الباندا بندق", s:"شعر فرشاة بندق بقى منكوش ومفتوح خالص!", q:"نغيّر فرشاة الأسنان إمتى؟",
+        c:["كل ٣ شهور","كل ٥ سنين","عمرنا ما نغيّرها"], f:"نغيّر الفرشاة كل ٣ شهور، أو أول ما شعرها يتنكش، عشان تنضّف كويس."},
+    en:{p:"Panda Pip", s:"Pip's toothbrush bristles are all frayed and messy!", q:"When should we change our toothbrush?",
+        c:["Every 3 months","Every 5 years","Never"], f:"Change your toothbrush every 3 months, or as soon as the bristles look messy, so it cleans well."} },
+  { type:"quiz", pe:"1f435", a:0, ic:["1f9f5","270f","1f36c"],
+    ar:{p:"القرد مشمش", s:"مشمش عنده أكل محشور بين أسنانه والفرشاة مش بتوصله!", q:"إيه اللي ينضّف بين الأسنان؟",
+        c:["خيط الأسنان","قلم رصاص","قطعة لبان"], f:"خيط الأسنان بيوصل للأماكن الضيقة بين الأسنان. اطلب من بابا أو ماما يساعدوك!"},
+    en:{p:"Momo the Monkey", s:"Momo has food stuck between his teeth and the brush can't reach!", q:"What cleans between your teeth?",
+        c:["Dental floss","A pencil","Chewing gum"], f:"Floss reaches the tiny spaces between teeth. Ask mom or dad to help you!"} },
+  { type:"quiz", pe:"1f418", a:0, ic:["23f3","1f6aa","1f95c"],
+    ar:{p:"الفيل فلفل", s:"واحدة من أسنان فلفل اللبنية بتتهزّ!", q:"فلفل يعمل إيه؟",
+        c:["يسيبها تقع لوحدها ويقول للدكتور","يربطها بخيط في الباب ويشدّ","يعضّ حاجة ناشفة جدًا"], f:"الأسنان اللبنية بتقع لوحدها عشان الأسنان الكبيرة الدايمة تطلع مكانها. الدكتور بيتابع إن الأسنان الجديدة بتطلع في مكانها الصح."},
+    en:{p:"Ellie the Elephant", s:"Ellie's baby tooth is wiggly!", q:"What should Ellie do?",
+        c:["Let it fall out by itself and tell the dentist","Tie it to a door and pull","Bite something very hard"], f:"Baby teeth fall out by themselves to make room for the big permanent tooth. The dentist checks that it grows in the right place."} },
+  { type:"quiz", pe:"1f42f", a:0, ic:["1f95b","1f5d1","1f9fc"],
+    ar:{p:"النمر نمّور", s:"نمّور وقعت منه سنّة وهو بيلعب كورة!", q:"يعمل إيه بسرعة؟",
+        c:["يحطّها في كوباية لبن ويروح للدكتور فورًا","يرميها","يغسلها بالصابون ويستنى لبكرة"], f:"نمسك السنّة من فوق مش من الجذر، ونحطّها في لبن، ونروح للدكتور بسرعة. كل ما نروح أسرع، كل ما الدكتور يقدر يساعد أكتر."},
+    en:{p:"Tiger Tom", s:"Tom knocked out a tooth while playing football!", q:"What should he do quickly?",
+        c:["Put it in a glass of milk and go to the dentist now","Throw it away","Wash it with soap and wait until tomorrow"], f:"Hold the tooth by the top, not the root, put it in milk and rush to the dentist. The faster you go, the more the dentist can help."} },
+  { type:"quiz", pe:"1f989", a:0, ic:["1f4aa","270c","1f319"],
+    ar:{p:"البومة بومبوم", s:"بومبوم بتمص صباعها كتير، وأسنانها بدأت تطلع لقدّام!", q:"تعمل إيه؟",
+        c:["تبطّل مص الصباع شوية بشوية","تمص صباعين بدل واحد","تمص صباعها طول الليل"], f:"مص الصباع لفترة طويلة بيزقّ الأسنان لقدّام. لما نبطّله بدري، الأسنان تفضل في مكانها، والدكتور يساعدنا لو احتجنا."},
+    en:{p:"Olive the Owl", s:"Olive sucks her thumb a lot and her teeth are starting to stick out!", q:"What should she do?",
+        c:["Stop thumb sucking little by little","Suck two fingers instead","Suck her thumb all night"], f:"Long-time thumb sucking pushes teeth forward. Stopping early keeps teeth in place, and the dentist helps if needed."} },
+  { type:"quiz", pe:"1f992", a:1, ic:["1f616","1fa7a","1f474"],
+    ar:{p:"الزرافة زوزو", s:"أسنان زوزو سليمة، بس بتسأل: لازم أزور الدكتور برضه؟", q:"نزور دكتور الأسنان كل قد إيه؟",
+        c:["لما السنّة توجعنا بس","كل ٦ شهور للكشف","لما نكبر"], f:"كل ٦ شهور! الدكتور بيكتشف أي مشكلة وهي لسه صغيرة، قبل ما توجع."},
+    en:{p:"Zuzu the Giraffe", s:"Zuzu's teeth look fine, but she asks: do I still need a check-up?", q:"How often should we visit the dentist?",
+        c:["Only when it hurts","Every 6 months for a check-up","When we grow up"], f:"Every 6 months! The dentist finds small problems early, before they ever hurt."} },
+  { type:"quiz", pe:"1f427", a:1, ic:["1f631","1f917","1f648"],
+    ar:{p:"البطريق بيبو", s:"بيبو خايف يدخل أوضة الكشف!", q:"تقول إيه لبيبو؟",
+        c:["اهرب! الدكتور مخيف","ما تخافش! الدكتور صاحبك وبيحافظ على ابتسامتك","خبّي سنانك"], f:"دكتور الأسنان صاحبك! بيعدّ أسنانك وينضّفها ويخليها قوية ولامعة. وفي حياة إيليت فيه مفاجآت للأبطال!"},
+    en:{p:"Bibo the Penguin", s:"Bibo is scared to go into the check-up room!", q:"What do you tell Bibo?",
+        c:["Run! The dentist is scary","Don't worry! The dentist is your friend who keeps your smile healthy","Hide your teeth"], f:"The dentist is your friend! They count your teeth, clean them and keep them strong and shiny. And at Hyatt Elite there are surprises for heroes!"} }
+];
+var TOTAL = LEVELS.length + 1;
+
+/* =========================================================
+   STATE + HELPERS
+   ========================================================= */
+var lang = "ar", sound = true, stars = 0, idx = -1, firstTry = true, kid = "";
+try { var sl = localStorage.getItem("homos_lang"); if (sl === "en" || sl === "ar") lang = sl; } catch(e){}
+var $ = function(id){ return document.getElementById(id); };
+function t(k){ return T[lang][k]; }
+function tw(code){ return "tw/" + code + ".svg"; }
+function nm(s){ return s.replace("{n}", kid ? (lang === "ar" ? "يا " + kid : kid) : t("hero")); }
+
+function applyLang(){
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  document.title = lang === "ar" ? "مغامرات دكتور حمص في العيادة | حياة إيليت" : "Dr. Homos's Clinic Adventures | Hyatt Elite";
+  document.querySelectorAll("[data-t]").forEach(function(el){ el.textContent = t(el.getAttribute("data-t")); });
+  $("kidName").placeholder = t("namePh");
+  $("langBtn").textContent = lang === "ar" ? "EN" : "ع";
+  $("lvlCountTag").textContent = lang === "ar" ? TOTAL + " " + t("levels") : TOTAL + " " + t("levels");
+  $("burstTxt").textContent = t("scream");
+  $("walkBubble").textContent = nm(t("walkBubble"));
+  $("certName").textContent = kid || t("friend");
+  if ($("s-level").classList.contains("on")) renderText();
+}
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("on"); });
+  $(id).classList.add("on");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function renderProgress(cur){
+  var p = $("progress"); p.innerHTML = "";
+  if (cur < 0) return;
+  for (var i = 0; i < TOTAL; i++){
+    var s = document.createElement("i");
+    if (i < cur) s.className = "done"; else if (i === cur) s.className = "now";
+    p.appendChild(s);
+  }
+}
+function addStars(n){
+  stars += n; $("starCount").textContent = stars;
+  var p = $("starPill"); p.classList.remove("bump"); void p.offsetWidth; p.classList.add("bump");
+}
+
+/* =========================================================
+   SVG SCENES
+   ========================================================= */
+var NAVY="#17243b", NAVY2="#24365a", GOLD="#c9a24a", GOLDHI="#f1d590", CREAM="#fbf6ea";
+
+function streetSVG(withClinic){
+  var s = '<defs>'+
+    '<linearGradient id="sky'+(withClinic?2:1)+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14203a"/><stop offset=".45" stop-color="#2e4373"/><stop offset=".72" stop-color="#c98e5a"/><stop offset=".86" stop-color="'+GOLDHI+'"/></linearGradient>'+
+    '<radialGradient id="glow"><stop offset="0" stop-color="'+GOLDHI+'" stop-opacity=".9"/><stop offset="1" stop-color="'+GOLDHI+'" stop-opacity="0"/></radialGradient>'+
+    '</defs>'+
+    '<rect width="400" height="250" fill="url(#sky'+(withClinic?2:1)+')"/>'+
+    '<circle cx="'+(withClinic?90:300)+'" cy="150" r="30" fill="'+GOLDHI+'" opacity=".95"/>'+
+    '<circle cx="60" cy="30" r="1.4" fill="#fff"/><circle cx="140" cy="18" r="1" fill="#fff"/><circle cx="230" cy="36" r="1.3" fill="'+GOLDHI+'"/><circle cx="330" cy="22" r="1" fill="#fff"/><circle cx="380" cy="50" r="1.2" fill="#fff"/>'+
+    '<g fill="#fff" opacity=".85"><ellipse cx="90" cy="60" rx="26" ry="9"/><ellipse cx="108" cy="54" rx="16" ry="9"/><ellipse cx="290" cy="80" rx="22" ry="7"/><ellipse cx="304" cy="75" rx="13" ry="7"/></g>';
+  // skyline
+  var b = withClinic ? [[0,110,44],[40,95,40],[78,125,36],[112,105,46],[156,130,34],[186,118,40]]
+                     : [[0,110,44],[40,92,40],[78,125,36],[112,100,46],[156,128,34],[186,112,40],[224,96,44],[266,122,34],[298,104,46],[342,118,30],[370,98,32]];
+  b.forEach(function(r){
+    s += '<rect x="'+r[0]+'" y="'+r[1]+'" width="'+r[2]+'" height="'+(186-r[1])+'" fill="'+NAVY2+'"/>';
+    s += '<rect x="'+r[0]+'" y="'+r[1]+'" width="'+r[2]+'" height="4" fill="'+NAVY+'"/>';
+    for (var y = r[1]+10; y < 176; y += 14) for (var x = r[0]+6; x < r[0]+r[2]-8; x += 11)
+      s += '<rect x="'+x+'" y="'+y+'" width="6" height="8" rx="1" fill="'+(((x*7+y*3)%5)<2?GOLDHI:"#3b5285")+'"/>';
+  });
+  if (withClinic){
+    s += '<g>'+
+      '<rect x="232" y="64" width="160" height="124" fill="'+CREAM+'"/>'+
+      '<rect x="226" y="56" width="172" height="14" rx="3" fill="'+NAVY+'"/><rect x="226" y="68" width="172" height="3" fill="'+GOLD+'"/>'+
+      '<rect x="262" y="76" width="100" height="52" rx="6" fill="'+NAVY+'" stroke="'+GOLD+'" stroke-width="2"/>'+
+      '<image href="../logo.png" x="266" y="78" width="92" height="48" preserveAspectRatio="xMidYMid meet"/>'+
+      '<rect x="244" y="138" width="30" height="26" rx="3" fill="#bfe3f5" stroke="'+NAVY+'" stroke-width="3"/><rect x="350" y="138" width="30" height="26" rx="3" fill="#bfe3f5" stroke="'+NAVY+'" stroke-width="3"/>'+
+      '<rect x="292" y="136" width="40" height="52" rx="4" fill="'+NAVY+'"/><rect x="296" y="140" width="15" height="44" fill="#2e4373"/><rect x="313" y="140" width="15" height="44" fill="#2e4373"/><circle cx="309" cy="164" r="2" fill="'+GOLD+'"/><circle cx="315" cy="164" r="2" fill="'+GOLD+'"/>'+
+      '<rect x="284" y="186" width="56" height="4" fill="'+GOLD+'"/>'+
+      '<g transform="translate(240,120)"><rect x="-2" y="0" width="14" height="14" rx="2" fill="'+GOLD+'"/></g>'+
+      '</g>';
+  }
+  // trees + lamps
+  [[30,'#1e5a4c'],[200,'#1e5a4c']].forEach(function(tr){ if (withClinic && tr[0] > 200) return;
+    s += '<rect x="'+(tr[0]-2)+'" y="160" width="4" height="26" fill="#5b4326"/><circle cx="'+tr[0]+'" cy="152" r="16" fill="'+tr[1]+'"/><circle cx="'+(tr[0]+8)+'" cy="146" r="9" fill="#2a7461"/>';
+  });
+  [120, withClinic ? 214 : 360].forEach(function(x){
+    s += '<circle cx="'+x+'" cy="128" r="18" fill="url(#glow)"/><rect x="'+(x-1.5)+'" y="128" width="3" height="58" fill="'+NAVY+'"/><rect x="'+(x-6)+'" y="122" width="12" height="8" rx="3" fill="'+GOLD+'"/>';
+  });
+  // sidewalk + road
+  s += '<rect y="186" width="400" height="18" fill="#cdbb95"/><rect y="186" width="400" height="3" fill="#e4d6b6"/>';
+  for (var i = 0; i < 400; i += 26) s += '<rect x="'+i+'" y="189" width="1.5" height="15" fill="#b5a27c"/>';
+  s += '<rect y="204" width="400" height="46" fill="#1a2232"/><rect y="204" width="400" height="3" fill="#8a7a5a"/>';
+  for (var j = 6; j < 400; j += 44) s += '<rect x="'+j+'" y="225" width="24" height="4" rx="2" fill="'+GOLDHI+'" opacity=".85"/>';
+  return s;
+}
+
+function clinicSVG(){
+  return '<defs>'+
+    '<linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbf6ea"/><stop offset="1" stop-color="#efe3c8"/></linearGradient>'+
+    '<linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e5d6b8"/><stop offset="1" stop-color="#cdb98f"/></linearGradient>'+
+    '<radialGradient id="lglow"><stop offset="0" stop-color="#fffbe8" stop-opacity=".95"/><stop offset="1" stop-color="#fffbe8" stop-opacity="0"/></radialGradient>'+
+    '</defs>'+
+    '<rect width="400" height="250" fill="url(#wall)"/>'+
+    '<rect width="400" height="10" fill="'+NAVY+'"/><rect y="10" width="400" height="2" fill="'+GOLD+'"/>'+
+    // window
+    '<g transform="translate(18,32)"><rect width="74" height="84" rx="8" fill="'+NAVY+'"/><rect x="6" y="6" width="62" height="72" rx="4" fill="#bfe3f5"/><ellipse cx="30" cy="30" rx="14" ry="5" fill="#fff"/><ellipse cx="40" cy="27" rx="9" ry="5" fill="#fff"/><circle cx="54" cy="18" r="7" fill="'+GOLDHI+'"/><rect x="35" y="6" width="4" height="72" fill="'+NAVY+'"/><rect x="6" y="40" width="62" height="4" fill="'+NAVY+'"/></g>'+
+    // poster: happy tooth
+    '<g transform="translate(118,30)"><rect width="56" height="66" rx="5" fill="'+GOLD+'"/><rect x="4" y="4" width="48" height="58" rx="3" fill="'+NAVY+'"/>'+
+      '<path d="M16 22c0-7 6-9 12-6 6-3 12-1 12 6 0 9-3 12-4 20-1 5-4 5-5 0l-1-6-2 6c-1 5-4 5-5 0-1-8-7-11-7-20z" fill="#fff"/>'+
+      '<circle cx="23" cy="25" r="1.8" fill="'+NAVY+'"/><circle cx="33" cy="25" r="1.8" fill="'+NAVY+'"/><path d="M23 30q5 4 10 0" stroke="'+NAVY+'" stroke-width="1.6" fill="none" stroke-linecap="round"/>'+
+      '<path d="M41 14l2 4 4 1-4 2-1 4-2-4-4-1 4-2z" fill="'+GOLDHI+'"/></g>'+
+    // cabinet
+    '<g transform="translate(262,96)"><rect width="120" height="62" rx="6" fill="#fff" stroke="#e4d6b6" stroke-width="2"/><rect x="0" y="-6" width="120" height="8" rx="3" fill="'+NAVY+'"/>'+
+      '<rect x="10" y="14" width="44" height="18" rx="3" fill="#d9bf95"/><rect x="66" y="14" width="44" height="18" rx="3" fill="#d9bf95"/><rect x="10" y="38" width="44" height="18" rx="3" fill="#d9bf95"/><rect x="66" y="38" width="44" height="18" rx="3" fill="#d9bf95"/>'+
+      '<rect x="27" y="21" width="10" height="3" rx="1.5" fill="'+GOLD+'"/><rect x="83" y="21" width="10" height="3" rx="1.5" fill="'+GOLD+'"/><rect x="27" y="45" width="10" height="3" rx="1.5" fill="'+GOLD+'"/><rect x="83" y="45" width="10" height="3" rx="1.5" fill="'+GOLD+'"/></g>'+
+    // wainscot + floor
+    '<rect y="158" width="400" height="44" fill="#f3ead6"/><rect y="156" width="400" height="4" fill="'+GOLD+'"/>'+
+    '<rect y="200" width="400" height="50" fill="url(#floor)"/><rect y="200" width="400" height="3" fill="#bfa77a"/>'+
+    '<path d="M0 225H400M60 203L40 250M160 203L150 250M260 203L270 250M360 203L380 250" stroke="#c8b38a" stroke-width="1.2"/>'+
+    // plant
+    '<g transform="translate(14,168)"><path d="M10 0c-8-12-2-26 4-30-2 10 2 18-4 30zM12 0c4-14 14-20 20-20-6 6-8 16-20 20zM10 0c-6-6-14-6-18-4 6 0 10 2 18 4z" fill="#2a7461"/><path d="M0 0h24l-3 30H3z" fill="'+GOLD+'"/></g>'+
+    // lamp
+    '<path d="M214 12V38Q214 50 200 52L172 56" stroke="#e8e8ee" stroke-width="7" fill="none" stroke-linecap="round"/>'+
+    '<ellipse cx="160" cy="62" rx="44" ry="26" fill="url(#lglow)"/>'+
+    '<rect x="146" y="50" width="30" height="16" rx="7" fill="#fff" stroke="#d7d7df" stroke-width="2"/><ellipse cx="161" cy="64" rx="11" ry="3" fill="'+GOLDHI+'"/>'+
+    // dental chair
+    '<ellipse cx="150" cy="214" rx="56" ry="7" fill="#8a6d2c" opacity=".3"/>'+
+    '<rect x="128" y="204" width="44" height="9" rx="4" fill="'+GOLD+'"/>'+
+    '<rect x="142" y="176" width="16" height="30" rx="3" fill="#d8dbe3"/>'+
+    '<rect x="96" y="172" width="112" height="9" rx="4" fill="#fff" stroke="#dfe2ea" stroke-width="1.5"/>'+
+    '<rect x="94" y="156" width="104" height="20" rx="10" fill="'+NAVY2+'"/>'+
+    '<path d="M196 160L238 182" stroke="'+NAVY2+'" stroke-width="16" stroke-linecap="round"/>'+
+    '<rect x="78" y="88" width="32" height="80" rx="14" fill="'+NAVY2+'" transform="rotate(-14 94 168)"/>'+
+    '<rect x="70" y="74" width="26" height="16" rx="8" fill="'+NAVY+'" transform="rotate(-14 94 168)"/>'+
+    '<rect x="112" y="146" width="40" height="7" rx="3.5" fill="'+GOLD+'"/>'+
+    // tray
+    '<path d="M238 132H262" stroke="#d8dbe3" stroke-width="4" stroke-linecap="round"/><rect x="216" y="126" width="46" height="8" rx="3" fill="#fff" stroke="#d8dbe3" stroke-width="1.5"/>'+
+    '<path d="M222 124l10-12M232 124l6-12M242 124l2-12" stroke="#9aa3b5" stroke-width="2" stroke-linecap="round"/>';
+}
+
+/* Open-mouth close-up used by the germ game, the scrub game and the braces animation. */
+var UP = [], LOW = [];
+for (var k = 0; k < 6; k++){ UP.push({x:104 + k*33, y:72, w:30, h:48}); LOW.push({x:112 + k*30, y:136, w:27, h:36}); }
+var CROOK = ["rotate(-16deg) translateY(6px)","rotate(12deg) translateX(3px)","translateY(14px) rotate(-8deg)","rotate(18deg) translateY(-4px)","translateY(9px) rotate(-14deg)","rotate(12deg) translateY(5px)"];
+
+function mouthSVG(opts){
+  opts = opts || {};
+  var s = '<defs><radialGradient id="mbg" cx=".5" cy=".45" r=".7"><stop offset="0" stop-color="#2e4373"/><stop offset="1" stop-color="'+NAVY+'"/></radialGradient>'+
+    '<clipPath id="inner"><path d="M78 124C78 58 322 58 322 124C322 196 78 196 78 124Z"/></clipPath></defs>'+
+    '<rect width="400" height="250" fill="url(#mbg)"/>'+
+    '<circle cx="40" cy="40" r="2" fill="'+GOLDHI+'"/><circle cx="360" cy="30" r="1.6" fill="#fff"/><circle cx="370" cy="210" r="2" fill="'+GOLDHI+'"/><circle cx="30" cy="200" r="1.5" fill="#fff"/>'+
+    '<path d="M58 124C58 36 342 36 342 124C342 220 58 220 58 124Z" fill="#e5625e"/>'+
+    '<path d="M78 124C78 58 322 58 322 124C322 196 78 196 78 124Z" fill="#5a1f2e"/>'+
+    '<g clip-path="url(#inner)">'+
+    '<ellipse cx="200" cy="172" rx="78" ry="24" fill="#e98a95"/><path d="M200 156V180" stroke="#d16f7c" stroke-width="2"/>';
+  LOW.forEach(function(t){ s += '<rect x="'+t.x+'" y="'+t.y+'" width="'+t.w+'" height="'+t.h+'" rx="9" fill="#fff"/>'; });
+  s += '<rect x="70" y="166" width="260" height="30" fill="#f19aa7"/>';
+  UP.forEach(function(t, i){
+    var tr = opts.crooked ? ' style="transform:'+CROOK[i]+'"' : '';
+    s += '<g class="tooth"'+tr+'><rect x="'+t.x+'" y="'+t.y+'" width="'+t.w+'" height="'+t.h+'" rx="10" fill="#fff"/><rect x="'+(t.x+5)+'" y="'+(t.y+8)+'" width="5" height="20" rx="2.5" fill="#eef3fb"/>'+
+      (opts.braces ? '<rect class="bracket" style="transition-delay:'+(i*0.08)+'s" x="'+(t.x+8)+'" y="'+(t.y+24)+'" width="14" height="12" rx="3" fill="'+(i===2||i===3?GOLD:"#4f4c4d")+'"/>' : '')+
+      '</g>';
+  });
+  if (opts.braces) s += '<path class="wire" d="M106 102Q200 108 294 102" stroke="#6b6869" stroke-width="3" fill="none" stroke-linecap="round"/>';
+  s += '<rect x="70" y="54" width="260" height="22" fill="#f19aa7"/></g>';
+  return s;
+}
+
+/* =========================================================
+   SOUND (Web Audio) + SPEECH
+   ========================================================= */
+var ac = null;
+function ctx(){ if (!ac) { try { ac = new (window.AudioContext||window.webkitAudioContext)(); } catch(e){} } if (ac && ac.state === "suspended") ac.resume(); return ac; }
+function tone(f, d, type, when, vol, slideTo){
+  var a = ctx(); if (!a || !sound) return;
+  var o = a.createOscillator(), g = a.createGain(), t0 = a.currentTime + (when||0);
+  o.type = type || "sine"; o.frequency.setValueAtTime(f, t0);
+  if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t0 + d);
+  g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(vol||0.2, t0 + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t0 + d);
+  o.connect(g).connect(a.destination); o.start(t0); o.stop(t0 + d + 0.05);
+}
+function sCheer(){ [523,659,784,1047,1319].forEach(function(f,i){ tone(f,0.25,"triangle",i*0.09,0.22); }); tone(1568,0.5,"sine",0.5,0.15); }
+function sClick(){ tone(660,0.08,"square",0,0.05); }
+function sPop(){ tone(500 + Math.random()*400,0.12,"sine",0,0.25,1400); }
+function sWrong(){ tone(300,0.18,"square",0,0.1,200); tone(220,0.25,"square",0.15,0.1,150); }
+function sScrub(){ tone(1800 + Math.random()*600,0.04,"triangle",0,0.03); }
+function sBling(){ [880,1175,1568].forEach(function(f,i){ tone(f,0.3,"sine",i*0.12,0.18); }); }
+function sScream(){
+  var a = ctx(); if (!a || !sound) return;
+  var o = a.createOscillator(), g = a.createGain(), lfo = a.createOscillator(), lg = a.createGain(), t0 = a.currentTime;
+  o.type = "sawtooth"; o.frequency.setValueAtTime(900, t0); o.frequency.exponentialRampToValueAtTime(260, t0 + 1.3);
+  lfo.frequency.value = 18; lg.gain.value = 40; lfo.connect(lg).connect(o.frequency);
+  g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(0.18, t0 + 0.05); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 1.4);
+  o.connect(g).connect(a.destination); o.start(t0); lfo.start(t0); o.stop(t0 + 1.5); lfo.stop(t0 + 1.5);
+}
+/* Background music: a calm music-box tune generated live (no audio files, no spoken voice).
+   C - Am - F - G, 88 bpm, soft pad + music-box melody with a light echo + gentle bass. */
+var MEL = [
+  [72,0,76,79, 76,0,74,72], [69,0,72,76, 74,72,0,69], [65,69,72,0, 74,72,69,0], [67,0,71,74, 72,0,71,0],
+  [79,0,76,72, 74,76,0,72], [76,0,72,69, 72,0,69,0], [72,74,76,0, 77,76,74,72], [71,0,74,0, 67,0,0,0]
+];
+var CHORDS = [[48,60,64,67],[45,57,60,64],[41,57,60,65],[43,55,59,62]];
+var mus = { bus:null, timer:null, step:0, next:0, playing:false };
+function mtof(m){ return 440 * Math.pow(2, (m - 69) / 12); }
+function musicBus(a){
+  if (mus.bus) return mus.bus;
+  var out = a.createGain(); out.gain.value = 0;
+  var lp = a.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 2600;
+  var dl = a.createDelay(1); dl.delayTime.value = 0.34; var fbk = a.createGain(); fbk.gain.value = 0.28; var wet = a.createGain(); wet.gain.value = 0.22;
+  dl.connect(fbk).connect(dl); dl.connect(wet).connect(lp);
+  out.connect(lp); lp.connect(a.destination);
+  mus.bus = { out: out, echo: dl };
+  return mus.bus;
+}
+function note(a, dest, freq, t, dur, vol, type, attack){
+  var o = a.createOscillator(), g = a.createGain();
+  o.type = type; o.frequency.setValueAtTime(freq, t);
+  g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + attack); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.connect(g).connect(dest); o.start(t); o.stop(t + dur + 0.05);
+  return g;
+}
+function schedule(){
+  var a = ac; if (!a || !mus.playing) return;
+  var bus = musicBus(a), eighth = 60 / 88 / 2;
+  while (mus.next < a.currentTime + 0.25){
+    var bar = Math.floor(mus.step / 8) % 8, pos = mus.step % 8, t = mus.next, ch = CHORDS[bar % 4];
+    if (pos === 0){
+      ch.slice(1).forEach(function(m){ note(a, bus.out, mtof(m), t, eighth * 8.2, 0.035, "sine", 0.6); });
+      note(a, bus.out, mtof(ch[0]), t, eighth * 3.5, 0.09, "sine", 0.02);
+    }
+    if (pos === 4) note(a, bus.out, mtof(ch[0] + 7), t, eighth * 3, 0.06, "sine", 0.02);
+    var m = MEL[bar][pos];
+    if (m){
+      var g = note(a, bus.out, mtof(m), t, 1.1, 0.07, "triangle", 0.005);
+      g.connect(bus.echo);
+      note(a, bus.out, mtof(m + 12), t, 0.5, 0.015, "sine", 0.005);
+    }
+    mus.step++; mus.next += eighth;
+  }
+}
+function musicOn(){
+  var a = ctx(); if (!a || !sound || mus.playing) return;
+  var bus = musicBus(a);
+  mus.playing = true; mus.next = a.currentTime + 0.1;
+  bus.out.gain.cancelScheduledValues(a.currentTime);
+  bus.out.gain.setValueAtTime(Math.max(0.0001, bus.out.gain.value), a.currentTime);
+  bus.out.gain.linearRampToValueAtTime(0.9, a.currentTime + 1.5);
+  schedule(); mus.timer = setInterval(schedule, 60);
+}
+function musicOff(){
+  if (!mus.playing) return;
+  mus.playing = false; clearInterval(mus.timer);
+  if (ac && mus.bus){ mus.bus.out.gain.cancelScheduledValues(ac.currentTime); mus.bus.out.gain.setValueAtTime(mus.bus.out.gain.value, ac.currentTime); mus.bus.out.gain.linearRampToValueAtTime(0.0001, ac.currentTime + 0.4); }
+}
+document.addEventListener("visibilitychange", function(){ if (document.hidden) musicOff(); else if (started) musicOn(); });
+var started = false;
+
+/* =========================================================
+   CONFETTI (gold / navy / cream to match the brand)
+   ========================================================= */
+var cv = $("confetti"), cx = cv.getContext("2d"), parts = [], raf = null;
+function fit(){ cv.width = innerWidth; cv.height = innerHeight; } fit(); addEventListener("resize", fit);
+function confetti(n){
+  var cols = [GOLD, GOLDHI, "#ffffff", "#3fbf8a", "#8fb3ff", "#e8c770"];
+  for (var i = 0; i < (n||140); i++){
+    parts.push({ x: innerWidth/2 + (Math.random()-.5)*160, y: innerHeight*0.42, vx:(Math.random()-.5)*15, vy: -Math.random()*14-4,
+      r: Math.random()*7+4, c: cols[i%cols.length], a: Math.random()*6, va:(Math.random()-.5)*.3, round: Math.random()<.3 });
+  }
+  if (!raf) loop();
+}
+function loop(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  parts.forEach(function(p){
+    p.vy += .32; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.a += p.va;
+    cx.save(); cx.translate(p.x,p.y); cx.rotate(p.a); cx.fillStyle = p.c;
+    if (p.round){ cx.beginPath(); cx.arc(0,0,p.r/2.4,0,6.3); cx.fill(); } else cx.fillRect(-p.r/2,-p.r/4,p.r,p.r/2);
+    cx.restore();
+  });
+  parts = parts.filter(function(p){ return p.y < cv.height + 40; });
+  raf = parts.length ? requestAnimationFrame(loop) : (cx.clearRect(0,0,cv.width,cv.height), null);
+}
+
+/* =========================================================
+   POPUP
+   ========================================================= */
+var fbNext = null;
+function popup(o){
+  $("fbTitle").textContent = o.title; $("fbText").textContent = o.text; $("fbBtn").textContent = o.btn; fbNext = o.next;
+  $("fbHomos").className = "fb-homos" + (o.scream ? " scream" : "");
+  var bd = $("fbBadge"); if (o.badge){ bd.src = tw(o.badge); bd.style.display = ""; } else bd.style.display = "none";
+  var st = $("fbStars"); st.innerHTML = "";
+  for (var i = 0; i < (o.stars||0); i++){ var s = document.createElement("img"); s.src = tw("2b50"); s.alt = ""; s.style.animationDelay = (i*.15)+"s"; st.appendChild(s); }
+  st.style.display = o.stars ? "" : "none";
+  $("fb").classList.add("on"); $("fbBtn").focus({preventScroll:true});
+}
+$("fbBtn").onclick = function(){ sClick(); $("fb").classList.remove("on"); var n = fbNext; fbNext = null; if (n) n(); };
+
+/* =========================================================
+   FLOW: start + street
+   ========================================================= */
+$("streetSvg").innerHTML = streetSVG(false);
+$("walkSvg").innerHTML = streetSVG(true);
+
+function start(){
+  kid = $("kidName").value.trim();
+  stars = 0; $("starCount").textContent = "0"; idx = -1; firstTry = true;
+  applyLang();
+  showScreen("s-street"); renderProgress(0);
+  $("goHome").disabled = $("goDentist").disabled = false;
+  $("goHome").className = $("goDentist").className = "choice";
+  $("walker").className = "walker"; $("burst").classList.remove("on");
+}
+$("playBtn").onclick = function(){ sClick(); ctx(); started = true; musicOn(); start(); };
+$("kidName").addEventListener("keydown", function(e){ if (e.key === "Enter") $("playBtn").click(); });
+
+$("goHome").onclick = function(){
+  var b = this; b.classList.add("wrong"); firstTry = false;
+  $("walker").className = "walker scream"; $("burst").classList.add("on"); sScream();
+  if (navigator.vibrate) navigator.vibrate([120,60,200]);
+  setTimeout(function(){
+    popup({ title:t("screamT"), text:t("screamP"), btn:t("tryAgain"), scream:true, badge:"1f631",
+      next:function(){ b.classList.remove("wrong"); $("walker").className = "walker"; $("burst").classList.remove("on"); } });
+  }, 1000);
+};
+$("goDentist").onclick = function(){
+  this.classList.add("right"); $("goHome").disabled = this.disabled = true;
+  $("walker").className = "walker happy"; $("burst").classList.remove("on");
+  sCheer(); confetti(180);
+  var earned = firstTry ? 3 : 1; addStars(earned);
+  setTimeout(function(){ popup({ title:t("rightT"), text:t("rightP"), btn:t("next"), stars:earned, badge:"1f9b7", next:walk }); }, 700);
+};
+
+function walk(){
+  showScreen("s-walk"); renderProgress(1);
+  $("walkBubble").textContent = nm(t("walkBubble"));
+  var m = $("mover"); m.style.animation = "none"; void m.offsetWidth; m.style.animation = "";
+  setTimeout(function(){ idx = 0; openLevel(); }, 4200);
+}
+
+/* =========================================================
+   CLINIC LEVELS
+   ========================================================= */
+function renderText(){
+  var L = LEVELS[idx], d = L[lang];
+  $("lvTag").textContent = t("lvl") + " " + (idx + 2) + " " + t("of") + " " + TOTAL;
+  $("lvWhoImg").src = tw(L.pe); $("lvWho").textContent = d.p;
+  $("lvText").textContent = d.s; $("lvAsk").textContent = d.q;
+  if (L.type === "quiz" || L.type === "ortho"){
+    $("lvBody").querySelectorAll(".choice span").forEach(function(sp, i){ sp.textContent = d.c[i]; });
+  }
+  if (L.type === "germs") updateGermHud();
+}
+
+function openLevel(){
+  firstTry = true;
+  var L = LEVELS[idx];
+  showScreen("s-level"); renderProgress(idx + 1);
+  var sc = $("lvScene"), body = $("lvBody");
+  sc.innerHTML = ""; body.innerHTML = "";
+  if (L.type === "quiz" || L.type === "ortho") buildQuiz(L, sc, body);
+  else if (L.type === "germs") buildGerms(L, sc, body);
+  else if (L.type === "scrub") buildScrub(L, sc, body);
+  renderText();
+}
+
+function clinicScene(sc, pe){
+  sc.innerHTML = '<svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' + clinicSVG() + '</svg>' +
+    '<img class="actor patient" src="' + tw(pe) + '" alt="" /><img class="actor doc" src="homos-cut.webp" alt="Dr. Homos" />';
+}
+
+function buildQuiz(L, sc, body){
+  if (L.type === "ortho"){
+    sc.innerHTML = '<svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true" id="orthoSvg">' + mouthSVG({crooked:true, braces:true}) + '</svg>' +
+      '<img class="actor" src="' + tw(L.pe) + '" alt="" style="left:3%;top:4%;width:16%" />' +
+      '<img class="actor" src="homos-cut.webp" alt="" style="right:1%;bottom:0;height:52%" />';
+  } else clinicScene(sc, L.pe);
+  var box = document.createElement("div"); box.className = "choices";
+  L.ic.forEach(function(code, i){
+    var b = document.createElement("button"); b.className = "choice";
+    b.innerHTML = '<img alt="" src="' + tw(code) + '" /><span></span>';
+    b.onclick = function(){ answer(i, b); };
+    box.appendChild(b);
+  });
+  body.appendChild(box);
+}
+
+function answer(i, btn){
+  var L = LEVELS[idx], d = L[lang];
+  if (i !== L.a){
+    firstTry = false; btn.classList.add("wrong"); btn.disabled = true; sWrong();
+    if (navigator.vibrate) navigator.vibrate(80);
+    return;
+  }
+  btn.classList.add("right");
+  $("lvBody").querySelectorAll("button").forEach(function(b){ b.disabled = true; });
+  var earned = firstTry ? 3 : 1;
+  if (L.type === "ortho"){
+    var svg = $("orthoSvg"); svg.classList.add("fixing"); sClick();
+    setTimeout(function(){ svg.classList.add("straight"); sBling(); }, 1500);
+    setTimeout(function(){ win(L, earned); }, 3200);
+  } else win(L, earned);
+}
+
+function win(L, earned){
+  sCheer(); confetti(); addStars(earned);
+  var last = idx === LEVELS.length - 1, titles = t("okT");
+  setTimeout(function(){
+    popup({ title: titles[idx % titles.length], text: L[lang].f, stars: earned, badge: L.pe,
+      btn: last ? t("finish") : t("next"),
+      next: function(){ if (last) finish(); else { idx++; openLevel(); } } });
+  }, 550);
+}
+
+/* ---------- mini game: tap the germs ---------- */
+var germsLeft = 0;
+function updateGermHud(){ var h = $("germHud"); if (h) h.lastChild.textContent = germsLeft + " " + t("germsLeft"); }
+function buildGerms(L, sc, body){
+  sc.innerHTML = '<svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">' + mouthSVG({}) + '</svg>' +
+    '<img class="actor" src="' + tw(L.pe) + '" alt="" style="left:3%;top:4%;width:16%" />';
+  var spots = UP.map(function(t){ return [t.x + t.w/2, t.y + t.h*0.62]; }).concat(LOW.map(function(t){ return [t.x + t.w/2, t.y + t.h*0.45]; }));
+  spots.sort(function(){ return Math.random() - .5; });
+  spots = spots.slice(0, 8); germsLeft = spots.length;
+  spots.forEach(function(p, i){
+    var g = document.createElement("button"); g.className = "germ"; g.setAttribute("aria-label", "germ");
+    g.style.left = (p[0]/4) + "%"; g.style.top = (p[1]/2.5) + "%"; g.style.animationDelay = (i*0.13) + "s";
+    g.innerHTML = '<img alt="" src="' + tw("1f9a0") + '" />';
+    g.onclick = function(){
+      if (g.classList.contains("pop")) return;
+      g.classList.add("pop"); sPop(); germsLeft--; updateGermHud();
+      var sp = document.createElement("img"); sp.className = "sparkle"; sp.src = tw("2728"); sp.alt = "";
+      sp.style.left = g.style.left; sp.style.top = g.style.top; sc.appendChild(sp);
+      setTimeout(function(){ g.remove(); sp.remove(); }, 600);
+      if (germsLeft === 0) setTimeout(function(){ win(L, 3); }, 500);
+    };
+    sc.appendChild(g);
+  });
+  body.innerHTML = '<div class="game-hud" id="germHud"><img src="' + tw("1f9a0") + '" alt="" /><span></span></div>';
+}
+
+/* ---------- mini game: scrub the plaque ---------- */
+function buildScrub(L, sc, body){
+  sc.innerHTML = '<svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">' + mouthSVG({}) + '</svg>' +
+    '<img class="actor" src="' + tw(L.pe) + '" alt="" style="left:3%;top:4%;width:16%" />' +
+    '<canvas id="scrubCanvas"></canvas><img class="brush" id="brush" src="' + tw("1faa5") + '" alt="" />';
+  body.innerHTML = '<div class="game-hud"><img src="' + tw("1faa5") + '" alt="" /><span>' + t("cleanLeft") + '</span></div><div class="meter"><i id="scrubMeter"></i></div>';
+  var c = $("scrubCanvas"), g = c.getContext("2d"), brush = $("brush");
+  var W, H, sx, total = 0, done = false, moves = 0;
+  function setup(){
+    var r = c.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = c.width = Math.round(r.width * dpr); H = c.height = Math.round(r.height * dpr); sx = W / 400;
+    g.globalCompositeOperation = "source-over";
+    UP.concat(LOW).forEach(function(t){
+      g.fillStyle = "rgba(214,186,72,.92)";
+      g.beginPath(); g.roundRect ? g.roundRect((t.x+1)*sx, (t.y+(t.h>40?16:2))*sx, (t.w-2)*sx, (t.h-(t.h>40?18:12))*sx, 6*sx) : g.rect((t.x+1)*sx,(t.y+16)*sx,(t.w-2)*sx,(t.h-18)*sx); g.fill();
+      g.fillStyle = "rgba(170,140,40,.9)";
+      for (var k = 0; k < 3; k++){ g.beginPath(); g.arc((t.x + 6 + Math.random()*(t.w-12))*sx, (t.y + 20 + Math.random()*(t.h-26))*sx, (2+Math.random()*3)*sx, 0, 6.3); g.fill(); }
+    });
+    total = count();
+  }
+  function count(){
+    var d = g.getImageData(0,0,W,H).data, n = 0;
+    for (var i = 3; i < d.length; i += 4*16) if (d[i] > 30) n++;
+    return n;
+  }
+  function pos(e){ var r = c.getBoundingClientRect(); return [(e.clientX - r.left), (e.clientY - r.top), r]; }
+  var down = false, last = null;
+  function scrub(e){
+    var p = pos(e), r = p[2];
+    brush.style.display = "block"; brush.style.left = (p[0]/r.width*100) + "%"; brush.style.top = (p[1]/r.height*100) + "%";
+    if (!down || done) return;
+    var x = p[0] * W / r.width, y = p[1] * H / r.height;
+    g.globalCompositeOperation = "destination-out"; g.lineCap = "round"; g.lineWidth = 34 * sx;
+    g.beginPath(); g.moveTo(last ? last[0] : x, last ? last[1] : y); g.lineTo(x, y); g.stroke();
+    last = [x, y];
+    if (++moves % 6 === 0){
+      sScrub();
+      var left = count(), pct = Math.min(100, Math.round((1 - left/total) * 100 / 0.9));
+      $("scrubMeter").style.width = pct + "%";
+      if (pct >= 100){ done = true; g.clearRect(0,0,W,H); brush.style.display = "none"; sBling(); setTimeout(function(){ win(L, 3); }, 500); }
+    }
+  }
+  c.addEventListener("pointerdown", function(e){ down = true; last = null; try { c.setPointerCapture(e.pointerId); } catch(_){} scrub(e); });
+  c.addEventListener("pointermove", scrub);
+  c.addEventListener("pointerup", function(){ down = false; last = null; });
+  c.addEventListener("pointerleave", function(){ down = false; last = null; brush.style.display = "none"; });
+  requestAnimationFrame(setup);
+}
+
+/* =========================================================
+   END
+   ========================================================= */
+function finish(){
+  showScreen("s-end"); renderProgress(TOTAL);
+  $("certStars").textContent = stars + " / " + (TOTAL * 3);
+  $("certName").textContent = kid || t("friend");
+  sCheer(); confetti(260); setTimeout(function(){ confetti(160); }, 700);
+}
+$("againBtn").onclick = function(){ sClick(); showScreen("s-start"); renderProgress(-1); stars = 0; $("starCount").textContent = "0"; };
+
+$("soundBtn").onclick = function(){ sound = !sound; this.textContent = sound ? "🔊" : "🔇"; if (!sound) musicOff(); else { sClick(); if (started) musicOn(); } };
+$("langBtn").onclick = function(){
+  lang = lang === "ar" ? "en" : "ar";
+  try { localStorage.setItem("homos_lang", lang); } catch(e){}
+  applyLang(); sClick();
+};
+
+applyLang();
+})();
+</script>
+</body>
+</html>
